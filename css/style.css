@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800;900&family=Holtwood+One+SC&family=Inknut+Antiqua:wght@500;700&family=Instrument+Serif:ital@0;1&display=swap');
 
+/* Design Tokens */
 :root {
   --p1: #ff945e;
   --p2: #ffd1e2;
@@ -9,6 +10,7 @@
   --cream: #fff8f4;
 }
 
+/* Base / Reset */
 * { box-sizing: border-box; }
 
 html, body {
@@ -23,6 +25,7 @@ body {
   background: radial-gradient(circle at 8% 10%, #ffe4d2 0%, #ffe9df 28%, #fff6f0 60%, #fffaf7 100%);
 }
 
+/* Layout Shell */
 .page-shell {
   display: grid;
   grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
@@ -39,6 +42,7 @@ body {
   z-index: 20;
 }
 
+/* Sidebar / Profile Card */
 .profile-card {
   width: 100%;
   height: 100%;
@@ -217,6 +221,7 @@ body {
   transform: translateY(1px) scale(0.99);
 }
 
+/* Main Content + Top Nav */
 .content-panel {
   min-height: 100vh;
   padding-bottom: 1.2rem;
@@ -283,6 +288,7 @@ body {
   margin: 0 1.5rem 1.2rem;
 }
 
+/* Home Section */
 .home-hero {
   position: relative;
   display: flex;
@@ -567,6 +573,7 @@ body {
   50% { transform: translateY(6px); }
 }
 
+/* Work Section */
 .project-area {
   position: relative;
   padding: 2.2rem;
@@ -810,6 +817,7 @@ body {
   font-weight: 700;
 }
 
+/* Contact Section */
 .contact-area {
   position: relative;
   min-height: auto;
@@ -917,6 +925,7 @@ body {
   min-width: 150px;
 }
 
+/* Footer */
 .site-footer {
   background: #7E8688;
   padding: 60px 0;
@@ -1007,6 +1016,7 @@ body {
   letter-spacing: 0.02em;
 }
 
+/* Responsive */
 @media (max-width: 1120px) {
   .page-shell {
     grid-template-columns: 1fr;

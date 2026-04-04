@@ -1,0 +1,553 @@
+/* About page: scope overrides and section visuals */
+.about-page .page-section {
+  min-height: auto;
+}
+
+.about-page .about-hero,
+.about-page .about-hobbies,
+.about-page .about-tools,
+.about-page .about-journey,
+.about-page .about-cta {
+  position: relative;
+  padding: 1.8rem 2rem;
+  background: #fff;
+  border-radius: 1.6rem;
+  border: 1px solid rgba(252, 114, 56, 0.15);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.08);
+}
+
+.about-title {
+  margin: 0 0 1rem;
+  font-family: 'Holtwood One SC', serif;
+  font-size: clamp(1.8rem, 3.3vw, 2.4rem);
+  letter-spacing: 0.04em;
+  color: #2a201d;
+}
+
+.about-page .page-section .hero-star {
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.about-slider {
+  position: relative;
+  margin-top: 0.6rem;
+}
+
+.about-slider-viewport {
+  overflow: hidden;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(252, 114, 56, 0.2);
+}
+
+.about-slider-track {
+  display: flex;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.about-slide {
+  min-width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #f7efe9;
+  overflow: hidden;
+}
+
+.about-slide img,
+.about-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Slider focus tweak: prioritize lower subject area for image 1 and 2 only */
+.about-slide img.about-slide-focus-bottom {
+  object-position: center 65%;
+}
+
+.about-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(252, 114, 56, 0.32);
+  background: rgba(255, 255, 255, 0.92);
+  color: #fc7238;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 3;
+  box-shadow: 0 8px 18px rgba(252, 114, 56, 0.18);
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+.about-arrow:hover {
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 12px 22px rgba(252, 114, 56, 0.24);
+}
+
+.about-prev { left: -1.2rem; }
+
+.about-next { right: -1.2rem; }
+
+.about-dots {
+  margin-top: 0.9rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.about-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  display: block;
+  flex: 0 0 auto;
+  aspect-ratio: 1 / 1;
+  line-height: 0;
+  border-radius: 50%;
+  border: none;
+  background: rgba(124, 100, 92, 0.28);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.about-dot.active {
+  background: #fc7238;
+  transform: scale(1.15);
+}
+
+.about-thumbs {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.about-thumb {
+  border: 1px solid rgba(252, 114, 56, 0.25);
+  background: #fff;
+  border-radius: 0.65rem;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 4 / 3;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.about-thumb.active {
+  border-color: #fc7238;
+  transform: translateY(-1px);
+}
+
+.about-thumb img,
+.about-thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-hobbies {
+  overflow: hidden;
+}
+
+.about-hobbies::before,
+.about-hobbies::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-hobbies::before {
+  width: 220px;
+  height: 220px;
+  top: -75px;
+  right: -45px;
+  background: radial-gradient(circle, rgba(255, 148, 94, 0.25), rgba(255, 148, 94, 0));
+}
+
+.about-hobbies::after {
+  width: 180px;
+  height: 180px;
+  bottom: -65px;
+  left: -45px;
+  background: radial-gradient(circle, rgba(255, 209, 226, 0.22), rgba(255, 209, 226, 0));
+}
+
+.about-hobbies > * {
+  position: relative;
+  z-index: 1;
+}
+
+.about-hobbies h3,
+.about-tools h3,
+.about-journey h3 {
+  margin: 0 0 0.6rem;
+  color: #fc7238;
+  letter-spacing: 0.08em;
+  font-size: 1.05rem;
+}
+
+.about-hobbies p,
+.about-journey p {
+  margin: 0.35rem 0 0;
+  color: #5f4e47;
+  line-height: 1.7;
+}
+
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.2rem;
+}
+
+.hobby-item {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+}
+
+.hobby-item h4 {
+  margin: 0;
+  font-size: 0.98rem;
+  letter-spacing: 0.06em;
+  color: #3b2d29;
+}
+
+.hobby-item p {
+  margin: 0.25rem 0 0;
+}
+
+.hobby-item-full {
+  grid-column: 1 / -1;
+}
+
+.hobby-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 999px;
+  background: rgba(255, 148, 94, 0.18);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.tool-group + .tool-group {
+  margin-top: 1.2rem;
+}
+
+.tool-group h4 {
+  margin: 0 0 0.6rem;
+  color: #3b2d29;
+  font-size: 1rem;
+}
+
+.tool-marquee {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.tool-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.tool-loop-set {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding-right: 0.8rem;
+  flex-shrink: 0;
+}
+
+.marquee-design .tool-track {
+  animation: toolsMarqueeRight 24s linear infinite;
+}
+
+.marquee-dev .tool-track {
+  animation: toolsMarqueeLeft 18s linear infinite;
+}
+
+.tool-marquee:hover .tool-track {
+  animation-play-state: paused;
+}
+
+.tool-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.32rem;
+  min-width: 108px;
+}
+
+.tool-icon-wrap {
+  width: 88px;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.tool-item img {
+  max-width: 58px;
+  max-height: 58px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.08));
+}
+
+.tool-item span {
+  font-size: 0.78rem;
+  color: #5f4e47;
+  text-align: center;
+}
+
+/* Per-icon visual normalization for transparent padding differences */
+.tool-item .tool-icon--figma {
+  width: 86px;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  transform: scale(1.15);
+  transform-origin: center;
+}
+
+.tool-item .tool-icon--html {
+  width: 47px;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  transform: none;
+}
+
+.tool-item .tool-icon--css {
+  width: 54px;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  transform: none;
+}
+
+.tool-item .tool-icon--js {
+  width: 70px;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  transform: scale(1.24);
+  transform-origin: center;
+}
+
+@keyframes toolsMarqueeLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes toolsMarqueeRight {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.about-journey {
+  overflow: hidden;
+  background: linear-gradient(120deg, #fff6f0, #ffeede, #fff5f3);
+  background-size: 180% 180%;
+  animation: journeyBgShift 16s ease-in-out infinite;
+  margin-bottom: 0;
+  border-bottom-left-radius: 1.6rem;
+  border-bottom-right-radius: 1.6rem;
+}
+
+.about-journey::before,
+.about-journey::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.about-journey::before {
+  width: 200px;
+  height: 200px;
+  top: -60px;
+  left: -40px;
+  background: #ff945e;
+  animation: floatBlobOne 9s ease-in-out infinite;
+}
+
+.about-journey::after {
+  width: 220px;
+  height: 220px;
+  right: -70px;
+  bottom: -70px;
+  background: #ffd1e2;
+  animation: floatBlobTwo 11s ease-in-out infinite;
+}
+
+.about-journey > * {
+  position: relative;
+  z-index: 1;
+}
+
+.about-cta {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  margin-top: 3.2rem;
+  background: linear-gradient(120deg, #fff6f0, #ffeede, #fff5f3);
+  background-size: 180% 180%;
+  animation: journeyBgShift 16s ease-in-out infinite;
+  border: none;
+  box-shadow: none;
+  border-radius: 1.6rem;
+  padding-top: 3.6rem;
+  padding-bottom: 3.6rem;
+}
+
+.about-cta::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: min(72%, 660px);
+  height: 210px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(252, 114, 56, 0.22) 0%, rgba(255, 148, 94, 0.1) 38%, rgba(255, 148, 94, 0) 72%);
+  filter: blur(26px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+.about-cta-link {
+  display: inline-block;
+  color: #ff6a3d;
+  opacity: 1;
+  font-family: 'Holtwood One SC', serif;
+  font-size: clamp(1.45rem, 3.3vw, 2.35rem);
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  line-height: 1.15;
+  text-decoration: none;
+  position: relative;
+  text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(255, 106, 61, 0.25);
+  transition: transform 0.28s ease, text-shadow 0.28s ease, filter 0.28s ease;
+}
+
+.about-cta-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  width: 100%;
+  height: 2px;
+  background: #ff6a3d;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s ease;
+}
+
+.about-cta-link:hover {
+  transform: translateY(-4px);
+  text-shadow: 0 0 24px rgba(255, 106, 61, 0.4);
+  filter: brightness(1.08);
+}
+
+.about-cta-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Keep one consistent decorative star per About section */
+.about-page .page-section > .hero-star {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  left: auto;
+  z-index: 2;
+}
+
+@keyframes journeyBgShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes floatBlobOne {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(10px, 18px); }
+}
+
+@keyframes floatBlobTwo {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-16px, -12px); }
+}
+
+@media (max-width: 1120px) {
+  .about-page .sidebar {
+    position: relative;
+    top: auto;
+    height: auto;
+  }
+}
+
+@media (max-width: 860px) {
+  .about-page .about-hero,
+  .about-page .about-hobbies,
+  .about-page .about-tools,
+  .about-page .about-journey,
+  .about-page .about-cta {
+    padding: 1.35rem;
+  }
+
+  .about-prev { left: 0.3rem; }
+
+  .about-next { right: 0.3rem; }
+
+  .about-thumbs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hobby-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hobby-item-full {
+    grid-column: auto;
+  }
+
+}

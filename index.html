@@ -1,14 +1,19 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jay Vu's Portfolio</title>
+  <title>Jay Vu's Portfolio | HOME</title>
   <meta name="description" content="Jay Vu Portfolio - Front-end Developer / UIUX Designer / Branding Designer" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <!-- Main Two-Column Shell -->
   <div class="page-shell">
+    <!-- Left Sidebar / Profile Card -->
     <aside class="sidebar">
       <div class="profile-card">
         <div class="header-row">
@@ -37,14 +42,19 @@
       </div>
     </aside>
 
+    <!-- Right Content Panel -->
     <main class="content-panel" id="main-content">
+      <!-- Top Navigation -->
       <nav class="topbar">
         <button class="section-btn active" data-section="home" id="btn-home">HOME</button>
         <a class="section-btn" href="about.html" id="btn-about">ABOUT</a>
         <a class="section-btn js-scroll-link" href="#works" id="btn-works">WORK</a>
       </nav>
+
+      <!-- Active Section Badge -->
       <p class="active-badge" aria-live="polite">HOME</p>
 
+      <!-- Home Section -->
       <section id="home" class="page-section home-hero">
         <span class="hero-star" aria-hidden="true">✦</span>
         <div class="hero-left">
@@ -88,6 +98,7 @@
         </div>
       </section>
 
+      <!-- Work Section -->
       <section id="works" class="page-section project-area">
         <span class="hero-star" aria-hidden="true">✦</span>
         <div class="work-filter-row">
@@ -177,6 +188,7 @@
         </div>
       </section>
 
+      <!-- Contact Section -->
       <section id="contact" class="page-section contact-area">
         <span class="contact-star" aria-hidden="true">✦</span>
         <div class="contact-heading">
@@ -216,6 +228,8 @@
       </section>
     </main>
   </div>
+
+  <!-- Footer -->
   <footer class="site-footer">
     <nav class="footer-nav" aria-label="Footer navigation">
       <a class="js-scroll-link" href="#home">HOME</a>
@@ -237,6 +251,8 @@
 
     <p class="footer-copy">© 2026 Jay Vu. All rights reserved</p>
   </footer>
+
+  <!-- Scripts -->
   <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
-// typewriter
+// =========================
+// Home: Typewriter
+// =========================
 const roles = ['UX/UI Designer', 'Front-end Developer', 'Branding Designer'];
 const typeEl = document.getElementById('typewriter');
 let roleIndex = 0;
@@ -36,7 +38,9 @@ function typeLoop() {
 
 if (typeEl) typeLoop();
 
-// lightweight smooth-scroll for in-page links
+// =========================
+// Global: Smooth Scroll Links
+// =========================
 document.querySelectorAll('.js-scroll-link, .section-btn[data-section]').forEach(link => {
   link.addEventListener('click', (event) => {
     const hrefTarget = link.getAttribute('href');
@@ -53,7 +57,9 @@ document.querySelectorAll('.js-scroll-link, .section-btn[data-section]').forEach
   });
 });
 
-// work section: category filters, tool filters, centered carousel, and auto slideshow
+// =========================
+// Work: Filters + Carousel + Slideshow
+// =========================
 const workRoot = document.getElementById('works');
 const filterButtons = Array.from(document.querySelectorAll('.work-filter-row .filter-btn'));
 const allWorkCards = Array.from(document.querySelectorAll('#work-carousel-stage .project-card'));
@@ -180,7 +186,9 @@ if (allWorkCards.length) {
   applyFilters();
 }
 
-// top navigation hide/show on scroll direction
+// =========================
+// Top Nav: Hide/Show on Scroll Direction
+// =========================
 const topNav = document.querySelector('.topbar');
 let lastScrollY = window.scrollY;
 let scrollTicking = false;
@@ -221,7 +229,9 @@ if (topNav) {
   }, { passive: true });
 }
 
-// contact form: validate required fields and open mailto
+// =========================
+// Contact: Mailto Form + Validation
+// =========================
 const contactForm = document.getElementById('contact-form');
 const contactMessage = document.getElementById('contact-message');
 
