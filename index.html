@@ -41,7 +41,7 @@
       <nav class="topbar">
         <button class="section-btn active" data-section="home" id="btn-home">HOME</button>
         <a class="section-btn" href="about.html" id="btn-about">ABOUT</a>
-        <a class="section-btn js-scroll-link" href="#works" id="btn-works">WORKS</a>
+        <a class="section-btn js-scroll-link" href="#works" id="btn-works">WORK</a>
       </nav>
       <p class="active-badge" aria-live="polite">HOME</p>
 
@@ -74,73 +74,90 @@
       </section>
 
       <section id="works" class="page-section project-area">
-        <div class="project-filter">
+        <div class="work-filter-row">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="design">Design</button>
           <button class="filter-btn" data-filter="coding">Coding</button>
-          <button class="filter-btn" data-filter="motion">Motion</button>
+          <button class="filter-btn" data-filter="uiux">UI/UX</button>
         </div>
 
-        <div class="cards-carousel" id="cards-carousel">
-          <article class="project-card" data-category="design">
-            <div class="project-image-wrap">
-              <img src="https://via.placeholder.com/540x300?text=Before-After+1" alt="Project 1 image 1" class="slide-img active" />
-              <img src="https://via.placeholder.com/540x300?text=Before-After+2" alt="Project 1 image 2" class="slide-img" />
-              <button class="img-nav prev" aria-label="Previous image">‹</button>
-              <button class="img-nav next" aria-label="Next image">›</button>
-            </div>
-            <h3>Re-branding Nonna's Thread</h3>
-            <p>Packaging and visual identity for sustainable brand.</p>
-            <div class="tag-row">
-              <span>Illustrator</span><span>Procreate</span><span>InDesign</span>
-            </div>
-            <a href="project1.html" class="btn-outline">VIEW PROJECT</a>
-          </article>
+        <div class="work-carousel-wrap" id="work-carousel">
+          <button class="carousel-arrow prev" type="button" aria-label="Previous project">‹</button>
+          <div class="work-carousel-stage" id="work-carousel-stage">
+            <article class="project-card" data-category="design" data-tools="Illustrator,Procreate,InDesign">
+              <div class="project-image-wrap">
+                <img src="assets/home/project card/project-card-1(1).png" alt="Re-branding Nonna's Thread image 1" class="slide-img active" />
+                <img src="assets/home/project card/project-card-1(2).png" alt="Re-branding Nonna's Thread image 2" class="slide-img" />
+              </div>
+              <h3>Re-branding Nonna’s Thread</h3>
+              <p>Nonna’s Thread is a branding project focused on creating hand-made pasta by Canada wheat, and using fabric bag for the sustainability which is the core brand values.</p>
+              <div class="tag-row">
+                <button class="tool-tag" type="button" data-tool="Illustrator">Illustrator</button>
+                <button class="tool-tag" type="button" data-tool="Procreate">Procreate</button>
+                <button class="tool-tag" type="button" data-tool="InDesign">InDesign</button>
+              </div>
+              <a href="project1.html" class="btn-outline">VIEW PROJECT</a>
+            </article>
 
-          <article class="project-card" data-category="coding">
-            <div class="project-image-wrap">
-              <img src="https://via.placeholder.com/540x300?text=Dashboard+1" alt="Project 2 image 1" class="slide-img active" />
-              <img src="https://via.placeholder.com/540x300?text=Dashboard+2" alt="Project 2 image 2" class="slide-img" />
-              <button class="img-nav prev" aria-label="Previous image">‹</button>
-              <button class="img-nav next" aria-label="Next image">›</button>
-            </div>
-            <h3>Interactive Analytics Dashboard</h3>
-            <p>Data visualization with reusable components and filters.</p>
-            <div class="tag-row">
-              <span>JavaScript</span><span>CSS</span><span>HTML</span>
-            </div>
-            <a href="project4.html" class="btn-outline">VIEW PROJECT</a>
-          </article>
+            <article class="project-card" data-category="design" data-tools="Illustrator,Procreate">
+              <div class="project-image-wrap">
+                <img src="assets/home/project card/project-card-2(1).png" alt="Design System and UI Kit image 1" class="slide-img active" />
+                <img src="assets/home/project card/project-card-2(2).png" alt="Design System and UI Kit image 2" class="slide-img" />
+              </div>
+              <h3>Packaging Vintage Jungle</h3>
+              <p>Vintage Jungle is a fictional chocolate branding project that combines nostalgic jungle-inspired visuals with bold packaging, focusing on storytelling and strong shelf presence as its core values.</p>
+              <div class="tag-row">
+                <button class="tool-tag" type="button" data-tool="Illustrator">Illustrator</button>
+                <button class="tool-tag" type="button" data-tool="Procreate">Procreate</button>
+              </div>
+              <a href="project2.html" class="btn-outline">VIEW PROJECT</a>
+            </article>
 
-          <article class="project-card" data-category="motion">
-            <div class="project-image-wrap">
-              <img src="https://via.placeholder.com/540x300?text=Motion+1" alt="Project 3 image 1" class="slide-img active" />
-              <img src="https://via.placeholder.com/540x300?text=Motion+2" alt="Project 3 image 2" class="slide-img" />
-              <button class="img-nav prev" aria-label="Previous image">‹</button>
-              <button class="img-nav next" aria-label="Next image">›</button>
-            </div>
-            <h3>Campaign Motion Visual</h3>
-            <p>Short video animation highlight of brand storytelling.</p>
-            <div class="tag-row">
-              <span>After Effects</span><span>Premiere</span><span>Figma</span>
-            </div>
-            <a href="project3.html" class="btn-outline">VIEW PROJECT</a>
-          </article>
+            <article class="project-card" data-category="design" data-tools="Illustrator,Photoshop,After Effects">
+              <div class="project-image-wrap">
+                <img src="assets/home/project card/project-card-3(1).png" alt="Campaign Motion Visual image 1" class="slide-img active" />
+                <img src="assets/home/project card/project-card-3(2).png" alt="Campaign Motion Visual image 2" class="slide-img" />
+              </div>
+              <h3>Packaging Aura Tint</h3>
+              <p>Aura Tint is a lipstick branding project centered on unconventional shades, encouraging individuality and self-expression through a visual identity that balances softness and confidence as its core brand values.</p>
+              <div class="tag-row">
+                <button class="tool-tag" type="button" data-tool="Illustrator">Illustrator</button>
+                <button class="tool-tag" type="button" data-tool="Photoshop">Photoshop</button>
+                <button class="tool-tag" type="button" data-tool="After Effects">After Effects</button>
+              </div>
+              <a href="project3.html" class="btn-outline">VIEW PROJECT</a>
+            </article>
 
-          <article class="project-card" data-category="design">
-            <div class="project-image-wrap">
-              <img src="https://via.placeholder.com/540x300?text=UI+Kit+1" alt="Project 4 image 1" class="slide-img active" />
-              <img src="https://via.placeholder.com/540x300?text=UI+Kit+2" alt="Project 4 image 2" class="slide-img" />
-              <button class="img-nav prev" aria-label="Previous image">‹</button>
-              <button class="img-nav next" aria-label="Next image">›</button>
-            </div>
-            <h3>Design System + UI Kit</h3>
-            <p>Modular components for consistent product experience.</p>
-            <div class="tag-row">
-              <span>Figma</span><span>Accessibility</span><span>Token</span>
-            </div>
-            <a href="project2.html" class="btn-outline">VIEW PROJECT</a>
-          </article>
+            <article class="project-card" data-category="coding" data-tools="HTML,CSS">
+              <div class="project-image-wrap">
+                <img src="https://via.placeholder.com/960x620?text=Coding+Card+1" alt="Coding placeholder project image 1" class="slide-img active" />
+                <img src="https://via.placeholder.com/960x620?text=Coding+Card+2" alt="Coding placeholder project image 2" class="slide-img" />
+              </div>
+              <h3>Title</h3>
+              <p>Description</p>
+              <div class="tag-row">
+                <button class="tool-tag" type="button" data-tool="Tool">Tool</button>
+                <button class="tool-tag" type="button" data-tool="Tool">Tool</button>
+              </div>
+              <a href="project4.html" class="btn-outline">VIEW PROJECT</a>
+            </article>
+
+            <article class="project-card" data-category="uiux" data-tools="Illustrator,Figma,Procreate">
+              <div class="project-image-wrap">
+                <img src="https://via.placeholder.com/960x620?text=UIUX+Card+1" alt="UI and UX placeholder project image 1" class="slide-img active" />
+                <img src="https://via.placeholder.com/960x620?text=UIUX+Card+2" alt="UI and UX placeholder project image 2" class="slide-img" />
+              </div>
+              <h3>Title</h3>
+              <p>Description</p>
+              <div class="tag-row">
+                <button class="tool-tag" type="button" data-tool="Tool">Tool</button>
+                <button class="tool-tag" type="button" data-tool="Tool">Tool</button>
+                <button class="tool-tag" type="button" data-tool="Tool">Tool</button>
+              </div>
+              <a href="project4.html" class="btn-outline">VIEW PROJECT</a>
+            </article>
+          </div>
+          <button class="carousel-arrow next" type="button" aria-label="Next project">›</button>
         </div>
       </section>
     </main>
