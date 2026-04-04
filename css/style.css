@@ -270,15 +270,6 @@ body {
 .active-badge {
   margin: 0 1.55rem 0.6rem;
   width: fit-content;
-  padding: 0.36rem 1rem;
-  border-radius: 999px;
-  background: #fff;
-  color: var(--p3);
-  font-size: 0.87rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  border: 1px solid rgba(252, 114, 56, 0.22);
-  box-shadow: 0 10px 20px rgba(24, 9, 4, 0.08);
 }
 
 .page-section {
@@ -473,11 +464,19 @@ body {
 }
 
 .project-area {
+  position: relative;
   padding: 2.2rem;
   background: #fff;
   border-radius: 1.6rem;
   border: 1px solid rgba(252, 114, 56, .15);
   box-shadow: 0 12px 22px rgba(0, 0, 0, .08);
+}
+
+.work-star {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  left: auto;
 }
 
 .work-filter-row {
@@ -487,25 +486,48 @@ body {
   margin-bottom: 1.25rem;
 }
 
+.active-badge,
 .filter-btn {
-  border: 2px solid #fc7238;
-  background: #fff;
-  color: #fc7238;
-  padding: .46rem .98rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.2rem;
+  padding: 0.42rem 1.02rem;
   border-radius: 999px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(252, 114, 56, 0.35);
+  background: #fff;
+  color: var(--p3);
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(24, 9, 4, 0.08);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
 }
 
+.active-badge:hover,
 .filter-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 16px rgba(252, 114, 56, 0.18);
+  box-shadow: 0 10px 18px rgba(252, 114, 56, 0.16);
+}
+
+.active-badge:active,
+.filter-btn:active {
+  transform: translateY(0);
+}
+
+.active-badge { cursor: default; }
+
+.filter-btn {
+  cursor: pointer;
 }
 
 .filter-btn.active {
   background: #fc7238;
   color: #fff;
+  border-color: #fc7238;
 }
 
 .work-carousel-wrap {
@@ -691,6 +713,113 @@ body {
   font-weight: 700;
 }
 
+.contact-area {
+  position: relative;
+  min-height: auto;
+  padding: 1.7rem 2.2rem 1.5rem;
+  background: #fff;
+  border-radius: 1.6rem;
+  border: 1px solid rgba(252, 114, 56, .15);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, .08);
+}
+
+.contact-star {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.6rem;
+  color: var(--p3);
+  font-size: 1.4rem;
+  opacity: 0.75;
+}
+
+.contact-heading h2 {
+  margin: 0;
+  font-family: 'Holtwood One SC', serif;
+  font-size: clamp(1.7rem, 3vw, 2.25rem);
+  letter-spacing: 0.05em;
+  color: #2a201d;
+}
+
+.contact-heading p {
+  margin: 0.55rem 0 1.15rem;
+  max-width: 720px;
+  color: #6c5951;
+  line-height: 1.55;
+}
+
+.contact-area .active-badge.contact-badge {
+  margin: 0 0 0.62rem;
+  color: var(--p3);
+}
+
+.contact-heading > p:last-child {
+  margin-top: 0;
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem 1.45rem;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.contact-field label {
+  font-weight: 700;
+  font-size: 0.93rem;
+  color: #6b5046;
+}
+
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid rgba(252, 114, 56, 0.35);
+  background: transparent;
+  padding: 0.48rem 0.08rem 0.56rem;
+  color: #2d2320;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.22s ease;
+}
+
+.contact-field textarea {
+  resize: vertical;
+  min-height: 132px;
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+  color: rgba(107, 80, 70, 0.52);
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  border-bottom-color: var(--p3);
+}
+
+.contact-field-full {
+  grid-column: 1 / -1;
+}
+
+.contact-message {
+  grid-column: 1 / -1;
+  margin: 0;
+  min-height: 1.2em;
+  color: #b45534;
+  font-weight: 600;
+}
+
+.contact-send {
+  grid-column: 1 / -1;
+  justify-self: start;
+  min-width: 150px;
+}
+
 .site-footer {
   background: #fff;
   padding: 1rem 2rem;
@@ -790,6 +919,11 @@ body {
     opacity: 0.34;
     transform: translateX(-50%) scale(0.93);
   }
+
+  .contact-form {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 620px) {
@@ -839,4 +973,6 @@ body {
   .carousel-arrow.prev { left: 24%; }
 
   .carousel-arrow.next { right: 24%; }
+
+  .contact-area { padding: 1.4rem; }
 }

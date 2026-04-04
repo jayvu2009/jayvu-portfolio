@@ -220,3 +220,48 @@ if (topNav) {
     window.requestAnimationFrame(updateNavVisibility);
   }, { passive: true });
 }
+
+// contact form: validate required fields and open mailto
+const contactForm = document.getElementById('contact-form');
+const contactMessage = document.getElementById('contact-message');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const nameInput = document.getElementById('contact-name');
+    const companyInput = document.getElementById('contact-company');
+    const emailInput = document.getElementById('contact-email');
+    const phoneInput = document.getElementById('contact-phone');
+    const descriptionInput = document.getElementById('contact-description');
+
+    if (!nameInput || !companyInput || !emailInput || !phoneInput || !descriptionInput) return;
+
+    const requiredFields = [nameInput, emailInput, phoneInput, descriptionInput];
+    const firstMissing = requiredFields.find((field) => !field.value.trim());
+    if (firstMissing) {
+      if (contactMessage) contactMessage.textContent = 'Please complete all required fields.';
+      firstMissing.focus();
+      return;
+    }
+
+    if (!emailInput.checkValidity()) {
+      if (contactMessage) contactMessage.textContent = 'Please enter a valid email address.';
+      emailInput.focus();
+      return;
+    }
+
+    if (contactMessage) contactMessage.textContent = '';
+
+    const bodyText = [
+      `Name: ${nameInput.value.trim()}`,
+      `Company: ${companyInput.value.trim()}`,
+      `Email address: ${emailInput.value.trim()}`,
+      `Phone number: ${phoneInput.value.trim()}`,
+      `Description of work: ${descriptionInput.value.trim()}`
+    ].join('\n');
+
+    const mailtoUrl = `mailto:jayvu209@gmail.com?subject=${encodeURIComponent('Project Inquiry')}&body=${encodeURIComponent(bodyText)}`;
+    window.location.href = mailtoUrl;
+  });
+}
