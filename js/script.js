@@ -1,61 +1,57 @@
 // typewriter
-const roles = ['Front-end Developer', 'UI/UX Designer', 'Branding Designer'];
+const roles = ['UX/UI Designer', 'Front-end Developer', 'Branding Designer'];
 const typeEl = document.getElementById('typewriter');
 let roleIndex = 0;
-let chr = 0;
+let charIndex = 0;
 let isDeleting = false;
-let loopDelay = 180;
 
 function typeLoop() {
-  const current = roles[roleIndex];
-  if (isDeleting) {
-    typeEl.textContent = current.substring(0, chr - 1);
-    chr--;
-  } else {
-    typeEl.textContent = current.substring(0, chr + 1);
-    chr++;
-  }
+  if (!typeEl) return;
 
-  if (!isDeleting && chr === current.length) {
-    setTimeout(() => { isDeleting = true; typeLoop(); }, 1000);
+  const current = roles[roleIndex];
+  typeEl.textContent = current.slice(0, charIndex);
+
+  if (!isDeleting && charIndex < current.length) {
+    charIndex += 1;
+    setTimeout(typeLoop, 120);
     return;
   }
 
-  if (isDeleting && chr === 0) {
-    isDeleting = false;
-    roleIndex = (roleIndex + 1) % roles.length;
+  if (!isDeleting && charIndex === current.length) {
+    isDeleting = true;
+    setTimeout(typeLoop, 1250);
+    return;
   }
 
-  setTimeout(typeLoop, isDeleting ? 80 : 140);
+  if (isDeleting && charIndex > 0) {
+    charIndex -= 1;
+    setTimeout(typeLoop, 75);
+    return;
+  }
+
+  isDeleting = false;
+  roleIndex = (roleIndex + 1) % roles.length;
+  setTimeout(typeLoop, 240);
 }
+
 if (typeEl) typeLoop();
 
-// section nav state and scroll
-const sectionButtons = document.querySelectorAll('.section-btn');
-const sections = document.querySelectorAll('.page-section');
-const contentPanel = document.getElementById('main-content');
+// lightweight smooth-scroll for in-page links
+document.querySelectorAll('.js-scroll-link, .section-btn[data-section]').forEach(link => {
+  link.addEventListener('click', (event) => {
+    const hrefTarget = link.getAttribute('href');
+    const dataTarget = link.dataset.section ? `#${link.dataset.section}` : '';
+    const targetSelector = (hrefTarget && hrefTarget.startsWith('#')) ? hrefTarget : dataTarget;
 
-function setActiveSection(name) {
-  sectionButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.section === name));
-}
+    if (!targetSelector) return;
 
-sectionButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = document.getElementById(btn.dataset.section);
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const target = document.querySelector(targetSelector);
+    if (!target) return;
+
+    event.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
-
-if (contentPanel) {
-  contentPanel.addEventListener('scroll', () => {
-    let top = contentPanel.scrollTop + 120;
-    sections.forEach(sec => {
-      if (top >= sec.offsetTop && top < sec.offsetTop + sec.offsetHeight) {
-        setActiveSection(sec.id);
-      }
-    });
-  });
-}
 
 // project card filter
 const filterButtons = document.querySelectorAll('.filter-btn');
@@ -103,3 +99,44 @@ document.querySelectorAll('.project-card').forEach(card => {
     updateImage();
   });
 });
+
+// top navigation hide/show on scroll direction
+const topNav = document.querySelector('.topbar');
+let lastScrollY = window.scrollY;
+let scrollTicking = false;
+
+function updateNavVisibility() {
+  if (!topNav) return;
+
+  const currentScrollY = window.scrollY;
+  const delta = currentScrollY - lastScrollY;
+
+  if (Math.abs(delta) < 6) {
+    scrollTicking = false;
+    return;
+  }
+
+  if (delta > 0 && currentScrollY > 80) {
+    if (!topNav.classList.contains('nav-hidden')) {
+      topNav.classList.add('nav-hidden');
+      topNav.classList.remove('nav-visible');
+    }
+  } else if (delta < 0) {
+    if (!topNav.classList.contains('nav-visible')) {
+      topNav.classList.add('nav-visible');
+      topNav.classList.remove('nav-hidden');
+    }
+  }
+
+  lastScrollY = currentScrollY;
+  scrollTicking = false;
+}
+
+if (topNav) {
+  topNav.classList.add('nav-visible');
+  window.addEventListener('scroll', () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    window.requestAnimationFrame(updateNavVisibility);
+  }, { passive: true });
+}

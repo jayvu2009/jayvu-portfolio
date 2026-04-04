@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jay Vu Portfolio | Home</title>
+  <title>Jay Vu's Portfolio</title>
   <meta name="description" content="Jay Vu Portfolio - Front-end Developer / UIUX Designer / Branding Designer" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -20,18 +20,20 @@
         <div class="avatar-wrap">
           <img class="avatar" src="assets/profile-picture 1.png" alt="Jay Vu avatar" />
         </div>
-        <p class="specialization-title">SPECIALIZATION</p>
-        <ul class="spec-list">
-          <li>Front-end Developer</li>
-          <li>UI/UX Designer</li>
-          <li>Branding Designer</li>
-        </ul>
+        <div class="spec-block">
+          <p class="specialization-title">SPECIALIZATION</p>
+          <ul class="spec-list">
+            <li>Front-end Developer</li>
+            <li>UI/UX Designer</li>
+            <li>Branding Designer</li>
+          </ul>
+        </div>
         <div class="social-row">
           <a href="https://www.linkedin.com/in/jay-vu-646486341/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
           <a href="mailto:jayvu209@gmail.com" aria-label="Email">@</a>
           <a href="https://www.youtube.com/@JayVu-journey" aria-label="YouTube">YT</a>
         </div>
-        <a href="https://www.linkedin.com/in/jay-vu-portfolio" class="btn connect-btn" target="_blank" rel="noopener">LET'S CONNECT</a>
+        <a href="#contact" class="btn connect-btn js-scroll-link">LET'S CONNECT</a>
       </div>
     </aside>
 
@@ -39,38 +41,39 @@
       <nav class="topbar">
         <button class="section-btn active" data-section="home" id="btn-home">HOME</button>
         <a class="section-btn" href="about.html" id="btn-about">ABOUT</a>
-        <button class="section-btn" data-section="projects" id="btn-projects">PROJECT</button>
+        <a class="section-btn js-scroll-link" href="#works" id="btn-works">WORKS</a>
       </nav>
+      <p class="active-badge" aria-live="polite">HOME</p>
 
       <section id="home" class="page-section home-hero">
+        <span class="hero-star" aria-hidden="true">✦</span>
         <div class="hero-left">
-          <p class="small-label">HOME</p>
-          <h2>Hi, I'm</h2>
+          <h2>Hi, I am</h2>
           <h1 class="name-title">JAY VU</h1>
-          <h3 class="typed-title"><span id="typewriter"></span></h3>
+          <h3 class="typed-title"><span id="typewriter"></span><span class="type-cursor" aria-hidden="true">|</span></h3>
           <p class="subtitle">Creative & Collaborative Designer building pixel-perfect web experiences.</p>
           <div class="hero-actions">
-            <a class="btn-secondary" href="#projects">My Works</a>
-            <a class="btn-primary" href="about.html">Let's Talk</a>
-          </div>
-          <div class="scroll-circle" id="scroll-hint">
-            <div class="scroll-text">SCROLL FOR MORE</div>
-            <div class="scroll-arrow">↓</div>
+            <a class="btn-primary js-scroll-link" href="#works">SEE MY WORKS</a>
           </div>
         </div>
         <div class="hero-right">
-          <div class="hero-card">
-            <h4>Specialization</h4>
-            <ul>
-              <li>Front-end Developer</li>
-              <li>UI/UX Designer</li>
-              <li>Branding Designer</li>
-            </ul>
+          <div class="scroll-indicator" id="scroll-hint" aria-hidden="true">
+            <svg viewBox="0 0 120 120" class="scroll-ring" role="img" aria-label="Scroll for more">
+              <defs>
+                <path id="scrollCirclePath" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"></path>
+              </defs>
+              <text>
+                <textPath href="#scrollCirclePath">SCROLL FOR MORE • SCROLL FOR MORE • </textPath>
+              </text>
+            </svg>
+            <div class="scroll-core">
+              <span class="scroll-arrow">↓</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="projects" class="page-section project-area">
+      <section id="works" class="page-section project-area">
         <div class="project-filter">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="design">Design</button>
