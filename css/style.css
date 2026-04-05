@@ -815,6 +815,20 @@ body {
   padding: .5rem .8rem;
   border-radius: .8rem;
   font-weight: 700;
+  background: transparent;
+  transition: background 0.28s ease, color 0.28s ease, transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.btn-outline:hover {
+  background: #fc7238;
+  color: #fff;
+  border-color: #fc7238;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 18px rgba(252, 114, 56, 0.28);
+}
+
+.btn-outline:active {
+  transform: translateY(-1px);
 }
 
 /* Contact Section */
