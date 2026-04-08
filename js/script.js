@@ -1,4 +1,33 @@
 // =========================
+// Home: Load-In Animation (run once)
+// =========================
+const homeLoadRoot = document.body;
+
+if (homeLoadRoot && homeLoadRoot.classList.contains('home-load-anim')) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const startHomeLoadAnimation = () => {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        homeLoadRoot.classList.add('is-loaded');
+        window.setTimeout(() => {
+          homeLoadRoot.classList.remove('home-load-anim');
+        }, 1600);
+      });
+    });
+  };
+
+  if (prefersReducedMotion) {
+    homeLoadRoot.classList.add('is-loaded');
+    homeLoadRoot.classList.remove('home-load-anim');
+  } else if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startHomeLoadAnimation, { once: true });
+  } else {
+    startHomeLoadAnimation();
+  }
+}
+
+// =========================
 // Home: Typewriter
 // =========================
 const roles = ['UX/UI Designer', 'Front-end Developer', 'Branding Designer'];
