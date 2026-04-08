@@ -362,11 +362,75 @@
   color: #fc7238;
 }
 
+.project1-more-empty {
+  margin: 0.85rem 0 0;
+  color: #6b5046;
+  font-size: 1.04rem;
+  font-weight: 700;
+}
+
 .project1-more-grid {
   margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.6rem;
+}
+
+.project1-more-grid.more-works-grid--carousel {
+  display: block;
+  margin-top: 1rem;
+}
+
+.project1-more-grid .more-works-carousel-wrap {
+  position: relative;
+  min-height: 560px;
+  padding: 0 3.4rem;
+  overflow: hidden;
+  border-radius: 1.2rem;
+}
+
+.project1-more-grid .more-works-carousel-stage {
+  position: relative;
+  min-height: 100%;
+}
+
+.project1-more-grid.more-works-grid--carousel .more-works-card {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(100%, 460px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scale(0.84);
+  filter: blur(0.6px);
+  transition: transform 0.42s ease, opacity 0.42s ease, filter 0.42s ease;
+}
+
+.project1-more-grid.more-works-grid--carousel .more-works-card.is-center {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 5;
+  transform: translateX(-50%) scale(1);
+  filter: none;
+}
+
+.project1-more-grid.more-works-grid--carousel .more-works-card.is-left {
+  opacity: 0.58;
+  z-index: 4;
+  transform: translateX(-128%) scale(0.87);
+}
+
+.project1-more-grid.more-works-grid--carousel .more-works-card.is-right {
+  opacity: 0.58;
+  z-index: 4;
+  transform: translateX(28%) scale(0.87);
+}
+
+.project1-more-grid.more-works-grid--carousel .more-works-card.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transform: translateX(-50%) scale(0.8);
 }
 
 .project1-more-card {
@@ -472,6 +536,19 @@
 
   .project1-filter-wrap {
     margin-right: 0;
+  }
+
+  .project1-more-grid .more-works-carousel-wrap {
+    min-height: 520px;
+    padding: 0 2.35rem;
+  }
+
+  .project1-more-grid.more-works-grid--carousel .more-works-card.is-left {
+    transform: translateX(-114%) scale(0.86);
+  }
+
+  .project1-more-grid.more-works-grid--carousel .more-works-card.is-right {
+    transform: translateX(14%) scale(0.86);
   }
 
   .project1-hero-media {

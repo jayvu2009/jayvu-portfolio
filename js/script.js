@@ -171,8 +171,11 @@ if (carouselNext) {
 }
 
 allWorkCards.forEach((card) => {
+  const isProject4Card = card.dataset.project === 'project4';
   const images = Array.from(card.querySelectorAll('.slide-img'));
   if (images.length < 2) return;
+
+  if (isProject4Card) return;
 
   let imageIndex = 0;
   window.setInterval(() => {
@@ -181,6 +184,73 @@ allWorkCards.forEach((card) => {
     images[imageIndex].classList.add('active');
   }, 5000);
 });
+
+// =========================
+// Work: Project 4 Card Slider (auto + pause)
+// =========================
+const project4Card = document.querySelector('#work-carousel-stage .project-card[data-project="project4"]');
+
+if (project4Card) {
+  const project4Images = Array.from(project4Card.querySelectorAll('.slide-img'));
+  const imageWrap = project4Card.querySelector('.project-image-wrap');
+  const projectLink = project4Card.querySelector('.btn-outline');
+
+  if (project4Images.length > 1 && imageWrap) {
+    let project4Index = 0;
+    let project4Timer = null;
+    let resumeTimer = null;
+
+    const showProject4Slide = (nextIndex) => {
+      project4Images[project4Index].classList.remove('active');
+      project4Index = (nextIndex + project4Images.length) % project4Images.length;
+      project4Images[project4Index].classList.add('active');
+    };
+
+    const goNextProject4Slide = () => showProject4Slide(project4Index + 1);
+
+    const clearProject4Timers = () => {
+      if (project4Timer) {
+        window.clearInterval(project4Timer);
+        project4Timer = null;
+      }
+      if (resumeTimer) {
+        window.clearTimeout(resumeTimer);
+        resumeTimer = null;
+      }
+    };
+
+    const startProject4AutoSlide = () => {
+      clearProject4Timers();
+      project4Timer = window.setInterval(goNextProject4Slide, 3800);
+    };
+
+    const pauseProject4AutoSlide = (resumeDelay = 4200) => {
+      clearProject4Timers();
+      resumeTimer = window.setTimeout(startProject4AutoSlide, resumeDelay);
+    };
+
+    imageWrap.addEventListener('mouseenter', () => {
+      clearProject4Timers();
+    });
+
+    imageWrap.addEventListener('mouseleave', () => {
+      startProject4AutoSlide();
+    });
+
+    imageWrap.addEventListener('click', () => {
+      goNextProject4Slide();
+      pauseProject4AutoSlide(4200);
+    });
+
+    if (projectLink) {
+      projectLink.addEventListener('click', () => {
+        pauseProject4AutoSlide(4200);
+      });
+    }
+
+    startProject4AutoSlide();
+  }
+}
 
 if (allWorkCards.length) {
   applyFilters();

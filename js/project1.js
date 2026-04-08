@@ -38,53 +38,11 @@ if (projectTopNav) {
   }, { passive: true });
 }
 
-// Project 1: local More Works category dropdown + filter
-const moreWorksToggle = document.getElementById('moreWorksToggle');
-const moreWorksMenu = document.getElementById('moreWorksMenu');
-const moreWorksCurrent = document.getElementById('moreWorksCurrent');
-const moreWorksCards = Array.from(document.querySelectorAll('#moreWorksGrid .project1-more-card'));
-const moreWorksOptions = Array.from(document.querySelectorAll('#moreWorksMenu button[data-category]'));
-
-let activeMoreWorksCategory = 'design';
-
-function applyMoreWorksFilter() {
-  moreWorksCards.forEach((card) => {
-    card.hidden = card.dataset.category !== activeMoreWorksCategory;
+// Project 1: shared More Works logic
+if (typeof window.initProjectMoreWorks === 'function') {
+  window.initProjectMoreWorks({
+    currentProjectId: 'project1',
+    currentProjectCategory: 'design',
+    classPrefix: 'project1'
   });
 }
-
-function setMenuOpen(isOpen) {
-  if (!moreWorksToggle || !moreWorksMenu) return;
-  moreWorksMenu.hidden = !isOpen;
-  moreWorksToggle.setAttribute('aria-expanded', String(isOpen));
-}
-
-if (moreWorksToggle && moreWorksMenu && moreWorksCurrent) {
-  moreWorksToggle.addEventListener('click', () => {
-    const isOpen = !moreWorksMenu.hidden;
-    setMenuOpen(!isOpen);
-  });
-
-  moreWorksOptions.forEach((option) => {
-    option.addEventListener('click', () => {
-      activeMoreWorksCategory = option.dataset.category;
-      moreWorksCurrent.textContent = option.textContent.trim();
-      applyMoreWorksFilter();
-      setMenuOpen(false);
-    });
-  });
-
-  document.addEventListener('click', (event) => {
-    if (moreWorksMenu.hidden) return;
-    const target = event.target;
-    if (!(target instanceof Node)) return;
-    if (moreWorksToggle.contains(target) || moreWorksMenu.contains(target)) return;
-    setMenuOpen(false);
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') setMenuOpen(false);
-  });
-}
-
-applyMoreWorksFilter();
