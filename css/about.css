@@ -3,6 +3,161 @@
   min-height: auto;
 }
 
+:root {
+  --about-load-duration: 760ms;
+  --about-load-duration-fast: 620ms;
+  --about-load-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* About: Load-In Animation (runs once on initial page load) */
+.about-page.about-load-anim .sidebar,
+.about-page.about-load-anim .content-panel > .active-badge,
+.about-page.about-load-anim .about-hero,
+.about-page.about-load-anim .about-title,
+.about-page.about-load-anim .about-hero .hero-star,
+.about-page.about-load-anim .about-slider,
+.about-page.about-load-anim .about-arrow,
+.about-page.about-load-anim .about-dots,
+.about-page.about-load-anim .about-thumbs,
+.about-page.about-load-anim .about-thumb,
+.about-page.about-load-anim .about-hobbies,
+.about-page.about-load-anim .about-tools,
+.about-page.about-load-anim .about-journey,
+.about-page.about-load-anim .about-cta {
+  will-change: transform, opacity;
+}
+
+.about-page.about-load-anim .sidebar {
+  transition: transform var(--about-load-duration) var(--about-load-ease), opacity var(--about-load-duration) var(--about-load-ease);
+  transition-delay: 70ms;
+}
+
+.about-page.about-load-anim .content-panel > .active-badge {
+  transition: transform 620ms var(--about-load-ease), opacity 620ms var(--about-load-ease);
+  transition-delay: 200ms;
+}
+
+.about-page.about-load-anim .about-hero {
+  transition: transform var(--about-load-duration) var(--about-load-ease), opacity var(--about-load-duration) var(--about-load-ease);
+  transition-delay: 240ms;
+}
+
+.about-page.about-load-anim .about-title {
+  transition: transform 640ms var(--about-load-ease), opacity 640ms var(--about-load-ease);
+  transition-delay: 340ms;
+}
+
+.about-page.about-load-anim .about-hero .hero-star {
+  transition: transform 620ms var(--about-load-ease), opacity 620ms var(--about-load-ease);
+  transition-delay: 380ms;
+}
+
+.about-page.about-load-anim .about-slider {
+  transition: transform 700ms var(--about-load-ease), opacity 700ms var(--about-load-ease);
+  transition-delay: 460ms;
+}
+
+.about-page.about-load-anim .about-arrow {
+  transition: opacity 560ms var(--about-load-ease), transform 560ms var(--about-load-ease);
+  transition-delay: 620ms;
+}
+
+.about-page.about-load-anim .about-dots {
+  transition: opacity 560ms var(--about-load-ease), transform 560ms var(--about-load-ease);
+  transition-delay: 680ms;
+}
+
+.about-page.about-load-anim .about-thumbs {
+  transition: opacity 560ms var(--about-load-ease), transform 560ms var(--about-load-ease);
+  transition-delay: 740ms;
+}
+
+.about-page.about-load-anim .about-thumb {
+  transition: opacity 520ms var(--about-load-ease), transform 520ms var(--about-load-ease);
+}
+
+.about-page.about-load-anim .about-thumb:nth-child(1) { transition-delay: 780ms; }
+.about-page.about-load-anim .about-thumb:nth-child(2) { transition-delay: 830ms; }
+.about-page.about-load-anim .about-thumb:nth-child(3) { transition-delay: 880ms; }
+.about-page.about-load-anim .about-thumb:nth-child(4) { transition-delay: 930ms; }
+.about-page.about-load-anim .about-thumb:nth-child(5) { transition-delay: 980ms; }
+.about-page.about-load-anim .about-thumb:nth-child(6) { transition-delay: 1030ms; }
+
+.about-page.about-load-anim .about-hobbies,
+.about-page.about-load-anim .about-tools,
+.about-page.about-load-anim .about-journey,
+.about-page.about-load-anim .about-cta {
+  transition: opacity 720ms var(--about-load-ease), transform 720ms var(--about-load-ease);
+}
+
+.about-page.about-load-anim .about-hobbies { transition-delay: 980ms; }
+.about-page.about-load-anim .about-tools { transition-delay: 1080ms; }
+.about-page.about-load-anim .about-journey { transition-delay: 1180ms; }
+.about-page.about-load-anim .about-cta { transition-delay: 1260ms; }
+
+.about-page.about-load-anim:not(.is-loaded) .sidebar {
+  opacity: 0;
+  transform: translateX(-88px);
+}
+
+.about-page.about-load-anim:not(.is-loaded) .content-panel > .active-badge {
+  opacity: 0;
+  transform: translateX(-24px);
+}
+
+.about-page.about-load-anim:not(.is-loaded) .about-hero {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.about-page.about-load-anim:not(.is-loaded) .about-title,
+.about-page.about-load-anim:not(.is-loaded) .about-slider,
+.about-page.about-load-anim:not(.is-loaded) .about-dots,
+.about-page.about-load-anim:not(.is-loaded) .about-thumbs {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.about-page.about-load-anim:not(.is-loaded) .about-hero .hero-star,
+.about-page.about-load-anim:not(.is-loaded) .about-arrow {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.about-page.about-load-anim:not(.is-loaded) .about-thumb {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.about-page.about-load-anim:not(.is-loaded) .about-hobbies,
+.about-page.about-load-anim:not(.is-loaded) .about-tools,
+.about-page.about-load-anim:not(.is-loaded) .about-journey,
+.about-page.about-load-anim:not(.is-loaded) .about-cta {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page.about-load-anim .sidebar,
+  .about-page.about-load-anim .content-panel > .active-badge,
+  .about-page.about-load-anim .about-hero,
+  .about-page.about-load-anim .about-title,
+  .about-page.about-load-anim .about-hero .hero-star,
+  .about-page.about-load-anim .about-slider,
+  .about-page.about-load-anim .about-arrow,
+  .about-page.about-load-anim .about-dots,
+  .about-page.about-load-anim .about-thumbs,
+  .about-page.about-load-anim .about-thumb,
+  .about-page.about-load-anim .about-hobbies,
+  .about-page.about-load-anim .about-tools,
+  .about-page.about-load-anim .about-journey,
+  .about-page.about-load-anim .about-cta {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 .about-page .about-hero,
 .about-page .about-hobbies,
 .about-page .about-tools,

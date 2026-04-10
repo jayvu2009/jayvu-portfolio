@@ -1,3 +1,30 @@
+// About: Load-In Animation (run once)
+const aboutLoadRoot = document.body;
+
+if (aboutLoadRoot && aboutLoadRoot.classList.contains('about-load-anim')) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const startAboutLoadAnimation = () => {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        aboutLoadRoot.classList.add('is-loaded');
+        window.setTimeout(() => {
+          aboutLoadRoot.classList.remove('about-load-anim');
+        }, 2200);
+      });
+    });
+  };
+
+  if (prefersReducedMotion) {
+    aboutLoadRoot.classList.add('is-loaded');
+    aboutLoadRoot.classList.remove('about-load-anim');
+  } else if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startAboutLoadAnimation, { once: true });
+  } else {
+    startAboutLoadAnimation();
+  }
+}
+
 // About slider: smooth infinite loop + synced arrows/dots/thumbs + stable autoplay
 const aboutTrack = document.getElementById('about-slider-track');
 const aboutViewport = document.querySelector('.about-slider-viewport');
