@@ -1,10 +1,31 @@
 // Project 4: top nav hide/show on scroll (same behavior as Home/About)
 const projectTopNav = document.querySelector('.project4-header.topbar');
+const projectMenuToggle = document.getElementById('topbar-menu-toggle');
+const projectMobilePanel = document.getElementById('topbar-mobile-panel');
 let projectLastScrollY = window.scrollY;
 let projectScrollTicking = false;
 
+function closeProjectMobileMenu() {
+  if (!projectTopNav || !projectMenuToggle) return;
+  projectTopNav.classList.remove('is-open');
+  projectMenuToggle.setAttribute('aria-expanded', 'false');
+}
+
+function openProjectMobileMenu() {
+  if (!projectTopNav || !projectMenuToggle) return;
+  projectTopNav.classList.add('is-open');
+  projectMenuToggle.setAttribute('aria-expanded', 'true');
+}
+
 function updateProjectNavVisibility() {
   if (!projectTopNav) {
+    projectScrollTicking = false;
+    return;
+  }
+
+  if (window.innerWidth <= 1024) {
+    projectTopNav.classList.add('nav-visible');
+    projectTopNav.classList.remove('nav-hidden');
     projectScrollTicking = false;
     return;
   }
@@ -18,6 +39,7 @@ function updateProjectNavVisibility() {
   }
 
   if (delta > 0 && currentScrollY > 80) {
+    closeProjectMobileMenu();
     projectTopNav.classList.add('nav-hidden');
     projectTopNav.classList.remove('nav-visible');
   } else if (delta < 0) {
@@ -36,6 +58,46 @@ if (projectTopNav) {
     projectScrollTicking = true;
     window.requestAnimationFrame(updateProjectNavVisibility);
   }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 1024) {
+      projectTopNav.classList.add('nav-visible');
+      projectTopNav.classList.remove('nav-hidden');
+      return;
+    }
+    closeProjectMobileMenu();
+  });
+}
+
+if (projectTopNav && projectMenuToggle && projectMobilePanel) {
+  projectMenuToggle.addEventListener('click', () => {
+    const isOpen = projectTopNav.classList.contains('is-open');
+    if (isOpen) {
+      closeProjectMobileMenu();
+    } else {
+      openProjectMobileMenu();
+    }
+  });
+
+  projectMobilePanel.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      closeProjectMobileMenu();
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    if (!projectTopNav.contains(target)) {
+      closeProjectMobileMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeProjectMobileMenu();
+    }
+  });
 }
 
 // Project 4: shared More Works logic

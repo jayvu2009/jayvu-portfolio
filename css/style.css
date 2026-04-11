@@ -259,6 +259,102 @@ body {
 
 .topbar.nav-hidden { transform: translateY(calc(-100% - 0.5rem)); }
 
+.topbar-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.topbar-menu-toggle {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.3rem;
+  cursor: pointer;
+  box-shadow: none;
+  transition: opacity 0.2s ease;
+}
+
+.topbar-menu-toggle:hover {
+  opacity: 0.85;
+}
+
+.topbar-menu-toggle span {
+  width: 1.15rem;
+  height: 2.25px;
+  border-radius: 999px;
+  background: #171313;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.topbar.is-open .topbar-menu-toggle span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.topbar.is-open .topbar-menu-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.topbar.is-open .topbar-menu-toggle span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.topbar-mobile-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.42rem);
+  right: 0.2rem;
+  width: min(280px, calc(100vw - 2.4rem));
+  border-radius: 1rem;
+  background: linear-gradient(160deg, #fffdfc 0%, #fff4ec 100%);
+  border: 1px solid rgba(255, 148, 94, 0.28);
+  box-shadow: 0 14px 26px rgba(252, 114, 56, 0.16);
+  padding: 0.42rem;
+  gap: 0.3rem;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.topbar.is-open .topbar-mobile-panel {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.topbar-mobile-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 148, 94, 0.25);
+  background: rgba(255, 255, 255, 0.94);
+  color: #38251e;
+  text-decoration: none;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.topbar-mobile-link:hover {
+  transform: translateY(-1px);
+  color: var(--p3);
+  box-shadow: 0 8px 14px rgba(252, 114, 56, 0.16);
+}
+
 .section-btn {
   flex: 1 1 0;
   border: 1px solid rgba(255, 148, 94, 0.25);
@@ -333,7 +429,7 @@ body {
 }
 
 .hero-left h2 {
-  margin: 0;
+  margin: 0 0 clamp(12px, 2vw, 20px);
   font-family: 'Instrument Serif', serif;
   font-size: clamp(2.2rem, 5vw, 3.9rem);
   font-weight: 400;
@@ -343,7 +439,7 @@ body {
 }
 
 .name-title {
-  margin: 0.18rem 0 0;
+  margin: 0 0 clamp(14px, 2.5vw, 24px);
   font-family: 'Holtwood One SC', serif;
   font-size: clamp(2.8rem, 9.1vw, 6.35rem);
   line-height: 0.92;
@@ -369,7 +465,7 @@ body {
 }
 
 .typed-title {
-  margin: 0.1rem 0 0;
+  margin: 0;
   min-height: 48px;
   color: #3f2e29;
   font-family: 'Instrument Serif', serif;
@@ -1208,16 +1304,19 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
     position: relative;
     top: auto;
     height: auto;
+    width: 100%;
   }
 
   .profile-card {
     min-height: auto;
-    max-width: 460px;
+    max-width: none;
+    width: 100%;
   }
 
   .content-panel {
     min-height: 100%;
     border-radius: 1.5rem;
+    width: 100%;
   }
 
   .home-hero { min-height: auto; }
@@ -1263,8 +1362,8 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
   }
 
   .work-carousel-wrap {
-    min-height: 540px;
-    padding-inline: 1rem;
+    min-height: 500px;
+    padding: 0 2.35rem;
   }
 
   .work-carousel-wrap::before,
@@ -1274,17 +1373,21 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
 
   .carousel-arrow {
     top: auto;
-    bottom: -0.1rem;
+    bottom: -0.65rem;
   }
 
   .carousel-arrow.prev { left: 35%; }
 
   .carousel-arrow.next { right: 35%; }
 
-  .project-card.is-left,
+  .project-card.is-left {
+    opacity: 0.58;
+    transform: translateX(-114%) scale(0.86);
+  }
+
   .project-card.is-right {
-    opacity: 0.34;
-    transform: translateX(-50%) scale(0.93);
+    opacity: 0.58;
+    transform: translateX(14%) scale(0.86);
   }
 
   .contact-form {
@@ -1293,8 +1396,50 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
   }
 }
 
+@media (max-width: 768px) {
+  #work-carousel-stage .project-card .btn-outline {
+    margin-top: clamp(12px, 3vw, 20px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .content-panel > .topbar {
+    width: auto;
+    margin: 0.85rem 0.95rem 0.5rem;
+    margin-left: auto;
+    padding: 0;
+    justify-content: flex-end;
+    align-items: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .content-panel > .topbar.nav-hidden,
+  .content-panel > .topbar.nav-visible {
+    transform: translateY(0);
+  }
+
+  .content-panel > .topbar .topbar-links {
+    display: none;
+  }
+
+  .content-panel > .topbar .topbar-menu-toggle {
+    display: inline-flex;
+    margin-right: 0;
+  }
+
+  .content-panel > .topbar .topbar-mobile-panel {
+    display: grid;
+  }
+}
+
 @media (max-width: 620px) {
-  .page-shell { padding-inline: 0.8rem; }
+  .page-shell {
+    padding-inline: 0.8rem;
+    gap: 1rem;
+  }
 
   .profile-card { border-radius: 1.6rem; }
 
@@ -1310,6 +1455,21 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
   .active-badge,
   .page-section { margin-left: 0.95rem; margin-right: 0.95rem; }
 
+  .sidebar,
+  .content-panel {
+    width: 100%;
+  }
+
+  .topbar {
+    width: auto;
+    align-items: center;
+  }
+
+  .content-panel > .topbar .topbar-mobile-panel {
+    right: 0;
+    width: min(260px, calc(100vw - 2rem));
+  }
+
   .hero-actions {
     width: 100%;
     flex-direction: column;
@@ -1323,7 +1483,7 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
   .filter-btn { padding-inline: 0.8rem; }
 
   .work-carousel-wrap {
-    min-height: 500px;
+    min-height: 470px;
     padding-inline: 0.2rem;
   }
 
@@ -1333,13 +1493,17 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
   }
 
   .project-card {
-    width: min(100%, 340px);
-    padding: 0.88rem;
+    width: min(100%, 380px);
+    padding: 0.92rem;
   }
 
   .carousel-arrow.prev { left: 24%; }
 
   .carousel-arrow.next { right: 24%; }
+
+  .carousel-arrow {
+    bottom: -0.8rem;
+  }
 
   .contact-area { padding: 1.4rem; }
 }

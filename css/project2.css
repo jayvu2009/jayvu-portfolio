@@ -550,16 +550,32 @@ body.project2-page.project2-reveal-ready .reveal-right.is-visible {
 
 @media (max-width: 1024px) {
   .project2-header.topbar {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 0.6rem;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    justify-items: stretch;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .project2-nav.topbar-links {
+    display: none;
+  }
+
+  .project2-header.topbar .topbar-menu-toggle {
+    display: inline-flex;
+    justify-self: end;
+  }
+
+  .project2-header.topbar .topbar-mobile-panel {
+    display: grid;
+    top: calc(100% + 0.35rem);
+    right: 0.75rem;
+    width: min(260px, calc(100vw - 2rem));
   }
 
   .project2-header-right {
     justify-self: end;
-    position: absolute;
-    right: 1rem;
-    top: 0.65rem;
+    position: static;
   }
 }
 

@@ -36,7 +36,7 @@
         <div class="social-row">
           <a href="https://www.linkedin.com/in/jay-vu-646486341/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
           <a href="mailto:jayvu209@gmail.com" aria-label="Email">@</a>
-          <a href="https://www.youtube.com/@JayVu-journey" aria-label="YouTube">YT</a>
+          <a href="https://www.youtube.com/@JayVu-journey" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
         </div>
         <a href="#contact" class="btn connect-btn js-scroll-link">LET'S CONNECT</a>
       </div>
@@ -45,10 +45,31 @@
     <!-- Right Content Panel -->
     <main class="content-panel" id="main-content">
       <!-- Top Navigation -->
-      <nav class="topbar">
-        <button class="section-btn active" data-section="home" id="btn-home">HOME</button>
-        <a class="section-btn" href="about.html" id="btn-about">ABOUT</a>
-        <a class="section-btn js-scroll-link" href="#works" id="btn-works">WORK</a>
+      <nav class="topbar" aria-label="Primary navigation">
+        <div class="topbar-links">
+          <button class="section-btn active" data-section="home" id="btn-home">HOME</button>
+          <a class="section-btn" href="about.html" id="btn-about">ABOUT</a>
+          <a class="section-btn js-scroll-link" href="#works" id="btn-works">WORK</a>
+        </div>
+
+        <button
+          class="topbar-menu-toggle"
+          id="topbar-menu-toggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="topbar-mobile-panel"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+
+        <div class="topbar-mobile-panel" id="topbar-mobile-panel" aria-label="Mobile navigation">
+          <a class="topbar-mobile-link js-scroll-link" href="#home">HOME</a>
+          <a class="topbar-mobile-link" href="about.html">ABOUT</a>
+          <a class="topbar-mobile-link js-scroll-link" href="#works">WORK</a>
+        </div>
       </nav>
 
       <!-- Active Section Badge -->
@@ -170,6 +191,7 @@
               <a href="project4.html" class="btn-outline">VIEW PROJECT</a>
             </article>
 
+            <!--
             <article class="project-card" data-category="uiux" data-tools="Illustrator,Figma,Procreate">
               <div class="project-image-wrap">
                 <img src="https://via.placeholder.com/960x620?text=UIUX+Card+1" alt="UI and UX placeholder project image 1" class="slide-img active" />
@@ -184,6 +206,7 @@
               </div>
               <a href="project4.html" class="btn-outline">VIEW PROJECT</a>
             </article>
+            -->
           </div>
           <button class="carousel-arrow next" type="button" aria-label="Next project">›</button>
         </div>

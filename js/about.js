@@ -148,11 +148,33 @@ if (aboutTrack) {
 
 // About top nav: match Home behavior (show on load, hide on scroll down, show on scroll up)
 const aboutTopNav = document.querySelector('.topbar');
+const aboutMenuToggle = document.getElementById('topbar-menu-toggle');
+const aboutMobilePanel = document.getElementById('topbar-mobile-panel');
 let aboutLastScrollY = window.scrollY;
 let aboutScrollTicking = false;
 
+function closeAboutMobileMenu() {
+  if (!aboutTopNav || !aboutMenuToggle) return;
+  aboutTopNav.classList.remove('is-open');
+  aboutMenuToggle.setAttribute('aria-expanded', 'false');
+}
+
+function openAboutMobileMenu() {
+  if (!aboutTopNav || !aboutMenuToggle) return;
+  aboutTopNav.classList.add('is-open');
+  aboutMenuToggle.setAttribute('aria-expanded', 'true');
+}
+
 function updateAboutNavVisibility() {
   if (!aboutTopNav) {
+    aboutScrollTicking = false;
+    return;
+  }
+
+  // Match homepage behavior: mobile/tablet nav stays anchored and visible.
+  if (window.innerWidth <= 1024) {
+    aboutTopNav.classList.add('nav-visible');
+    aboutTopNav.classList.remove('nav-hidden');
     aboutScrollTicking = false;
     return;
   }
@@ -171,6 +193,7 @@ function updateAboutNavVisibility() {
 
   if (scrollingDown) {
     if (!aboutTopNav.classList.contains('nav-hidden')) {
+      closeAboutMobileMenu();
       aboutTopNav.classList.add('nav-hidden');
       aboutTopNav.classList.remove('nav-visible');
     }
@@ -192,4 +215,44 @@ if (aboutTopNav) {
     aboutScrollTicking = true;
     window.requestAnimationFrame(updateAboutNavVisibility);
   }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 1024) {
+      aboutTopNav.classList.add('nav-visible');
+      aboutTopNav.classList.remove('nav-hidden');
+      return;
+    }
+    closeAboutMobileMenu();
+  });
+}
+
+if (aboutTopNav && aboutMenuToggle && aboutMobilePanel) {
+  aboutMenuToggle.addEventListener('click', () => {
+    const isOpen = aboutTopNav.classList.contains('is-open');
+    if (isOpen) {
+      closeAboutMobileMenu();
+    } else {
+      openAboutMobileMenu();
+    }
+  });
+
+  aboutMobilePanel.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      closeAboutMobileMenu();
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    if (!aboutTopNav.contains(target)) {
+      closeAboutMobileMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeAboutMobileMenu();
+    }
+  });
 }
