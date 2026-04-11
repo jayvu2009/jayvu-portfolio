@@ -416,6 +416,8 @@
   display: flex;
   width: max-content;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 .tool-loop-set {
@@ -427,15 +429,11 @@
 }
 
 .marquee-design .tool-track {
-  animation: toolsMarqueeRight 24s linear infinite;
+  animation: toolsMarquee 24s linear infinite reverse;
 }
 
 .marquee-dev .tool-track {
-  animation: toolsMarqueeLeft 18s linear infinite;
-}
-
-.tool-marquee:hover .tool-track {
-  animation-play-state: paused;
+  animation: toolsMarquee 18s linear infinite;
 }
 
 .tool-item {
@@ -514,21 +512,12 @@
   transform-origin: center;
 }
 
-@keyframes toolsMarqueeLeft {
+@keyframes toolsMarquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes toolsMarqueeRight {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 

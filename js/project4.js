@@ -46,3 +46,168 @@ if (typeof window.initProjectMoreWorks === 'function') {
     classPrefix: 'project4'
   });
 }
+
+// Project 4: initial load animation + hybrid scroll reveal animation
+const project4Body = document.body;
+
+if (project4Body && project4Body.classList.contains('project4-page')) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const REVEAL_THRESHOLD = 0.16;
+  const REVEAL_ROOT_MARGIN = '0px 0px -8% 0px';
+
+  const prepareLoadElements = () => {
+    const loadElements = Array.from(document.querySelectorAll('.load-from-top, .load-from-left, .load-from-right, .load-fade-up'));
+    loadElements.forEach((element) => {
+      const delay = Number(element.dataset.loadDelay || 0);
+      element.style.setProperty('--load-delay', `${delay}ms`);
+    });
+  };
+
+  const initScrollReveal = () => {
+    const revealOnceObserver = prefersReducedMotion ? null : new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: REVEAL_THRESHOLD,
+        rootMargin: REVEAL_ROOT_MARGIN
+      }
+    );
+
+    const revealReplayObserver = prefersReducedMotion ? null : new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          } else {
+            entry.target.classList.remove('is-visible');
+          }
+        });
+      },
+      {
+        threshold: REVEAL_THRESHOLD,
+        rootMargin: REVEAL_ROOT_MARGIN
+      }
+    );
+
+    const registerRevealElement = (element, delayMs = 0) => {
+      if (!(element instanceof HTMLElement)) return;
+      if (!element.classList.contains('reveal-up') && !element.classList.contains('reveal-left') && !element.classList.contains('reveal-right')) return;
+      if (element.dataset.revealBound === 'true') return;
+
+      element.dataset.revealBound = 'true';
+      element.style.setProperty('--reveal-delay', `${delayMs}ms`);
+
+      if (prefersReducedMotion) {
+        element.classList.add('is-visible');
+        return;
+      }
+
+      const isReplay = element.classList.contains('reveal-replay');
+      if (isReplay) {
+        revealReplayObserver.observe(element);
+      } else {
+        revealOnceObserver.observe(element);
+      }
+    };
+
+    const tagVisualGroups = () => {
+      const processFigures = Array.from(document.querySelectorAll('.project4-visual-grid figure'));
+      processFigures.forEach((figure, index) => {
+        figure.classList.add('reveal-up', 'reveal-replay');
+        registerRevealElement(figure, 70 + index * 75);
+      });
+
+      const brandFigures = Array.from(document.querySelectorAll('.project4-brand-strip figure'));
+      brandFigures.forEach((figure, index) => {
+        figure.classList.add('reveal-up', 'reveal-replay');
+        registerRevealElement(figure, 80 + index * 80);
+      });
+
+      const finalFigures = Array.from(document.querySelectorAll('.project4-final-grid figure'));
+      finalFigures.forEach((figure, index) => {
+        figure.classList.add('reveal-up', 'reveal-replay');
+        registerRevealElement(figure, 70 + index * 75);
+      });
+    };
+
+    const tagMoreWorksCards = () => {
+      const cards = Array.from(document.querySelectorAll('#moreWorksGrid .project4-more-card'));
+      cards.forEach((card, cardIndex) => {
+        // Keep carousel/layout transforms untouched on structural card nodes.
+        card.classList.remove('reveal-up', 'reveal-left', 'reveal-right', 'reveal-once', 'reveal-replay', 'is-visible');
+        delete card.dataset.revealBound;
+
+        const safeInnerTargets = [
+          card.querySelector('.project4-more-image'),
+          card.querySelector('h3'),
+          card.querySelector('p'),
+          card.querySelector('.tag-row'),
+          card.querySelector('.btn-outline')
+        ].filter((element) => element instanceof HTMLElement);
+
+        safeInnerTargets.forEach((element, innerIndex) => {
+          element.classList.add('reveal-up', 'reveal-replay');
+          registerRevealElement(element, 70 + cardIndex * 85 + innerIndex * 45);
+        });
+      });
+    };
+
+    project4Body.classList.add('project4-reveal-ready');
+
+    const baseRevealElements = Array.from(document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right'));
+    baseRevealElements.forEach((element) => {
+      const delay = Number(element.dataset.revealDelay || 0);
+      if (!element.classList.contains('reveal-once') && !element.classList.contains('reveal-replay')) {
+        element.classList.add('reveal-once');
+      }
+      registerRevealElement(element, delay);
+    });
+
+    tagVisualGroups();
+    tagMoreWorksCards();
+
+    const moreWorksGrid = document.getElementById('moreWorksGrid');
+    if (moreWorksGrid) {
+      const moreWorksObserver = new MutationObserver(() => {
+        tagMoreWorksCards();
+      });
+      moreWorksObserver.observe(moreWorksGrid, { childList: true });
+    }
+  };
+
+  const startProject4Animations = () => {
+    prepareLoadElements();
+    project4Body.classList.add('project4-load-running');
+
+    if (prefersReducedMotion) {
+      project4Body.classList.add('is-loaded');
+      project4Body.classList.remove('project4-load-running');
+      project4Body.classList.remove('project4-load-anim');
+      initScrollReveal();
+      return;
+    }
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        project4Body.classList.add('is-loaded');
+      });
+    });
+
+    window.setTimeout(() => {
+      project4Body.classList.remove('project4-load-running');
+      project4Body.classList.remove('project4-load-anim');
+      initScrollReveal();
+    }, 980);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startProject4Animations, { once: true });
+  } else {
+    startProject4Animations();
+  }
+}

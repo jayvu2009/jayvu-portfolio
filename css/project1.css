@@ -7,6 +7,106 @@
     linear-gradient(160deg, #f6f1ed 0%, #f9f2eb 48%, #f2e5dc 100%);
 }
 
+:root {
+  --project-load-duration: 760ms;
+  --project-load-duration-fast: 620ms;
+  --project-load-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --project-load-distance-y: 36px;
+  --project-load-distance-x: 48px;
+  --project-reveal-duration: 720ms;
+  --project-reveal-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --project-reveal-distance-y: 30px;
+  --project-reveal-distance-x: 34px;
+}
+
+/* Project 1: Initial page-load entrance */
+body.project1-page.project1-load-anim .load-from-top,
+body.project1-page.project1-load-anim .load-from-left,
+body.project1-page.project1-load-anim .load-from-right,
+body.project1-page.project1-load-anim .load-fade-up {
+  transition:
+    opacity var(--project-load-duration) var(--project-load-ease),
+    transform var(--project-load-duration) var(--project-load-ease);
+  transition-delay: var(--load-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+body.project1-page.project1-load-anim .load-from-top {
+  transition-duration: var(--project-load-duration-fast);
+}
+
+body.project1-page.project1-load-anim.project1-load-running:not(.is-loaded) .load-from-top {
+  opacity: 0;
+  transform: translate3d(0, calc(var(--project-load-distance-y) * -1), 0);
+}
+
+body.project1-page.project1-load-anim.project1-load-running:not(.is-loaded) .load-from-left {
+  opacity: 0;
+  transform: translate3d(calc(var(--project-load-distance-x) * -1), 0, 0);
+}
+
+body.project1-page.project1-load-anim.project1-load-running:not(.is-loaded) .load-from-right {
+  opacity: 0;
+  transform: translate3d(var(--project-load-distance-x), 0, 0);
+}
+
+body.project1-page.project1-load-anim.project1-load-running:not(.is-loaded) .load-fade-up {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.project1-page.project1-load-anim .load-from-top,
+  body.project1-page.project1-load-anim .load-from-left,
+  body.project1-page.project1-load-anim .load-from-right,
+  body.project1-page.project1-load-anim .load-fade-up {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Project 1: Scroll Reveal (enabled by JS only) */
+body.project1-page.project1-reveal-ready .reveal-up,
+body.project1-page.project1-reveal-ready .reveal-left,
+body.project1-page.project1-reveal-ready .reveal-right {
+  opacity: 0;
+  transition:
+    opacity var(--project-reveal-duration) var(--project-reveal-ease),
+    transform var(--project-reveal-duration) var(--project-reveal-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+body.project1-page.project1-reveal-ready .reveal-up {
+  transform: translate3d(0, var(--project-reveal-distance-y), 0);
+}
+
+body.project1-page.project1-reveal-ready .reveal-left {
+  transform: translate3d(calc(var(--project-reveal-distance-x) * -1), 0, 0);
+}
+
+body.project1-page.project1-reveal-ready .reveal-right {
+  transform: translate3d(var(--project-reveal-distance-x), 0, 0);
+}
+
+body.project1-page.project1-reveal-ready .reveal-up.is-visible,
+body.project1-page.project1-reveal-ready .reveal-left.is-visible,
+body.project1-page.project1-reveal-ready .reveal-right.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.project1-page.project1-reveal-ready .reveal-up,
+  body.project1-page.project1-reveal-ready .reveal-left,
+  body.project1-page.project1-reveal-ready .reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 .project1-header.topbar {
   position: sticky;
   top: 0.55rem;
@@ -156,6 +256,13 @@
   margin-top: 0.95rem;
 }
 
+.project1-intro {
+  margin: 0.8rem 0 0;
+  color: #594940;
+  line-height: 1.62;
+  font-size: 1.05rem;
+}
+
 .project1-overview-goals {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
@@ -215,27 +322,31 @@
 }
 
 .project1-sketch-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
   gap: 0.9rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .project1-sketch-grid img {
-  width: auto;
+  flex: 0 0 clamp(220px, 31%, 360px);
+  width: clamp(220px, 31%, 360px);
   height: auto;
-  max-width: 100%;
+  max-width: none;
   max-height: 82vh;
   object-fit: contain;
   display: block;
   border-radius: 1rem;
   border: 1px solid rgba(252, 114, 56, 0.16);
-  margin: 0 auto;
+  margin: 0;
 }
 
 .project1-sketch-grid .sketch-bottom {
-  grid-column: 1 / -1;
-  width: min(100%, 68%);
-  margin: 0 auto;
+  width: clamp(220px, 31%, 360px);
 }
 
 .project1-research {
@@ -555,13 +666,10 @@
     min-height: 320px;
   }
 
-  .project1-sketch-grid {
-    grid-template-columns: 1fr;
-  }
-
+  .project1-sketch-grid img,
   .project1-sketch-grid .sketch-bottom {
-    grid-column: auto;
-    width: 100%;
+    flex-basis: clamp(190px, 70vw, 300px);
+    width: clamp(190px, 70vw, 300px);
   }
 
   .project1-final-grid {

@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/project1.css" />
 </head>
-<body class="project1-page">
-  <header class="topbar project1-header">
+<body class="project1-page project1-load-anim">
+  <header class="topbar project1-header load-from-top">
     <a class="project1-logo-link" href="index.html" aria-label="Go to home">
       <span class="project1-logo-pill">
         <img src="assets/white-logo-ver3.svg" alt="Jay Vu logo" />
@@ -31,12 +31,12 @@
   </header>
 
   <main class="project1-main">
-    <section class="project1-section project1-hero">
+    <section class="project1-section project1-hero reveal-up reveal-once">
       <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
-      <div class="project1-hero-media">
+      <div class="project1-hero-media load-from-left reveal-left reveal-once">
         <img src="assets/project1/1-packaging.png" alt="Nonna's Thread packaging hero" />
       </div>
-      <div class="project1-hero-content">
+      <div class="project1-hero-content load-from-right reveal-right reveal-once">
         <span class="section-btn active project1-status-pill">DESIGN</span>
         <h1>NONNA’S THREAD</h1>
         <div class="tag-row project1-tags">
@@ -44,16 +44,17 @@
           <span class="tool-tag">Procreate</span>
           <span class="tool-tag">InDesign</span>
         </div>
+        <p class="project1-intro">Nonna’s Thread is a branding project focused on creating a handmade pasta identity using Canadian wheat and reusable fabric packaging to reflect sustainability and heritage.</p>
       </div>
     </section>
 
     <section class="project1-section project1-overview-goals">
       <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
-      <article class="project1-overview">
+      <article class="project1-overview load-fade-up reveal-left reveal-once" data-load-delay="560" data-reveal-delay="60">
         <h2>OVERVIEW</h2>
         <p>Nonna’s Thread is a rebranding project for an artisan pasta brand rooted in heritage and sustainability, combining Italian culinary tradition with Canadian-grown wheat through a warm, character-driven visual identity and reusable fabric packaging.</p>
       </article>
-      <article class="project1-goals">
+      <article class="project1-goals load-fade-up reveal-right reveal-once" data-load-delay="640" data-reveal-delay="120">
         <h2>GOALS</h2>
         <p>The goal of Nonna’s Thread was to modernize a heritage-driven pasta brand while preserving its sense of tradition, warmth, and sustainability through a cohesive visual identity and reusable packaging system.</p>
       </article>
@@ -61,25 +62,25 @@
 
     <section class="project1-section project1-process">
       <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
-      <h2>DESIGN PROCESS</h2>
+      <h2 class="reveal-up reveal-once">DESIGN PROCESS</h2>
 
-      <div class="project1-subsection">
+      <div class="project1-subsection reveal-up reveal-once" data-reveal-delay="80">
         <h3>MOOD BOARD</h3>
-        <div class="project1-image-frame">
+        <div class="project1-image-frame reveal-up reveal-replay" data-reveal-delay="120">
           <img src="assets/project1/2-moodboard.png" alt="Nonna's Thread mood board" />
         </div>
       </div>
 
-      <div class="project1-subsection">
+      <div class="project1-subsection reveal-up reveal-once" data-reveal-delay="130">
         <h3>LOGO SKETCHES</h3>
-        <div class="project1-sketch-grid">
-          <img src="assets/project1/3-logosketch(1).png" alt="Logo sketch 1" />
-          <img src="assets/project1/4-logosketch(2).png" alt="Logo sketch 2" />
-          <img src="assets/project1/5-logosketch(3).png" alt="Logo sketch 3" class="sketch-bottom" />
+        <div class="project1-sketch-grid reveal-up reveal-replay" data-reveal-delay="140">
+          <img src="assets/project1/3-logosketch(1).png" alt="Logo sketch 1" class="reveal-up reveal-replay" data-reveal-delay="180" />
+          <img src="assets/project1/4-logosketch(2).png" alt="Logo sketch 2" class="reveal-up reveal-replay" data-reveal-delay="240" />
+          <img src="assets/project1/5-logosketch(3).png" alt="Logo sketch 3" class="sketch-bottom reveal-up reveal-replay" data-reveal-delay="300" />
         </div>
       </div>
 
-      <div class="project1-subsection project1-research">
+      <div class="project1-subsection project1-research reveal-stagger-group">
         <h3>Research</h3>
         <p>Research focused on heritage pasta brands, sustainable packaging systems, and the emotional connection between food and family tradition. Insights from market positioning and visual analysis guided the balance between authenticity, warmth, and contemporary branding.</p>
 
@@ -94,7 +95,7 @@
       </div>
     </section>
 
-    <section class="project1-section project1-final">
+    <section class="project1-section project1-final reveal-up reveal-once">
       <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
       <h2>FINAL OUTCOME</h2>
       <div class="project1-final-grid">
@@ -105,13 +106,13 @@
       </div>
     </section>
 
-    <section class="project1-section project1-reflection">
+    <section class="project1-section project1-reflection reveal-up reveal-once">
       <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
       <h2>REFLECTION</h2>
       <p>This project strengthened my understanding that visual identity must communicate meaning beyond aesthetics. I learned that every design decision, from a single line in the logo to the illustrated mascot, should clearly reflect the brand’s heritage and values. In future branding projects, I aim to approach design with stronger strategic intention and deeper research from the start.</p>
     </section>
 
-    <section class="project1-section project1-more-works">
+    <section class="project1-section project1-more-works reveal-up reveal-once">
       <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
       <div class="project1-more-header">
         <h2>MORE WORKS IN</h2>
@@ -180,8 +181,7 @@
       </div>
     </section>
 
-    <section class="project1-section project1-bottom-nav">
-      <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
+    <section class="project1-section project1-bottom-nav reveal-up reveal-once">
       <a href="index.html#works" class="project1-nav-action">Back to Work page</a>
       <a href="index.html#contact" class="project1-nav-action">Contacts</a>
     </section>

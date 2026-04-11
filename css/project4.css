@@ -7,6 +7,99 @@
     linear-gradient(160deg, #f6f1ed 0%, #f9f2eb 48%, #f2e5dc 100%);
 }
 
+:root {
+  --project4-load-duration: 760ms;
+  --project4-load-duration-fast: 620ms;
+  --project4-load-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --project4-load-distance-y: 36px;
+  --project4-load-distance-x: 48px;
+  --project4-reveal-duration: 720ms;
+  --project4-reveal-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --project4-reveal-distance-y: 30px;
+  --project4-reveal-distance-x: 34px;
+}
+
+/* Project 4: Initial page-load entrance */
+body.project4-page.project4-load-anim .load-from-top,
+body.project4-page.project4-load-anim .load-from-left,
+body.project4-page.project4-load-anim .load-from-right,
+body.project4-page.project4-load-anim .load-fade-up {
+  transition:
+    opacity var(--project4-load-duration) var(--project4-load-ease),
+    transform var(--project4-load-duration) var(--project4-load-ease);
+  transition-delay: var(--load-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+body.project4-page.project4-load-anim .load-from-top {
+  transition-duration: var(--project4-load-duration-fast);
+}
+
+body.project4-page.project4-load-anim.project4-load-running:not(.is-loaded) .load-from-top {
+  opacity: 0;
+  transform: translate3d(0, calc(var(--project4-load-distance-y) * -1), 0);
+}
+
+body.project4-page.project4-load-anim.project4-load-running:not(.is-loaded) .load-from-left {
+  opacity: 0;
+  transform: translate3d(calc(var(--project4-load-distance-x) * -1), 0, 0);
+}
+
+body.project4-page.project4-load-anim.project4-load-running:not(.is-loaded) .load-from-right {
+  opacity: 0;
+  transform: translate3d(var(--project4-load-distance-x), 0, 0);
+}
+
+body.project4-page.project4-load-anim.project4-load-running:not(.is-loaded) .load-fade-up {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+}
+
+/* Project 4: Scroll Reveal (enabled by JS only) */
+body.project4-page.project4-reveal-ready .reveal-up,
+body.project4-page.project4-reveal-ready .reveal-left,
+body.project4-page.project4-reveal-ready .reveal-right {
+  opacity: 0;
+  transition:
+    opacity var(--project4-reveal-duration) var(--project4-reveal-ease),
+    transform var(--project4-reveal-duration) var(--project4-reveal-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+body.project4-page.project4-reveal-ready .reveal-up {
+  transform: translate3d(0, var(--project4-reveal-distance-y), 0);
+}
+
+body.project4-page.project4-reveal-ready .reveal-left {
+  transform: translate3d(calc(var(--project4-reveal-distance-x) * -1), 0, 0);
+}
+
+body.project4-page.project4-reveal-ready .reveal-right {
+  transform: translate3d(var(--project4-reveal-distance-x), 0, 0);
+}
+
+body.project4-page.project4-reveal-ready .reveal-up.is-visible,
+body.project4-page.project4-reveal-ready .reveal-left.is-visible,
+body.project4-page.project4-reveal-ready .reveal-right.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.project4-page.project4-load-anim .load-from-top,
+  body.project4-page.project4-load-anim .load-from-left,
+  body.project4-page.project4-load-anim .load-from-right,
+  body.project4-page.project4-load-anim .load-fade-up,
+  body.project4-page.project4-reveal-ready .reveal-up,
+  body.project4-page.project4-reveal-ready .reveal-left,
+  body.project4-page.project4-reveal-ready .reveal-right {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 .project4-header.topbar {
   position: sticky;
   top: 0.55rem;
@@ -148,6 +241,13 @@
 
 .project4-tags {
   margin-top: 0.95rem;
+}
+
+.project4-intro {
+  margin: 0.8rem 0 0;
+  color: #594940;
+  line-height: 1.62;
+  font-size: 1.05rem;
 }
 
 .project4-visit-btn {

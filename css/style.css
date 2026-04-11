@@ -11,6 +11,9 @@
   --home-load-duration: 760ms;
   --home-load-duration-fast: 620ms;
   --home-load-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --sr-duration: 620ms;
+  --sr-distance: 28px;
+  --sr-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 /* Base / Reset */
@@ -702,6 +705,38 @@ body.home-load-anim:not(.is-loaded) .home-hero .scroll-indicator {
     transition: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+/* Home: Scroll Reveal (replay on re-enter) */
+body.scroll-reveal-ready .scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--sr-distance), 0);
+  transition:
+    opacity var(--sr-duration) var(--sr-ease),
+    transform var(--sr-duration) var(--sr-ease);
+  transition-delay: var(--sr-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+body.scroll-reveal-ready .scroll-reveal.sr-left {
+  transform: translate3d(calc(-1 * var(--sr-distance)), 0, 0);
+}
+
+body.scroll-reveal-ready .scroll-reveal.sr-right {
+  transform: translate3d(var(--sr-distance), 0, 0);
+}
+
+body.scroll-reveal-ready .scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.scroll-reveal-ready .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 

@@ -40,7 +40,7 @@
       title: 'Zestli – Meal Delivery Website',
       description: 'Zestli is a responsive meal delivery website developed using HTML, Tailwind CSS, and JavaScript. The project focuses on clean layout structure, accessibility, and creating a smooth, intuitive user experience for browsing and ordering meals.',
       tools: ['HTML', 'Tailwind', 'JavaScript'],
-      images: ['assets/project2/image1.png', 'assets/project2/image6.png'],
+      images: ['assets/project4/image1.png', 'assets/project4/image6.png'],
       link: 'project4.html'
     },
     {

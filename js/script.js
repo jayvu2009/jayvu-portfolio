@@ -329,6 +329,89 @@ if (topNav) {
 }
 
 // =========================
+// Home: Scroll Reveal (Replay on Re-Enter)
+// =========================
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function initHomeScrollReveal() {
+  const revealSelector = [
+    '#works .work-filter-row',
+    '#works .work-carousel-wrap',
+    '#works .hero-star',
+    '#contact .contact-heading',
+    '#contact .contact-star',
+    '#contact .contact-field',
+    '#contact .contact-message',
+    '#contact .contact-send',
+    'footer.site-footer .footer-nav',
+    'footer.site-footer .footer-logo',
+    'footer.site-footer .footer-connect',
+    'footer.site-footer .footer-social',
+    'footer.site-footer .footer-copy'
+  ].join(', ');
+
+  const revealElements = Array.from(document.querySelectorAll(revealSelector));
+  if (!revealElements.length) return;
+
+  // Reveal direction + subtle stagger setup
+  let fieldDelay = 0;
+  revealElements.forEach((element) => {
+    element.classList.add('scroll-reveal');
+
+    if (element.matches('#works .work-filter-row, #contact .contact-heading, #contact .contact-message, #contact .contact-send')) {
+      element.classList.add('sr-up');
+    } else if (element.matches('#works .work-carousel-wrap, footer.site-footer .footer-social')) {
+      element.classList.add('sr-right');
+    } else if (element.matches('#works .hero-star, #contact .contact-star')) {
+      element.classList.add('sr-up');
+    } else if (element.matches('#contact .contact-field')) {
+      const isOddField = fieldDelay % 2 === 0;
+      element.classList.add(isOddField ? 'sr-left' : 'sr-right');
+      element.style.setProperty('--sr-delay', `${fieldDelay * 40}ms`);
+      fieldDelay += 1;
+    } else {
+      element.classList.add('sr-up');
+    }
+  });
+
+  if (prefersReducedMotion) {
+    revealElements.forEach((element) => element.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      } else {
+        entry.target.classList.remove('is-visible');
+      }
+    });
+  }, {
+    threshold: 0.2,
+    rootMargin: '0px 0px -8% 0px'
+  });
+
+  document.body.classList.add('scroll-reveal-ready');
+  revealElements.forEach((element) => observer.observe(element));
+}
+
+const delayScrollRevealInit = () => {
+  // Keep page-load animation isolated; start scroll-reveal after initial entrance settles.
+  if (document.body.classList.contains('home-load-anim')) {
+    window.setTimeout(initHomeScrollReveal, 1700);
+  } else {
+    initHomeScrollReveal();
+  }
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', delayScrollRevealInit, { once: true });
+} else {
+  delayScrollRevealInit();
+}
+
+// =========================
 // Contact: Mailto Form + Validation
 // =========================
 const contactForm = document.getElementById('contact-form');
