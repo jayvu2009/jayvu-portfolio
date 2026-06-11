@@ -20,10 +20,10 @@
           <div class="logo-wrap" aria-label="Jay Vu logo">
             <img class="logo-img" src="assets/white-logo-ver3.svg" alt="Jay Vu logo" />
           </div>
-          <h1 class="profile-name">JAY VU</h1>
+          <p class="profile-name">JAY VU</p>
         </div>
         <div class="avatar-wrap">
-          <img class="avatar" src="assets/profile-picture 1.png" alt="Jay Vu avatar" />
+            <img class="avatar" src="assets/profile-picture 1.png" alt="Jay Vu portrait" width="434" height="327" />
         </div>
         <div class="spec-block">
           <p class="specialization-title">SPECIALIZATION</p>
@@ -79,9 +79,9 @@
       <section id="home" class="page-section home-hero">
         <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
         <div class="hero-left">
-          <h2>Hi, I am</h2>
+          <p class="hero-kicker">Hi, I am</p>
           <h1 class="name-title">JAY VU</h1>
-          <h3 class="typed-title"><span id="typewriter"></span><span class="type-cursor" aria-hidden="true">|</span></h3>
+          <p class="typed-title"><span id="typewriter"></span><span class="type-cursor" aria-hidden="true">|</span></p>
           <p class="subtitle">Creative & Collaborative Designer building pixel-perfect web experiences!</p>
           <div class="hero-actions">
             <a class="btn-primary cta-slide cta-primary js-scroll-link" href="#works">
@@ -122,6 +122,7 @@
       <!-- Work Section -->
       <section id="works" class="page-section project-area">
         <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
+        <h2 class="visually-hidden">Featured Work</h2>
         <div class="work-filter-row">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="design">Design</button>
@@ -134,8 +135,8 @@
           <div class="work-carousel-stage" id="work-carousel-stage">
             <article class="project-card" data-category="design" data-tools="Illustrator,Procreate,InDesign">
               <div class="project-image-wrap">
-                <img src="assets/home/project card/project-card-1(1).png" alt="Re-branding Nonna's Thread image 1" class="slide-img active" />
-                <img src="assets/home/project card/project-card-1(2).png" alt="Re-branding Nonna's Thread image 2" class="slide-img" />
+                <img src="assets/home/project card/project-card-1(1).png" alt="Nonna's Thread branding preview" class="slide-img active" width="535" height="350" loading="lazy" />
+                <img src="assets/home/project card/project-card-1(2).png" alt="Nonna's Thread packaging preview" class="slide-img" width="535" height="350" loading="lazy" />
               </div>
               <h3>Re-branding Nonna’s Thread</h3>
               <p>Nonna’s Thread is a branding project focused on creating hand-made pasta by Canada wheat, and using fabric bag for the sustainability which is the core brand values.</p>
@@ -149,8 +150,8 @@
 
             <article class="project-card" data-category="design" data-tools="Illustrator,Procreate">
               <div class="project-image-wrap">
-                <img src="assets/home/project card/project-card-2(1).png" alt="Design System and UI Kit image 1" class="slide-img active" />
-                <img src="assets/home/project card/project-card-2(2).png" alt="Design System and UI Kit image 2" class="slide-img" />
+                <img src="assets/home/project card/project-card-2(1).png" alt="Vintage Jungle packaging preview" class="slide-img active" width="535" height="398" loading="lazy" />
+                <img src="assets/home/project card/project-card-2(2).png" alt="Vintage Jungle brand pattern preview" class="slide-img" width="535" height="401" loading="lazy" />
               </div>
               <h3>Packaging Vintage Jungle</h3>
               <p>Vintage Jungle is a fictional chocolate branding project that combines nostalgic jungle-inspired visuals with bold packaging, focusing on storytelling and strong shelf presence as its core values.</p>
@@ -163,8 +164,8 @@
 
             <article class="project-card" data-category="design" data-tools="Illustrator,Photoshop,After Effects">
               <div class="project-image-wrap">
-                <img src="assets/home/project card/project-card-3(1).png" alt="Campaign Motion Visual image 1" class="slide-img active" />
-                <img src="assets/home/project card/project-card-3(2).png" alt="Campaign Motion Visual image 2" class="slide-img" />
+                <img src="assets/home/project card/project-card-3(1).png" alt="Aura Tint packaging preview" class="slide-img active" width="535" height="350" loading="lazy" />
+                <img src="assets/home/project card/project-card-3(2).png" alt="Aura Tint brand application preview" class="slide-img" width="535" height="350" loading="lazy" />
               </div>
               <h3>Packaging Aura Tint</h3>
               <p>Aura Tint is a lipstick branding project centered on unconventional shades, encouraging individuality and self-expression through a visual identity that balances softness and confidence as its core brand values.</p>
@@ -178,8 +179,8 @@
 
             <article class="project-card" data-project="project4" data-category="coding" data-tools="HTML,Tailwind,JavaScript">
               <div class="project-image-wrap">
-                <img src="assets/project4/image1.png" alt="Zestli meal delivery website preview image 1" class="slide-img active" />
-                <img src="assets/project4/image6.png" alt="Zestli meal delivery website preview image 2" class="slide-img" />
+                <img src="assets/project4/image1.png" alt="Zestli meal delivery website homepage preview" class="slide-img active" width="1727" height="1132" loading="lazy" />
+                <img src="assets/project4/image6.png" alt="Zestli meal delivery website menu preview" class="slide-img" width="1729" height="1279" loading="lazy" />
               </div>
               <h3>Zestli – Meal Delivery Website</h3>
               <p>Zestli is a responsive meal delivery website developed using HTML, Tailwind CSS, and JavaScript. The project focuses on clean layout structure, accessibility, and creating a smooth, intuitive user experience for browsing and ordering meals.</p>
@@ -191,22 +192,6 @@
               <a href="project4.html" class="btn-outline">VIEW PROJECT</a>
             </article>
 
-            <!--
-            <article class="project-card" data-category="uiux" data-tools="Illustrator,Figma,Procreate">
-              <div class="project-image-wrap">
-                <img src="https://via.placeholder.com/960x620?text=UIUX+Card+1" alt="UI and UX placeholder project image 1" class="slide-img active" />
-                <img src="https://via.placeholder.com/960x620?text=UIUX+Card+2" alt="UI and UX placeholder project image 2" class="slide-img" />
-              </div>
-              <h3>Title</h3>
-              <p>Description</p>
-              <div class="tag-row">
-                <button class="tool-tag" type="button" data-tool="Tool">Tool</button>
-                <button class="tool-tag" type="button" data-tool="Tool">Tool</button>
-                <button class="tool-tag" type="button" data-tool="Tool">Tool</button>
-              </div>
-              <a href="project4.html" class="btn-outline">VIEW PROJECT</a>
-            </article>
-            -->
           </div>
           <button class="carousel-arrow next" type="button" aria-label="Next project">›</button>
         </div>
@@ -216,6 +201,7 @@
       <section id="contact" class="page-section contact-area">
         <span class="contact-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
         <div class="contact-heading">
+          <h2 class="visually-hidden">Contact</h2>
           <p class="active-badge contact-badge">CONTACT</p>
           <p>Tell me a little about your project and I will get back to you as soon as possible.</p>
         </div>

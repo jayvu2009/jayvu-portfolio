@@ -239,9 +239,11 @@
   transition: transform 0.24s ease, box-shadow 0.24s ease;
 }
 
-.about-arrow:hover {
-  transform: translateY(-50%) scale(1.05);
-  box-shadow: 0 12px 22px rgba(252, 114, 56, 0.24);
+@media (hover: hover) and (pointer: fine) {
+  .about-arrow:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 12px 22px rgba(252, 114, 56, 0.24);
+  }
 }
 
 .about-prev { left: -1.2rem; }
@@ -340,9 +342,9 @@
   z-index: 1;
 }
 
-.about-hobbies h3,
-.about-tools h3,
-.about-journey h3 {
+.about-hobbies > h2,
+.about-tools > h2,
+.about-journey > h2 {
   margin: 0 0 0.6rem;
   color: #fc7238;
   letter-spacing: 0.08em;
@@ -354,6 +356,13 @@
   margin: 0.35rem 0 0;
   color: #5f4e47;
   line-height: 1.7;
+}
+
+.about-journey h3 {
+  margin: 1.1rem 0 0.25rem;
+  color: #3b2d29;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
 }
 
 .hobby-grid {
@@ -368,7 +377,7 @@
   align-items: flex-start;
 }
 
-.hobby-item h4 {
+.hobby-item h3 {
   margin: 0;
   font-size: 0.98rem;
   letter-spacing: 0.06em;
@@ -399,7 +408,7 @@
   margin-top: 1.2rem;
 }
 
-.tool-group h4 {
+.tool-group h3 {
   margin: 0 0 0.6rem;
   color: #3b2d29;
   font-size: 1rem;
@@ -627,14 +636,26 @@
   transition: transform 0.35s ease;
 }
 
-.about-cta-link:hover {
-  transform: translateY(-4px);
+.about-cta-link:focus-visible {
+  transform: translateY(-3px);
   text-shadow: 0 0 24px rgba(255, 106, 61, 0.4);
   filter: brightness(1.08);
 }
 
-.about-cta-link:hover::after {
+.about-cta-link:focus-visible::after {
   transform: scaleX(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .about-cta-link:hover {
+    transform: translateY(-4px);
+    text-shadow: 0 0 24px rgba(255, 106, 61, 0.4);
+    filter: brightness(1.08);
+  }
+
+  .about-cta-link:hover::after {
+    transform: scaleX(1);
+  }
 }
 
 /* Keep one consistent decorative star per About section */

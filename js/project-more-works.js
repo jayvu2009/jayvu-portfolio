@@ -43,16 +43,18 @@
       images: ['assets/project4/image1.png', 'assets/project4/image6.png'],
       link: 'project4.html'
     },
-    {
-      id: 'uiux-placeholder',
-      category: 'uiux',
-      title: 'Title',
-      description: 'Description',
-      tools: ['Tool'],
-      images: ['https://via.placeholder.com/960x620?text=UIUX+Card+1'],
-      link: '#'
-    }
   ];
+
+  const IMAGE_DIMENSIONS = {
+    'assets/home/project card/project-card-1(1).png': { width: 535, height: 350 },
+    'assets/home/project card/project-card-1(2).png': { width: 535, height: 350 },
+    'assets/home/project card/project-card-2(1).png': { width: 535, height: 398 },
+    'assets/home/project card/project-card-2(2).png': { width: 535, height: 401 },
+    'assets/home/project card/project-card-3(1).png': { width: 535, height: 350 },
+    'assets/home/project card/project-card-3(2).png': { width: 535, height: 350 },
+    'assets/project4/image1.png': { width: 1727, height: 1132 },
+    'assets/project4/image6.png': { width: 1729, height: 1279 }
+  };
 
   function categoryLabel(category) {
     return CATEGORY_LABELS[category] || category.toUpperCase();
@@ -60,15 +62,19 @@
 
   function buildCardMarkup(project, classPrefix) {
     const image = project.images && project.images.length ? project.images[0] : '';
+    const dimensions = IMAGE_DIMENSIONS[image];
+    const sizeAttrs = dimensions ? ` width="${dimensions.width}" height="${dimensions.height}"` : '';
     const imageMarkup = image
-      ? `<img src="${image}" alt="${project.title} preview" />`
+      ? `<img src="${image}" alt="${project.title} preview"${sizeAttrs} loading="lazy" />`
       : '';
 
     const toolMarkup = project.tools
       .map((tool) => `<span class="tool-tag">${tool}</span>`)
       .join('');
 
-    const safeHref = project.link || '#';
+    const actionMarkup = project.link
+      ? `<a class="btn-outline" href="${project.link}">VIEW PROJECT</a>`
+      : '<span class="btn-outline" aria-disabled="true">COMING SOON</span>';
 
     return `
       <article class="${classPrefix}-more-card more-works-card" data-category="${project.category}" data-project-id="${project.id}">
@@ -80,7 +86,7 @@
         <div class="tag-row">
           ${toolMarkup}
         </div>
-        <a class="btn-outline" href="${safeHref}">VIEW PROJECT</a>
+        ${actionMarkup}
       </article>
     `;
   }
