@@ -1,6 +1,5 @@
-// =========================
 // Home: Load-In Animation (run once)
-// =========================
+
 const homeLoadRoot = document.body;
 
 if (homeLoadRoot && homeLoadRoot.classList.contains('home-load-anim')) {
