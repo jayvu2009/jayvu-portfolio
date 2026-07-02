@@ -27,10 +27,10 @@ if (homeLoadRoot && homeLoadRoot.classList.contains('home-load-anim')) {
   }
 }
 
-// =========================
+
 // Home: Typewriter
-// =========================
-const roles = ['UX/UI Designer', 'Front-end Developer', 'Branding Designer'];
+
+const roles = ['UX/UI Designer', 'Front-end Developer', 'Branding Designer', 'Marketing Coordinator'];
 const typeEl = document.getElementById('typewriter');
 let roleIndex = 0;
 let charIndex = 0;
@@ -67,9 +67,9 @@ function typeLoop() {
 
 if (typeEl) typeLoop();
 
-// =========================
+
 // Global: Smooth Scroll Links
-// =========================
+
 document.querySelectorAll('.js-scroll-link, .section-btn[data-section]').forEach(link => {
   link.addEventListener('click', (event) => {
     const hrefTarget = link.getAttribute('href');
@@ -86,9 +86,9 @@ document.querySelectorAll('.js-scroll-link, .section-btn[data-section]').forEach
   });
 });
 
-// =========================
+
 // Work: Filters + Carousel + Slideshow
-// =========================
+
 const workRoot = document.getElementById('works');
 const filterButtons = Array.from(document.querySelectorAll('.work-filter-row .filter-btn'));
 const allWorkCards = Array.from(document.querySelectorAll('#work-carousel-stage .project-card'));
@@ -234,9 +234,9 @@ allWorkCards.forEach((card) => {
   }, 5000);
 });
 
-// =========================
+
 // Work: Project 4 Card Slider (auto + pause)
-// =========================
+
 const project4Card = document.querySelector('#work-carousel-stage .project-card[data-project="project4"]');
 
 if (project4Card) {
@@ -306,9 +306,8 @@ if (allWorkCards.length) {
   window.addEventListener('resize', syncWorkCarouselHeight, { passive: true });
 }
 
-// =========================
+
 // Top Nav: Hide/Show on Scroll Direction
-// =========================
 const topNav = document.querySelector('.topbar');
 const topbarMenuToggle = document.getElementById('topbar-menu-toggle');
 const topbarMobilePanel = document.getElementById('topbar-mobile-panel');
@@ -416,9 +415,9 @@ if (topNav && topbarMenuToggle && topbarMobilePanel) {
   });
 }
 
-// =========================
+ 
 // Home: Scroll Reveal (Replay on Re-Enter)
-// =========================
+
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function initHomeScrollReveal() {
@@ -499,9 +498,8 @@ if (document.readyState === 'loading') {
   delayScrollRevealInit();
 }
 
-// =========================
+
 // Contact: Mailto Form + Validation
-// =========================
 const contactForm = document.getElementById('contact-form');
 const contactMessage = document.getElementById('contact-message');
 
