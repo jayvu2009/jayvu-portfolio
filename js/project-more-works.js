@@ -43,6 +43,15 @@
       images: ['assets/project4/image1.png', 'assets/project4/image6.png'],
       link: 'project4.html'
     },
+    {
+      id: 'project5',
+      category: 'coding',
+      title: 'Love is Love',
+      description: 'An interactive awareness website promoting LGBTQ+ acceptance through storytelling, educational content, and calls to action.',
+      tools: ['HTML', 'CSS', 'JavaScript'],
+      images: ['assets/project5/image1.png'],
+      link: 'project5.html'
+    },
   ];
 
   const IMAGE_DIMENSIONS = {
@@ -53,7 +62,8 @@
     'assets/home/project card/project-card-3(1).png': { width: 535, height: 350 },
     'assets/home/project card/project-card-3(2).png': { width: 535, height: 350 },
     'assets/project4/image1.png': { width: 1727, height: 1132 },
-    'assets/project4/image6.png': { width: 1729, height: 1279 }
+    'assets/project4/image6.png': { width: 1729, height: 1279 },
+    'assets/project5/image1.png': { width: 2624, height: 1542 }
   };
 
   function categoryLabel(category) {
