@@ -3,7 +3,8 @@
   const CATEGORY_LABELS = {
     design: 'DESIGN',
     coding: 'CODING',
-    uiux: 'UI/UX'
+    uiux: 'UI/UX',
+    motion: 'MOTION'
   };
 
   const PROJECTS = [
@@ -52,6 +53,15 @@
       images: ['assets/project5/image1.png'],
       link: 'project5.html'
     },
+    {
+      id: 'project6',
+      category: 'motion',
+      title: 'Paris in the Rain',
+      description: "A lyric-based motion graphics project inspired by Lauv's Paris in the Rain, combining hand-drawn illustrations, kinetic typography, and cinematic transitions to visually tell the emotional journey of the song.",
+      tools: ['After Effects', 'Premiere Pro', 'Illustrator'],
+      images: ['assets/project6/image1.png'],
+      link: 'project6.html'
+    },
   ];
 
   const IMAGE_DIMENSIONS = {
@@ -63,7 +73,8 @@
     'assets/home/project card/project-card-3(2).png': { width: 535, height: 350 },
     'assets/project4/image1.png': { width: 1727, height: 1132 },
     'assets/project4/image6.png': { width: 1729, height: 1279 },
-    'assets/project5/image1.png': { width: 2624, height: 1542 }
+    'assets/project5/image1.png': { width: 2624, height: 1542 },
+    'assets/project6/image1.png': { width: 1162, height: 654 }
   };
 
   function categoryLabel(category) {
@@ -239,6 +250,18 @@
     toggleEl.addEventListener('click', () => {
       const isOpen = !menuEl.hidden;
       setMenuOpen(toggleEl, menuEl, !isOpen);
+    });
+
+    Object.entries(CATEGORY_LABELS).forEach(([category, label]) => {
+      if (menuEl.querySelector(`button[data-category="${category}"]`)) return;
+
+      const item = document.createElement('li');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.category = category;
+      button.textContent = label;
+      item.appendChild(button);
+      menuEl.appendChild(item);
     });
 
     const options = Array.from(menuEl.querySelectorAll('button[data-category]'));
