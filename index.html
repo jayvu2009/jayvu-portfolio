@@ -9,8 +9,34 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/intro.css" />
+
+  <script src="js/intro.js" defer></script>
 </head>
 <body class="home-load-anim">
+  <!-- Fullscreen Intro -->
+  <section class="intro-overlay" id="intro-overlay" aria-label="Portfolio introduction">
+    <video
+      class="intro-video"
+      id="intro-video"
+      src="assets/intro/Comp 1a.mp4"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+    ></video>
+
+    <div class="intro-actions">
+      <button class="intro-button intro-play" id="intro-play" type="button" hidden>
+        PLAY INTRO
+      </button>
+      <button class="intro-button intro-skip" id="intro-skip" type="button">
+        SKIP INTRO
+      </button>
+    </div>
+  </section>
+
   <!-- Main Two-Column Shell -->
   <div class="page-shell">
     <!-- Left Sidebar / Profile Card -->

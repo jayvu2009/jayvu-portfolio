@@ -1,0 +1,81 @@
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 1;
+  background: #ffd1e2;
+  transition: opacity 450ms ease;
+}
+
+.intro-overlay.intro-exit {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+.intro-actions {
+  position: absolute;
+  top: clamp(1rem, 2.5vw, 2rem);
+  right: clamp(1rem, 2.5vw, 2rem);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.intro-button {
+  min-height: 2.75rem;
+  padding: 0.72rem 1.15rem;
+  border: 1px solid rgba(252, 114, 56, 0.38);
+  border-radius: 999px;
+  color: #fc7238;
+  background: linear-gradient(120deg, #ffffff, #fff2ea);
+  box-shadow: 0 10px 24px rgba(79, 34, 22, 0.22);
+  font: 800 0.88rem/1 'Alegreya Sans', sans-serif;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.intro-button[hidden] {
+  display: none;
+}
+
+.intro-button:focus-visible {
+  outline: 3px solid #1b1717;
+  outline-offset: 4px;
+}
+
+.intro-button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .intro-button:hover {
+    color: #ffffff;
+    background: linear-gradient(120deg, #ff945e, #fc7238);
+    box-shadow: 0 14px 28px rgba(79, 34, 22, 0.28);
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay,
+  .intro-button {
+    transition: none;
+  }
+}
