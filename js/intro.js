@@ -1,7 +1,6 @@
 (() => {
   'use strict';
 
-  const STORAGE_KEY = 'portfolioIntroViewed';
   const overlay = document.getElementById('intro-overlay');
   const video = document.getElementById('intro-video');
   const skipButton = document.getElementById('intro-skip');
@@ -11,22 +10,6 @@
 
   const prefersReducedMotion = window.matchMedia
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const hasViewedIntro = () => {
-    try {
-      return window.sessionStorage.getItem(STORAGE_KEY) === 'true';
-    } catch {
-      return false;
-    }
-  };
-
-  const markIntroViewed = () => {
-    try {
-      window.sessionStorage.setItem(STORAGE_KEY, 'true');
-    } catch {
-      // The intro can still close when storage is unavailable.
-    }
-  };
 
   let isClosing = false;
 
@@ -39,7 +22,6 @@
   const closeIntro = ({ animate = true } = {}) => {
     if (isClosing) return;
     isClosing = true;
-    markIntroViewed();
 
     if (video) {
       video.pause();
@@ -59,7 +41,7 @@
     window.setTimeout(removeOverlay, 600);
   };
 
-  if (hasViewedIntro() || prefersReducedMotion) {
+  if (prefersReducedMotion) {
     closeIntro({ animate: false });
     return;
   }
