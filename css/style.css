@@ -85,6 +85,18 @@ video {
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
+@media (min-width: 1121px) {
+  .sidebar {
+    height: auto;
+    min-height: calc(100vh - 2.4rem);
+  }
+
+  .profile-card {
+    height: auto;
+    min-height: calc(100vh - 2.4rem);
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .profile-card:hover {
     transform: translateY(-3px);
