@@ -11,6 +11,20 @@
   const prefersReducedMotion = window.matchMedia
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  const consumeInternalNavigationBypass = () => {
+    try {
+      const shouldBypass = window.sessionStorage.getItem('portfolioIntroBypassOnce') === 'true';
+
+      if (shouldBypass) {
+        window.sessionStorage.removeItem('portfolioIntroBypassOnce');
+      }
+
+      return shouldBypass;
+    } catch {
+      return false;
+    }
+  };
+
   let isClosing = false;
 
   const removeOverlay = () => {
@@ -41,7 +55,7 @@
     window.setTimeout(removeOverlay, 600);
   };
 
-  if (prefersReducedMotion) {
+  if (consumeInternalNavigationBypass() || prefersReducedMotion) {
     closeIntro({ animate: false });
     return;
   }
