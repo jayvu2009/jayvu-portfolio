@@ -1453,9 +1453,21 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
     height: 118px;
   }
 
+  .project-area {
+    min-height: auto;
+  }
+
   .work-carousel-wrap {
-    min-height: 500px;
-    padding: 0 2.35rem;
+    min-height: 0 !important;
+    padding: 0 2.35rem 3.5rem;
+  }
+
+  .work-carousel-stage {
+    min-height: 0;
+  }
+
+  .project-card.is-center {
+    position: relative;
   }
 
   .work-carousel-wrap::before,
@@ -1465,7 +1477,7 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
 
   .carousel-arrow {
     top: auto;
-    bottom: -0.65rem;
+    bottom: 0;
   }
 
   .carousel-arrow.prev { left: 35%; }
@@ -1575,7 +1587,6 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
   .filter-btn { padding-inline: 0.8rem; }
 
   .work-carousel-wrap {
-    min-height: 470px;
     padding-inline: 0.2rem;
   }
 
@@ -1592,10 +1603,6 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
   .carousel-arrow.prev { left: 24%; }
 
   .carousel-arrow.next { right: 24%; }
-
-  .carousel-arrow {
-    bottom: -0.8rem;
-  }
 
   .contact-area { padding: 1.4rem; }
 }
