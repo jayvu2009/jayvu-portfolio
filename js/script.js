@@ -310,8 +310,82 @@ if (allWorkCards.length) {
 const topNav = document.querySelector('.topbar');
 const topbarMenuToggle = document.getElementById('topbar-menu-toggle');
 const topbarMobilePanel = document.getElementById('topbar-mobile-panel');
+const topbarDesktopLinks = Array.from(document.querySelectorAll('.topbar-links .section-btn'));
+const topbarMobileLinks = Array.from(document.querySelectorAll('.topbar-mobile-panel .topbar-mobile-link'));
+const topbarSectionLinks = [...topbarDesktopLinks, ...topbarMobileLinks];
+let pendingNavSection = '';
+let pendingNavTimer = null;
 let lastScrollY = window.scrollY;
 let scrollTicking = false;
+
+function getTopbarLinkSection(link) {
+  if (link.dataset.section) return link.dataset.section;
+
+  const href = link.getAttribute('href');
+  if (!href) return '';
+
+  try {
+    return new URL(href, window.location.href).hash.slice(1);
+  } catch {
+    return '';
+  }
+}
+
+function setActiveNavigation(sectionId) {
+  if (!topNav || !sectionId) return;
+
+  const useMobileNavigation = window.innerWidth <= 1024;
+
+  topbarSectionLinks.forEach((link) => {
+    const isMobileLink = topbarMobilePanel?.contains(link) ?? false;
+    const isVisibleNavigation = useMobileNavigation ? isMobileLink : !isMobileLink;
+    const isActive = isVisibleNavigation && getTopbarLinkSection(link) === sectionId;
+
+    link.classList.toggle('active', isActive);
+    if (isActive) {
+      link.setAttribute('aria-current', 'location');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
+
+function updateActiveNavigationFromScroll() {
+  if (!workRoot) {
+    setActiveNavigation('home');
+    return;
+  }
+
+  const activationLine = Math.max(96, window.innerHeight * 0.3);
+
+  if (pendingNavSection) {
+    const pendingSection = document.getElementById(pendingNavSection);
+    const pendingSectionReached = pendingNavSection === 'home'
+      ? window.scrollY <= activationLine
+      : pendingSection && pendingSection.getBoundingClientRect().top <= activationLine;
+
+    if (!pendingSectionReached) {
+      setActiveNavigation(pendingNavSection);
+      return;
+    }
+
+    pendingNavSection = '';
+  }
+
+  const sectionId = workRoot.getBoundingClientRect().top <= activationLine ? 'works' : 'home';
+  setActiveNavigation(sectionId);
+}
+
+function holdClickedNavigationState(sectionId) {
+  pendingNavSection = sectionId;
+  setActiveNavigation(sectionId);
+
+  if (pendingNavTimer) window.clearTimeout(pendingNavTimer);
+  pendingNavTimer = window.setTimeout(() => {
+    pendingNavSection = '';
+    updateActiveNavigationFromScroll();
+  }, 1400);
+}
 
 function closeMobileMenu() {
   if (!topNav || !topbarMenuToggle) return;
@@ -327,6 +401,8 @@ function openMobileMenu() {
 
 function updateNavVisibility() {
   if (!topNav) return;
+
+  updateActiveNavigationFromScroll();
 
   // Keep mobile/tablet nav anchored and stable (no desktop hide-on-scroll behavior).
   if (window.innerWidth <= 1024) {
@@ -363,6 +439,17 @@ function updateNavVisibility() {
 
 if (topNav) {
   topNav.classList.add('nav-visible');
+  updateActiveNavigationFromScroll();
+
+  topbarSectionLinks.forEach((link) => {
+    const sectionId = getTopbarLinkSection(link);
+    if (sectionId !== 'home' && sectionId !== 'works') return;
+
+    link.addEventListener('click', () => {
+      holdClickedNavigationState(sectionId);
+    });
+  });
+
   window.addEventListener('scroll', () => {
     if (scrollTicking) return;
     scrollTicking = true;
@@ -370,11 +457,16 @@ if (topNav) {
   }, { passive: true });
 
   window.addEventListener('resize', () => {
+    updateActiveNavigationFromScroll();
+
     if (window.innerWidth <= 1024) {
       topNav.classList.add('nav-visible');
       topNav.classList.remove('nav-hidden');
     }
   });
+
+  window.addEventListener('load', updateActiveNavigationFromScroll);
+  window.addEventListener('hashchange', updateActiveNavigationFromScroll);
 }
 
 if (topNav && topbarMenuToggle && topbarMobilePanel) {

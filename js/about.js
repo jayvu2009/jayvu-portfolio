@@ -150,8 +150,28 @@ if (aboutTrack) {
 const aboutTopNav = document.querySelector('.topbar');
 const aboutMenuToggle = document.getElementById('topbar-menu-toggle');
 const aboutMobilePanel = document.getElementById('topbar-mobile-panel');
+const aboutDesktopNavLinks = Array.from(document.querySelectorAll('.topbar-links .section-btn'));
+const aboutMobileNavLinks = Array.from(document.querySelectorAll('.topbar-mobile-panel .topbar-mobile-link'));
 let aboutLastScrollY = window.scrollY;
 let aboutScrollTicking = false;
+
+function syncAboutActiveNavigation() {
+  const useMobileNavigation = window.innerWidth <= 1024;
+
+  [...aboutDesktopNavLinks, ...aboutMobileNavLinks].forEach((link) => {
+    const isMobileLink = aboutMobilePanel?.contains(link) ?? false;
+    const isAboutLink = new URL(link.href, window.location.href).pathname.endsWith('/about.html');
+    const isVisibleNavigation = useMobileNavigation ? isMobileLink : !isMobileLink;
+    const isActive = isVisibleNavigation && isAboutLink;
+
+    link.classList.toggle('active', isActive);
+    if (isActive) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
 
 function closeAboutMobileMenu() {
   if (!aboutTopNav || !aboutMenuToggle) return;
@@ -210,6 +230,8 @@ function updateAboutNavVisibility() {
 
 if (aboutTopNav) {
   aboutTopNav.classList.add('nav-visible');
+  syncAboutActiveNavigation();
+
   window.addEventListener('scroll', () => {
     if (aboutScrollTicking) return;
     aboutScrollTicking = true;
@@ -217,6 +239,8 @@ if (aboutTopNav) {
   }, { passive: true });
 
   window.addEventListener('resize', () => {
+    syncAboutActiveNavigation();
+
     if (window.innerWidth <= 1024) {
       aboutTopNav.classList.add('nav-visible');
       aboutTopNav.classList.remove('nav-hidden');

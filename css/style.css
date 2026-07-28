@@ -508,6 +508,7 @@ video {
 }
 
 .section-btn.active,
+.topbar-mobile-link.active,
 .section-btn:focus-visible {
   color: var(--p3);
   background: #fff;
