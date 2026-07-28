@@ -757,8 +757,9 @@ body.home-load-anim .home-hero .scroll-indicator {
 }
 
 body.home-load-anim .sidebar {
-  transition: transform var(--home-load-duration) var(--home-load-ease), opacity var(--home-load-duration) var(--home-load-ease);
+  transition: transform var(--home-load-duration) var(--home-load-ease);
   transition-delay: 70ms;
+  will-change: transform;
 }
 
 body.home-load-anim .topbar {
@@ -810,7 +811,6 @@ body.home-load-anim .home-hero .scroll-indicator {
 }
 
 body.home-load-anim:not(.is-loaded) .sidebar {
-  opacity: 0;
   transform: translateX(-88px);
 }
 

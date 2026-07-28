@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jay Vu's Portfolio | HOME</title>
   <meta name="description" content="Jay Vu Portfolio - Front-end Developer / UIUX Designer / Branding Designer" />
+  <link rel="preload" as="image" href="assets/profile-picture 1.png" fetchpriority="high" />
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css" />
@@ -49,7 +50,7 @@
           <p class="profile-name">JAY VU</p>
         </div>
         <div class="avatar-wrap">
-            <img class="avatar" src="assets/profile-picture 1.png" alt="Jay Vu portrait" width="434" height="327" />
+            <img class="avatar" src="assets/profile-picture 1.png" alt="Jay Vu portrait" width="434" height="327" loading="eager" fetchpriority="high" decoding="sync" />
         </div>
         <div class="spec-block">
           <p class="specialization-title">SPECIALIZATION</p>
@@ -163,7 +164,7 @@
           <div class="work-carousel-stage" id="work-carousel-stage">
             <article class="project-card" data-category="design" data-tools="Illustrator,Procreate,InDesign">
               <div class="project-image-wrap">
-                <img src="assets/home/project card/project-card-1(1).png" alt="Nonna's Thread branding preview" class="slide-img active" width="535" height="350" loading="lazy" />
+                <img src="assets/home/project card/project-card-1(1).png" alt="Nonna's Thread branding preview" class="slide-img active" width="535" height="350" loading="eager" fetchpriority="high" decoding="async" />
                 <img src="assets/home/project card/project-card-1(2).png" alt="Nonna's Thread packaging preview" class="slide-img" width="535" height="350" loading="lazy" />
               </div>
               <h3>Re-branding Nonna’s Thread</h3>

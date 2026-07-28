@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jay Vu's Portfolio | ABOUT</title>
   <meta name="description" content="About Jay Vu - Designer and Developer Journey" />
+  <link rel="preload" as="image" href="assets/profile-picture 1.png" fetchpriority="high" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/about.css" />
 </head>
@@ -19,7 +20,7 @@
           <p class="profile-name">JAY VU</p>
         </div>
         <div class="avatar-wrap">
-          <img class="avatar" src="assets/profile-picture 1.png" alt="Jay Vu portrait" width="434" height="327" />
+          <img class="avatar" src="assets/profile-picture 1.png" alt="Jay Vu portrait" width="434" height="327" loading="eager" fetchpriority="high" decoding="sync" />
         </div>
         <div class="spec-block">
           <p class="specialization-title">SPECIALIZATION</p>
@@ -80,7 +81,7 @@
                 <video src="assets/about/vid.MP4" autoplay muted loop playsinline preload="metadata" aria-label="Jay Vu personal video montage"></video>
               </article>
               <article class="about-slide">
-                <img class="about-slide-focus-bottom" src="assets/about/pic1.jpg" alt="Jay Vu portrait in a casual outdoor setting" width="3024" height="4032" loading="lazy" />
+                <img class="about-slide-focus-bottom" src="assets/about/pic1.jpg" alt="Jay Vu portrait in a casual outdoor setting" width="3024" height="4032" loading="eager" fetchpriority="low" decoding="async" />
               </article>
               <article class="about-slide">
                 <img class="about-slide-focus-bottom" src="assets/about/pic2.jpg" alt="Jay Vu portrait in a city setting" width="3024" height="4032" loading="lazy" />
