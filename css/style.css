@@ -1498,6 +1498,19 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
+  /* Project detail pages: keep the expanded More Works menu in the mobile flow. */
+  body[class*="project"][class*="-page"] [class$="-filter-wrap"] {
+    z-index: 20;
+  }
+
+  #moreWorksMenu {
+    position: relative;
+    inset: auto;
+    max-height: none;
+    overflow: visible;
+    z-index: 21;
+  }
 }
 
 @media (max-width: 768px) {
