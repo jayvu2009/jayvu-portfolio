@@ -10,8 +10,16 @@
 
   if (!overlay) return;
 
+  if (document.documentElement.classList.contains('intro-skipped')) {
+    if (video) video.pause();
+    overlay.remove();
+    document.body.classList.remove('intro-active');
+    return;
+  }
+
   const prefersReducedMotion = window.matchMedia
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const requestedHash = window.location.hash;
 
   const dateFormatter = new Intl.DateTimeFormat('en-US', {
     weekday: 'short',
@@ -29,6 +37,10 @@
   let clockTimer = null;
   let removalTimer = null;
   let cursorTimer = null;
+
+  if (video?.dataset.src) {
+    video.src = video.dataset.src;
+  }
 
   const updateClock = () => {
     const now = new Date();
@@ -76,6 +88,28 @@
     }
   };
 
+  const scrollToRequestedSection = () => {
+    if (!requestedHash) return;
+
+    let sectionId;
+    try {
+      sectionId = decodeURIComponent(requestedHash.slice(1));
+    } catch {
+      return;
+    }
+
+    if (!['home', 'works', 'contact'].includes(sectionId)) return;
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    window.requestAnimationFrame(() => {
+      section.scrollIntoView({
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    });
+  };
+
   const removeOverlay = () => {
     if (removalTimer !== null) {
       window.clearTimeout(removalTimer);
@@ -85,11 +119,17 @@
       overlay.remove();
     }
     restorePage();
+    scrollToRequestedSection();
   };
 
   const signIn = () => {
     if (isSigningIn) return;
     isSigningIn = true;
+
+    window.portfolioSessionState?.setSessionValue(
+      window.portfolioSessionState.signedInKey,
+      'true'
+    );
 
     clearReplayTimer();
     if (video) {

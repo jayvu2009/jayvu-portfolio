@@ -1,3 +1,11 @@
+html.intro-skipped .intro-overlay {
+  display: none;
+}
+
+html.intro-skipped body.intro-active {
+  overflow: auto;
+}
+
 .intro-active {
   overflow: hidden;
 }
