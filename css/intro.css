@@ -1,3 +1,7 @@
+.intro-active {
+  overflow: hidden;
+}
+
 .intro-overlay {
   position: fixed;
   inset: 0;
@@ -7,15 +11,38 @@
   overflow: hidden;
   opacity: 1;
   background: #ffd1e2;
-  transition: opacity 450ms ease;
+  cursor: pointer;
+  transform: scale(1);
+  filter: blur(0);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease,
+    filter 700ms ease;
 }
 
 .intro-overlay.intro-exit {
   opacity: 0;
+  transform: scale(1.01);
+  filter: blur(2px);
   pointer-events: none;
 }
 
+.intro-overlay.intro-cursor-hidden,
+.intro-overlay.intro-cursor-hidden * {
+  cursor: none;
+}
+
 .intro-video {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -24,58 +51,237 @@
   object-position: center;
 }
 
-.intro-actions {
+.intro-lock-screen {
   position: absolute;
-  top: clamp(1rem, 2.5vw, 2rem);
-  right: clamp(1rem, 2.5vw, 2rem);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  padding:
+    max(clamp(4rem, 9vh, 7rem), env(safe-area-inset-top))
+    clamp(1rem, 4vw, 3rem)
+    max(clamp(3rem, 6vh, 5rem), env(safe-area-inset-bottom));
+  color: rgba(255, 255, 255, 0.86);
+  text-align: center;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  transform-origin: center;
 }
 
-.intro-button {
-  min-height: 2.75rem;
-  padding: 0.72rem 1.15rem;
-  border: 1px solid rgba(252, 114, 56, 0.38);
+.intro-lock-screen.intro-loop-pulse {
+  animation: intro-loop-pulse 360ms ease-out;
+}
+
+.intro-clock {
+  align-self: start;
+  transform: translateY(clamp(-60px, -5vh, -40px));
+}
+
+.intro-date,
+.intro-time {
+  display: block;
+}
+
+.intro-date {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(18px, 1.5vw, 24px);
+  font-weight: 550;
+  line-height: 1.2;
+}
+
+.intro-time {
+  margin-top: clamp(6px, 0.7vh, 10px);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(88px, 9vw, 120px);
+  font-weight: 200;
+  letter-spacing: -0.045em;
+  line-height: 0.94;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.intro-user-area {
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  pointer-events: auto;
+}
+
+.intro-sign-in {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-shadow: inherit;
+  cursor: pointer;
+}
+
+.intro-avatar {
+  display: block;
+  width: clamp(64px, 5vw, 68px);
+  height: clamp(64px, 5vw, 68px);
+  margin-bottom: clamp(8px, 0.7vw, 10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 180ms ease;
+}
+
+.intro-user-name {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(20px, 1.5vw, 22px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.intro-sign-in-label {
+  margin-top: clamp(2px, 0.25vw, 4px);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(14px, 1vw, 15px);
+  font-weight: 400;
+  line-height: 1.3;
+  transition: color 180ms ease;
+}
+
+.intro-play {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 999px;
-  color: #fc7238;
-  background: linear-gradient(120deg, #ffffff, #fff2ea);
-  box-shadow: 0 10px 24px rgba(79, 34, 22, 0.22);
-  font: 800 0.88rem/1 'Alegreya Sans', sans-serif;
-  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(64, 23, 41, 0.18);
+  box-shadow: 0 4px 18px rgba(64, 23, 41, 0.15);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-shadow: inherit;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   cursor: pointer;
   transition:
-    transform 180ms ease,
-    color 180ms ease,
-    background 180ms ease,
-    box-shadow 180ms ease;
+    background-color 180ms ease,
+    transform 180ms ease;
 }
 
-.intro-button[hidden] {
+.intro-play[hidden] {
   display: none;
 }
 
-.intro-button:focus-visible {
-  outline: 3px solid #1b1717;
+.intro-sign-in:focus-visible,
+.intro-play:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.94);
   outline-offset: 4px;
 }
 
-.intro-button:active {
+.intro-sign-in:active,
+.intro-play:active {
   transform: translateY(1px) scale(0.99);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .intro-button:hover {
-    color: #ffffff;
-    background: linear-gradient(120deg, #ff945e, #fc7238);
-    box-shadow: 0 14px 28px rgba(79, 34, 22, 0.28);
-    transform: translateY(-2px);
+  .intro-sign-in:hover .intro-avatar {
+    transform: scale(1.03);
+  }
+
+  .intro-sign-in:hover .intro-sign-in-label {
+    color: rgba(255, 255, 255, 0.86);
+  }
+
+  .intro-play:hover {
+    background: rgba(64, 23, 41, 0.3);
+  }
+}
+
+@media (max-width: 768px) {
+  .intro-lock-screen {
+    padding-top: max(clamp(3rem, 8vh, 4.5rem), env(safe-area-inset-top));
+    padding-bottom: max(clamp(2.25rem, 6vh, 3.5rem), env(safe-area-inset-bottom));
+  }
+
+  .intro-clock {
+    transform: translateY(clamp(-32px, -3.5vh, -20px));
+  }
+
+  .intro-date {
+    font-size: clamp(16px, 4vw, 20px);
+  }
+
+  .intro-time {
+    font-size: clamp(60px, 16vw, 78px);
+  }
+
+  .intro-avatar {
+    width: clamp(54px, 14vw, 60px);
+    height: clamp(54px, 14vw, 60px);
+  }
+
+  .intro-user-name {
+    font-size: clamp(17px, 4.5vw, 19px);
+  }
+
+  .intro-sign-in-label {
+    font-size: clamp(13px, 3.5vw, 14px);
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .intro-lock-screen {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    padding-block: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-bottom));
+  }
+
+  .intro-clock,
+  .intro-user-area {
+    align-self: center;
+  }
+
+  .intro-time {
+    font-size: clamp(60px, 9vw, 78px);
+  }
+}
+
+@keyframes intro-loop-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.99);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .intro-overlay,
-  .intro-button {
+  .intro-overlay {
+    transition: opacity 80ms linear;
+  }
+
+  .intro-overlay.intro-exit {
+    transform: none;
+    filter: none;
+  }
+
+  .intro-video {
+    opacity: 0.35;
+  }
+
+  .intro-lock-screen.intro-loop-pulse {
+    animation: none;
+  }
+
+  .intro-avatar {
     transition: none;
+  }
+
+  .intro-sign-in:hover .intro-avatar {
+    transform: none;
   }
 }

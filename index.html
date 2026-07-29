@@ -14,9 +14,15 @@
 
   <script src="js/intro.js" defer></script>
 </head>
-<body class="home-load-anim">
+<body class="home-load-anim intro-active">
   <!-- Fullscreen Intro -->
-  <section class="intro-overlay" id="intro-overlay" aria-label="Portfolio introduction">
+  <section
+    class="intro-overlay"
+    id="intro-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Jay Vu portfolio lock screen. Click or press Enter or Space to sign in."
+  >
     <video
       class="intro-video"
       id="intro-video"
@@ -26,17 +32,31 @@
       preload="auto"
       aria-hidden="true"
     >
-      <source media="(max-width: 768px)" src="assets/intro/Mobile_2.mp4" type="video/mp4" />
       <source src="assets/intro/Comp 1a.mp4" type="video/mp4" />
     </video>
 
-    <div class="intro-actions">
-      <button class="intro-button intro-play" id="intro-play" type="button" hidden>
-        PLAY INTRO
-      </button>
-      <button class="intro-button intro-skip" id="intro-skip" type="button">
-        SKIP INTRO
-      </button>
+    <div class="intro-lock-screen">
+      <div class="intro-clock" aria-label="Current local date and time">
+        <time class="intro-date" id="intro-date"></time>
+        <time class="intro-time" id="intro-time"></time>
+      </div>
+
+      <div class="intro-user-area">
+        <button class="intro-sign-in" id="intro-sign-in" type="button" aria-label="Sign in as Jay Vu">
+          <img
+            class="intro-avatar"
+            src="assets/profile-picture 1.png"
+            alt="Jay Vu"
+            width="434"
+            height="327"
+          />
+          <span class="intro-user-name">Jay Vu</span>
+          <span class="intro-sign-in-label">Click to Sign In</span>
+        </button>
+        <button class="intro-play" id="intro-play" type="button" hidden>
+          Play Intro
+        </button>
+      </div>
     </div>
   </section>
 
