@@ -6,6 +6,21 @@
   const INDEX_FILE_PATTERN = /(?:^|\/)index\.html$/i;
   const PORTFOLIO_PAGE_PATTERN = /(?:^|\/)(?:about|project[1-6])\.html$/i;
 
+  const navigationScript = document.currentScript;
+  if (navigationScript?.src) {
+    const mascotScriptUrl = new URL('mascots.js', navigationScript.src).href;
+    const mascotAlreadyLoaded = Array.from(document.scripts)
+      .some((script) => script.src === mascotScriptUrl);
+
+    if (!mascotAlreadyLoaded) {
+      const mascotScript = document.createElement('script');
+      mascotScript.src = mascotScriptUrl;
+      mascotScript.defer = true;
+      mascotScript.dataset.mascotSystem = 'true';
+      document.head.append(mascotScript);
+    }
+  }
+
   const getSessionValue = (key) => {
     try {
       return window.sessionStorage.getItem(key);

@@ -1,0 +1,167 @@
+@media (hover: hover) and (pointer: fine) {
+  html.mascot-system-active,
+  html.mascot-system-active body,
+  html.mascot-system-active body * {
+    cursor: none !important;
+  }
+
+  html.mascot-system-active :is(
+    input:not([type]),
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="search"],
+    input[type="password"],
+    input[type="number"],
+    textarea,
+    [contenteditable="true"]
+  ) {
+    cursor: text !important;
+  }
+
+  html.mascot-system-active :is(iframe, object, embed, video[controls]) {
+    cursor: auto !important;
+  }
+
+  .mascot-pointer,
+  .mascot-pointer *,
+  .mascot-cursor,
+  .mascot-helper,
+  .mascot-cursor *,
+  .mascot-helper * {
+    pointer-events: none !important;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .mascot-pointer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2147483647;
+    display: block;
+    width: 0;
+    height: 0;
+    overflow: visible;
+    will-change: transform;
+  }
+
+  .mascot-cursor,
+  .mascot-helper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    will-change: opacity;
+  }
+
+  .mascot-cursor {
+    width: clamp(180px, 11.25vw, 210px);
+  }
+
+  .mascot-helper {
+    width: clamp(225px, 13.75vw, 270px);
+  }
+
+  .mascot-cursor-visual,
+  .mascot-helper-visual {
+    display: block;
+    width: 100%;
+    transform: translate3d(var(--mascot-art-x), var(--mascot-art-y), 0);
+    transform-origin: top left;
+  }
+
+  .mascot-cursor-artwork,
+  .mascot-helper-artwork {
+    display: block;
+    width: 100%;
+    transform: scale(1);
+    transform-origin: top left;
+    transition: transform 120ms ease;
+  }
+
+  .mascot-cursor-visual {
+    --mascot-art-x: -38%;
+    --mascot-art-y: -22%;
+  }
+
+  .mascot-helper-visual {
+    --mascot-art-x: -30%;
+    --mascot-art-y: -19%;
+  }
+
+  .mascot-cursor.is-visible,
+  .mascot-helper.is-visible {
+    opacity: 1;
+    visibility: visible;
+    animation: mascot-state-in 120ms ease-out;
+  }
+
+  .mascot-cursor.is-pressed .mascot-cursor-artwork,
+  .mascot-helper.is-pressed .mascot-helper-artwork {
+    transform: scale(0.92);
+  }
+
+  .mascot-cursor img,
+  .mascot-helper img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .mascot-cursor img,
+  .mascot-helper img {
+    animation: mascot-idle-bob 1.8s ease-in-out infinite;
+  }
+
+  .mascot-cursor.is-moving img,
+  .mascot-helper.is-moving img {
+    animation-play-state: paused;
+  }
+
+  .intro-overlay.intro-cursor-hidden ~ .mascot-pointer .mascot-cursor,
+  .intro-overlay.intro-cursor-hidden ~ .mascot-pointer .mascot-helper {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  html.is-reduced-motion .mascot-cursor,
+  html.is-reduced-motion .mascot-helper {
+    animation: none;
+  }
+
+  html.is-reduced-motion .mascot-cursor img,
+  html.is-reduced-motion .mascot-helper img {
+    animation: none;
+  }
+
+  html.is-reduced-motion .mascot-cursor-artwork,
+  html.is-reduced-motion .mascot-helper-artwork {
+    transition-duration: 80ms;
+  }
+
+  @keyframes mascot-state-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes mascot-idle-bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(1.5px);
+    }
+  }
+}
