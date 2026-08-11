@@ -69,57 +69,46 @@
       <p class="active-badge">ABOUT</p>
 
       <section class="page-section about-hero">
-        <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
+        <button class="hero-star diamond-trigger" type="button" aria-label="Why the diamond?" aria-haspopup="dialog" aria-expanded="false" aria-controls="diamond-explanation-popover"><ion-icon name="diamond" aria-hidden="true"></ion-icon></button>
         <h1 class="about-title">WHO’S JAY?</h1>
+        <p class="about-polaroid-instruction">Click the photo to learn a little more about me!</p>
 
-        <div class="about-slider">
-          <button class="about-arrow about-prev" type="button" aria-label="Previous slide">‹</button>
-          <div class="about-slider-viewport">
-            <div class="about-slider-track" id="about-slider-track">
-              <article class="about-slide is-video">
-                <video src="assets/about/vid.MP4" autoplay muted loop playsinline preload="metadata" aria-label="Jay Vu personal video montage"></video>
-              </article>
-              <article class="about-slide">
-                <img class="about-slide-focus-bottom" src="assets/about/pic1.jpg" alt="Jay Vu portrait in a casual outdoor setting" width="3024" height="4032" loading="eager" fetchpriority="low" decoding="async" />
-              </article>
-              <article class="about-slide">
-                <img class="about-slide-focus-bottom" src="assets/about/pic2.jpg" alt="Jay Vu portrait in a city setting" width="3024" height="4032" loading="lazy" />
-              </article>
-              <article class="about-slide">
-                <img src="assets/about/pic3.JPEG" alt="Jay Vu lifestyle photo with friends" width="4320" height="3240" loading="lazy" />
-              </article>
-              <article class="about-slide">
-                <img src="assets/about/pic4.JPG" alt="Jay Vu lifestyle photo outdoors" width="2048" height="1638" loading="lazy" />
-              </article>
-              <article class="about-slide">
-                <img src="assets/about/pic5.jpg" alt="Jay Vu portrait in a scenic outdoor location" width="1328" height="900" loading="lazy" />
-              </article>
+        <div class="about-polaroid-layout">
+          <div class="about-polaroid-stage about-polaroid-stage--portrait" id="about-polaroid-stage">
+            <div class="about-polaroid about-polaroid--back about-polaroid--back-two about-polaroid--landscape" aria-hidden="true">
+              <img id="about-polaroid-back-two" src="assets/about/pic3.JPEG" alt="" width="4320" height="3240" loading="lazy" />
+            </div>
+            <div class="about-polaroid about-polaroid--back about-polaroid--back-one about-polaroid--portrait" aria-hidden="true">
+              <img id="about-polaroid-back-one" src="assets/about/pic2.jpg" alt="" width="3024" height="4032" loading="lazy" />
+            </div>
+            <button class="about-polaroid about-polaroid--active about-polaroid--portrait" id="about-polaroid-active" type="button" aria-label="Show the next photo story">
+              <span class="about-polaroid-tape" aria-hidden="true"></span>
+              <img id="about-polaroid-image" src="assets/about/pic1.jpg" alt="Jay Vu taking a mirror selfie" width="3024" height="4032" loading="eager" decoding="async" />
+              <span class="about-polaroid-caption" id="about-polaroid-caption">just a random mirror selfie :)</span>
+            </button>
+          </div>
+
+          <div class="about-polaroid-story" aria-live="polite">
+            <p class="about-polaroid-counter" id="about-polaroid-counter">01 / 05</p>
+            <h2 id="about-polaroid-title">Hi, I’m Jay!</h2>
+            <div class="about-polaroid-copy" id="about-polaroid-copy">
+              <p>I’m a designer based in Canada who enjoys turning ideas into thoughtful visual experiences.</p>
+              <p>I care about details, storytelling, and creating things that feel both useful and personal.</p>
             </div>
           </div>
-          <button class="about-arrow about-next" type="button" aria-label="Next slide">›</button>
         </div>
 
-        <div class="about-dots" id="about-dots">
-          <button class="about-dot active" type="button" data-index="0" aria-label="Go to slide 1"></button>
-          <button class="about-dot" type="button" data-index="1" aria-label="Go to slide 2"></button>
-          <button class="about-dot" type="button" data-index="2" aria-label="Go to slide 3"></button>
-          <button class="about-dot" type="button" data-index="3" aria-label="Go to slide 4"></button>
-          <button class="about-dot" type="button" data-index="4" aria-label="Go to slide 5"></button>
-          <button class="about-dot" type="button" data-index="5" aria-label="Go to slide 6"></button>
-        </div>
-
-        <div class="about-thumbs" id="about-thumbs">
-          <button class="about-thumb active" type="button" data-index="0" aria-label="Show video slide"><video src="assets/about/vid.MP4" muted playsinline preload="metadata" aria-hidden="true"></video></button>
-          <button class="about-thumb" type="button" data-index="1" aria-label="Show portrait slide 1"><img src="assets/about/pic1.jpg" alt="" width="3024" height="4032" loading="lazy" /></button>
-          <button class="about-thumb" type="button" data-index="2" aria-label="Show portrait slide 2"><img src="assets/about/pic2.jpg" alt="" width="3024" height="4032" loading="lazy" /></button>
-          <button class="about-thumb" type="button" data-index="3" aria-label="Show lifestyle slide 3"><img src="assets/about/pic3.JPEG" alt="" width="4320" height="3240" loading="lazy" /></button>
-          <button class="about-thumb" type="button" data-index="4" aria-label="Show lifestyle slide 4"><img src="assets/about/pic4.JPG" alt="" width="2048" height="1638" loading="lazy" /></button>
-          <button class="about-thumb" type="button" data-index="5" aria-label="Show portrait slide 5"><img src="assets/about/pic5.jpg" alt="" width="1328" height="900" loading="lazy" /></button>
+        <div class="about-polaroid-dots" id="about-polaroid-dots" aria-label="Photo stories">
+          <button class="about-polaroid-dot active" type="button" data-index="0" aria-label="Show photo story 1" aria-current="true"></button>
+          <button class="about-polaroid-dot" type="button" data-index="1" aria-label="Show photo story 2"></button>
+          <button class="about-polaroid-dot" type="button" data-index="2" aria-label="Show photo story 3"></button>
+          <button class="about-polaroid-dot" type="button" data-index="3" aria-label="Show photo story 4"></button>
+          <button class="about-polaroid-dot" type="button" data-index="4" aria-label="Show photo story 5"></button>
         </div>
       </section>
 
       <section class="page-section about-hobbies">
-        <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
+        <button class="hero-star diamond-trigger" type="button" aria-label="Why the diamond?" aria-haspopup="dialog" aria-expanded="false" aria-controls="diamond-explanation-popover"><ion-icon name="diamond" aria-hidden="true"></ion-icon></button>
         <h2>Hobbies</h2>
         <div class="hobby-grid">
           <article class="hobby-item">
@@ -147,7 +136,7 @@
       </section>
 
       <section class="page-section about-tools">
-        <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
+        <button class="hero-star diamond-trigger" type="button" aria-label="Why the diamond?" aria-haspopup="dialog" aria-expanded="false" aria-controls="diamond-explanation-popover"><ion-icon name="diamond" aria-hidden="true"></ion-icon></button>
         <h2>MY TOOLS</h2>
         <div class="tool-group">
           <h3>Design</h3>
@@ -228,7 +217,7 @@
       </section>
 
       <section class="page-section about-journey">
-        <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
+        <button class="hero-star diamond-trigger" type="button" aria-label="Why the diamond?" aria-haspopup="dialog" aria-expanded="false" aria-controls="diamond-explanation-popover"><ion-icon name="diamond" aria-hidden="true"></ion-icon></button>
         <h2>MY JOURNEY</h2>
         <h3>I once thought I would build a life around people</h3>
         <p>In high school, I was Vice President of two clubs: F-Event and IDo. One organized every major event in the school. The other organized charity concerts and fundraising campaigns, traveling to remote areas to support underprivileged communities. I loved it. Planning. Coordinating. Listening. Watching people come together because of something we created.</p>
@@ -247,11 +236,18 @@
       </section>
 
       <section class="page-section about-cta" id="contact-cta">
-        <span class="hero-star" aria-hidden="true"><ion-icon name="diamond"></ion-icon></span>
+        <button class="hero-star diamond-trigger" type="button" aria-label="Why the diamond?" aria-haspopup="dialog" aria-expanded="false" aria-controls="diamond-explanation-popover"><ion-icon name="diamond" aria-hidden="true"></ion-icon></button>
         <a href="mailto:jayvu209@gmail.com" class="about-cta-link">LET’S TURN IDEAS INTO EXPERIENCES.</a>
       </section>
     </main>
   </div>
+
+  <div class="diamond-prompt" id="diamond-prompt" role="tooltip" hidden>💎 Why the diamond?</div>
+  <aside class="diamond-popover" id="diamond-explanation-popover" role="dialog" aria-modal="false" aria-labelledby="diamond-popover-title" hidden>
+    <button class="diamond-popover-close" type="button" aria-label="Close diamond explanation">×</button>
+    <h2 id="diamond-popover-title">WHY THE DIAMOND? 💎</h2>
+    <p>To me, a diamond represents love, happiness, and lasting commitment. It comes from a family tradition: my dad gave my mom a diamond ring when they married, and years later, my brother-in-law did the same for my sister. That connection made the diamond a small but meaningful symbol throughout my portfolio.</p>
+  </aside>
 
   <!-- Footer -->
   <footer class="site-footer">

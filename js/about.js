@@ -25,125 +25,327 @@ if (aboutLoadRoot && aboutLoadRoot.classList.contains('about-load-anim')) {
   }
 }
 
-// About slider: smooth infinite loop + synced arrows/dots/thumbs + stable autoplay
-const aboutTrack = document.getElementById('about-slider-track');
-const aboutViewport = document.querySelector('.about-slider-viewport');
-const aboutPrev = document.querySelector('.about-prev');
-const aboutNext = document.querySelector('.about-next');
-const aboutDots = Array.from(document.querySelectorAll('.about-dot'));
-const aboutThumbs = Array.from(document.querySelectorAll('.about-thumb'));
+// WHO'S JAY? photo stories: edit this array to update each title, description, or caption.
+const aboutPolaroidSlides = [
+  {
+    image: 'assets/about/pic1.jpg',
+    alt: 'Jay Vu taking a mirror selfie',
+    width: 3024,
+    height: 4032,
+    orientation: 'portrait',
+    rotation: '-3deg',
+    title: "Hi, I'm Jay!",
+    description: [
+      "I'm a designer based in Canada who enjoys turning ideas into thoughtful visual experiences.",
+      'I care about details, storytelling, and creating things that feel both useful and personal.'
+    ],
+    caption: 'just a random mirror selfie :)'
+  },
+  {
+    image: 'assets/about/pic2.jpg',
+    alt: 'Jay Vu exploring the city',
+    width: 3024,
+    height: 4032,
+    orientation: 'portrait',
+    rotation: '2.5deg',
+    title: 'Curious by nature',
+    description: [
+      'I find inspiration in small details, new places, and the unexpected ideas that show up along the way.'
+    ],
+    caption: 'out looking for ideas'
+  },
+  {
+    image: 'assets/about/pic3.JPEG',
+    alt: 'Jay Vu sharing time with friends',
+    width: 4320,
+    height: 3240,
+    orientation: 'landscape',
+    rotation: '-2deg',
+    title: 'People keep me inspired',
+    description: [
+      'Good conversations and shared moments remind me that the best creative work always has a human side.'
+    ],
+    caption: 'better together'
+  },
+  {
+    image: 'assets/about/pic4.JPG',
+    alt: 'Jay Vu spending time outdoors',
+    width: 2048,
+    height: 1638,
+    orientation: 'landscape',
+    rotation: '2deg',
+    title: 'A little room to wander',
+    description: [
+      'Stepping away from the screen helps me reset, notice more, and return to a project with fresh eyes.'
+    ],
+    caption: 'taking the scenic route'
+  },
+  {
+    image: 'assets/about/pic5.jpg',
+    alt: 'Jay Vu in a scenic outdoor setting',
+    width: 1328,
+    height: 900,
+    orientation: 'landscape',
+    rotation: '-1.5deg',
+    title: 'Always making something',
+    description: [
+      'Whether it is design, motion, or a new experiment, I am happiest when an idea starts becoming real.'
+    ],
+    caption: 'one idea at a time'
+  }
+];
 
-if (aboutTrack) {
-  const baseSlides = Array.from(aboutTrack.children);
-  const slideCount = baseSlides.length;
-  const AUTO_DELAY_MS = 5200;
+const aboutPolaroidStage = document.getElementById('about-polaroid-stage');
+const aboutPolaroidActive = document.getElementById('about-polaroid-active');
+const aboutPolaroidImage = document.getElementById('about-polaroid-image');
+const aboutPolaroidBackOne = document.getElementById('about-polaroid-back-one');
+const aboutPolaroidBackTwo = document.getElementById('about-polaroid-back-two');
+const aboutPolaroidCaption = document.getElementById('about-polaroid-caption');
+const aboutPolaroidCounter = document.getElementById('about-polaroid-counter');
+const aboutPolaroidTitle = document.getElementById('about-polaroid-title');
+const aboutPolaroidCopy = document.getElementById('about-polaroid-copy');
+const aboutPolaroidDots = Array.from(document.querySelectorAll('.about-polaroid-dot'));
 
-  const firstClone = baseSlides[0].cloneNode(true);
-  const lastClone = baseSlides[slideCount - 1].cloneNode(true);
-  aboutTrack.appendChild(firstClone);
-  aboutTrack.insertBefore(lastClone, aboutTrack.firstChild);
+if (aboutPolaroidStage && aboutPolaroidActive && aboutPolaroidImage) {
+  let aboutPolaroidIndex = 0;
+  let aboutPolaroidAnimationTimer = null;
 
-  let currentIndex = 1; // Track index includes clones: [0..slideCount+1]
-  let isAnimating = false;
-  let autoTimer = null;
-
-  function toRealIndex(trackIndex) {
-    if (trackIndex === 0) return slideCount - 1;
-    if (trackIndex === slideCount + 1) return 0;
-    return trackIndex - 1;
+  function setAboutPolaroidFrame(frame, image, slide) {
+    frame.classList.toggle('about-polaroid--portrait', slide.orientation === 'portrait');
+    frame.classList.toggle('about-polaroid--landscape', slide.orientation === 'landscape');
+    image.src = slide.image;
+    image.width = slide.width;
+    image.height = slide.height;
   }
 
-  function updateIndicators(realIndex = toRealIndex(currentIndex)) {
-    aboutDots.forEach((dot, idx) => dot.classList.toggle('active', idx === realIndex));
-    aboutThumbs.forEach((thumb, idx) => thumb.classList.toggle('active', idx === realIndex));
+  function renderAboutPolaroid(index, animate = true) {
+    const slide = aboutPolaroidSlides[index];
+    const nextSlide = aboutPolaroidSlides[(index + 1) % aboutPolaroidSlides.length];
+    const followingSlide = aboutPolaroidSlides[(index + 2) % aboutPolaroidSlides.length];
+
+    aboutPolaroidIndex = index;
+    aboutPolaroidStage.classList.toggle('about-polaroid-stage--portrait', slide.orientation === 'portrait');
+    aboutPolaroidStage.classList.toggle('about-polaroid-stage--landscape', slide.orientation === 'landscape');
+    setAboutPolaroidFrame(aboutPolaroidActive, aboutPolaroidImage, slide);
+    setAboutPolaroidFrame(aboutPolaroidBackOne.parentElement, aboutPolaroidBackOne, nextSlide);
+    setAboutPolaroidFrame(aboutPolaroidBackTwo.parentElement, aboutPolaroidBackTwo, followingSlide);
+
+    aboutPolaroidActive.style.setProperty('--polaroid-rotation', slide.rotation);
+    aboutPolaroidImage.alt = slide.alt;
+    aboutPolaroidCaption.textContent = slide.caption;
+    aboutPolaroidCounter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(aboutPolaroidSlides.length).padStart(2, '0')}`;
+    aboutPolaroidTitle.textContent = slide.title;
+    aboutPolaroidCopy.replaceChildren(...slide.description.map((text) => {
+      const paragraph = document.createElement('p');
+      paragraph.textContent = text;
+      return paragraph;
+    }));
+
+    aboutPolaroidDots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === index;
+      dot.classList.toggle('active', isActive);
+      if (isActive) {
+        dot.setAttribute('aria-current', 'true');
+      } else {
+        dot.removeAttribute('aria-current');
+      }
+    });
+
+    if (animate) {
+      window.clearTimeout(aboutPolaroidAnimationTimer);
+      aboutPolaroidActive.classList.remove('is-shuffling');
+      void aboutPolaroidActive.offsetWidth;
+      aboutPolaroidActive.classList.add('is-shuffling');
+      aboutPolaroidAnimationTimer = window.setTimeout(() => {
+        aboutPolaroidActive.classList.remove('is-shuffling');
+      }, 400);
+    }
   }
 
-  function setTrackPosition(animated = true) {
-    aboutTrack.style.transition = animated ? 'transform 0.62s cubic-bezier(0.22, 0.61, 0.36, 1)' : 'none';
-    aboutTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+  aboutPolaroidActive.addEventListener('click', () => {
+    renderAboutPolaroid((aboutPolaroidIndex + 1) % aboutPolaroidSlides.length);
+  });
+
+  aboutPolaroidDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => renderAboutPolaroid(index));
+  });
+
+  aboutPolaroidSlides.forEach((slide) => {
+    const image = new Image();
+    image.src = slide.image;
+  });
+
+  renderAboutPolaroid(0, false);
+}
+
+// Shared two-step explanation for every About-page diamond.
+const aboutDiamondTriggers = Array.from(document.querySelectorAll('.diamond-trigger'));
+const aboutDiamondPrompt = document.getElementById('diamond-prompt');
+const aboutDiamondPopover = document.getElementById('diamond-explanation-popover');
+const aboutDiamondClose = aboutDiamondPopover?.querySelector('.diamond-popover-close');
+
+if (aboutDiamondTriggers.length && aboutDiamondPrompt && aboutDiamondPopover && aboutDiamondClose) {
+  const aboutDiamondHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+  let activeDiamondTrigger = null;
+  let diamondPromptHideTimer = null;
+  let suppressDiamondFocusPrompt = false;
+  const diamondVisibilityTimers = new WeakMap();
+
+  function getDiamondMinimumTop() {
+    const topbar = document.querySelector('.topbar');
+    if (!topbar) return 12;
+
+    const topbarRect = topbar.getBoundingClientRect();
+    if (topbarRect.bottom <= 0 || topbarRect.top >= window.innerHeight) return 12;
+    return Math.max(12, topbarRect.bottom + 8);
   }
 
-  function goToTrackIndex(targetIndex) {
-    if (isAnimating) return;
-    isAnimating = true;
-    currentIndex = targetIndex;
-    setTrackPosition(true);
-    updateIndicators(toRealIndex(currentIndex));
+  function positionDiamondFloatingElement(element, trigger, gap = 10) {
+    const viewportInset = 12;
+    const triggerRect = trigger.getBoundingClientRect();
+    const elementRect = element.getBoundingClientRect();
+    const minimumTop = getDiamondMinimumTop();
+    const maximumLeft = Math.max(viewportInset, window.innerWidth - elementRect.width - viewportInset);
+    const preferredLeft = triggerRect.right - elementRect.width;
+    const left = Math.min(Math.max(preferredLeft, viewportInset), maximumLeft);
+    const belowTop = triggerRect.bottom + gap;
+    const aboveTop = triggerRect.top - elementRect.height - gap;
+    const canOpenAbove = aboveTop >= minimumTop;
+    const opensAbove = belowTop + elementRect.height > window.innerHeight - viewportInset && canOpenAbove;
+    const maximumTop = Math.max(minimumTop, window.innerHeight - elementRect.height - viewportInset);
+    const preferredTop = opensAbove ? aboveTop : belowTop;
+    const top = Math.min(Math.max(preferredTop, minimumTop), maximumTop);
+    const pointerLeft = Math.min(Math.max(triggerRect.left + (triggerRect.width / 2) - left, 20), elementRect.width - 20);
+
+    element.style.left = `${Math.round(left)}px`;
+    element.style.top = `${Math.round(top)}px`;
+    element.style.setProperty('--diamond-pointer-left', `${Math.round(pointerLeft)}px`);
+    element.classList.toggle('opens-above', opensAbove);
   }
 
-  function goToSlide(realIndex) {
-    goToTrackIndex(realIndex + 1);
+  function revealDiamondElement(element, trigger) {
+    window.clearTimeout(diamondVisibilityTimers.get(element));
+    element.hidden = false;
+    positionDiamondFloatingElement(element, trigger);
+    window.requestAnimationFrame(() => element.classList.add('is-visible'));
   }
 
-  function stopAutoplay() {
-    if (!autoTimer) return;
-    window.clearInterval(autoTimer);
-    autoTimer = null;
+  function concealDiamondElement(element) {
+    element.classList.remove('is-visible');
+    window.clearTimeout(diamondVisibilityTimers.get(element));
+    const visibilityTimer = window.setTimeout(() => {
+      if (!element.classList.contains('is-visible')) element.hidden = true;
+    }, 230);
+    diamondVisibilityTimers.set(element, visibilityTimer);
   }
 
-  function startAutoplay() {
-    stopAutoplay();
-    autoTimer = window.setInterval(() => {
-      if (!isAnimating) goToTrackIndex(currentIndex + 1);
-    }, AUTO_DELAY_MS);
+  function cancelDiamondPromptHide() {
+    window.clearTimeout(diamondPromptHideTimer);
+    diamondPromptHideTimer = null;
   }
 
-  function restartAutoplay() {
-    stopAutoplay();
-    startAutoplay();
+  function hideDiamondPrompt() {
+    cancelDiamondPromptHide();
+    concealDiamondElement(aboutDiamondPrompt);
   }
 
-  aboutTrack.addEventListener('transitionend', (event) => {
-    if (event.propertyName !== 'transform') return;
+  function scheduleDiamondPromptHide() {
+    if (!aboutDiamondHoverQuery.matches || !aboutDiamondPopover.hidden) return;
+    cancelDiamondPromptHide();
+    diamondPromptHideTimer = window.setTimeout(hideDiamondPrompt, 180);
+  }
 
-    if (currentIndex === 0) {
-      currentIndex = slideCount;
-      setTrackPosition(false);
-    } else if (currentIndex === slideCount + 1) {
-      currentIndex = 1;
-      setTrackPosition(false);
+  function showDiamondPrompt(trigger) {
+    if (!aboutDiamondPopover.hidden) return;
+    cancelDiamondPromptHide();
+    activeDiamondTrigger = trigger;
+    revealDiamondElement(aboutDiamondPrompt, trigger);
+  }
+
+  function openDiamondPopover(trigger = activeDiamondTrigger) {
+    if (!trigger) return;
+    activeDiamondTrigger = trigger;
+    hideDiamondPrompt();
+    aboutDiamondTriggers.forEach((trigger) => {
+      trigger.setAttribute('aria-expanded', String(trigger === activeDiamondTrigger));
+    });
+    revealDiamondElement(aboutDiamondPopover, activeDiamondTrigger);
+    aboutDiamondClose.focus({ preventScroll: true });
+  }
+
+  function restoreDiamondTriggerFocus(trigger) {
+    if (!trigger) return;
+    suppressDiamondFocusPrompt = true;
+    trigger.focus({ preventScroll: true });
+    window.requestAnimationFrame(() => {
+      suppressDiamondFocusPrompt = false;
+    });
+  }
+
+  function closeDiamondPopover(restoreFocus = false) {
+    if (aboutDiamondPopover.hidden) return;
+    concealDiamondElement(aboutDiamondPopover);
+    aboutDiamondTriggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
+    const triggerToRestore = activeDiamondTrigger;
+    activeDiamondTrigger = null;
+    if (restoreFocus) restoreDiamondTriggerFocus(triggerToRestore);
+  }
+
+  aboutDiamondTriggers.forEach((trigger) => {
+    trigger.addEventListener('pointerenter', () => {
+      if (aboutDiamondHoverQuery.matches) showDiamondPrompt(trigger);
+    });
+
+    trigger.addEventListener('pointerleave', scheduleDiamondPromptHide);
+    trigger.addEventListener('focus', () => {
+      if (!suppressDiamondFocusPrompt) showDiamondPrompt(trigger);
+    });
+    trigger.addEventListener('blur', scheduleDiamondPromptHide);
+    trigger.addEventListener('click', () => openDiamondPopover(trigger));
+  });
+
+  aboutDiamondClose.addEventListener('click', () => closeDiamondPopover(true));
+
+  document.addEventListener('pointerdown', (event) => {
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+
+    if (!aboutDiamondPopover.hidden) {
+      if (aboutDiamondPopover.contains(target) || activeDiamondTrigger?.contains(target)) return;
+      closeDiamondPopover();
+      return;
     }
 
-    updateIndicators(toRealIndex(currentIndex));
-    isAnimating = false;
+    if (!aboutDiamondPrompt.hidden && !aboutDiamondPrompt.contains(target) && !activeDiamondTrigger?.contains(target)) {
+      hideDiamondPrompt();
+      activeDiamondTrigger = null;
+    }
   });
 
-  if (aboutNext) {
-    aboutNext.addEventListener('click', () => {
-      goToTrackIndex(currentIndex + 1);
-      restartAutoplay();
-    });
-  }
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
 
-  if (aboutPrev) {
-    aboutPrev.addEventListener('click', () => {
-      goToTrackIndex(currentIndex - 1);
-      restartAutoplay();
-    });
-  }
-
-  aboutDots.forEach((dot, idx) => {
-    dot.addEventListener('click', () => {
-      goToSlide(idx);
-      restartAutoplay();
-    });
+    if (!aboutDiamondPopover.hidden) {
+      closeDiamondPopover(true);
+    } else if (!aboutDiamondPrompt.hidden) {
+      const triggerToRestore = activeDiamondTrigger;
+      hideDiamondPrompt();
+      activeDiamondTrigger = null;
+      restoreDiamondTriggerFocus(triggerToRestore);
+    }
   });
 
-  aboutThumbs.forEach((thumb, idx) => {
-    thumb.addEventListener('click', () => {
-      goToSlide(idx);
-      restartAutoplay();
-    });
-  });
-
-  if (aboutViewport) {
-    aboutViewport.addEventListener('mouseenter', stopAutoplay);
-    aboutViewport.addEventListener('mouseleave', startAutoplay);
+  function repositionDiamondExplanation() {
+    if (!activeDiamondTrigger) return;
+    if (!aboutDiamondPopover.hidden) {
+      positionDiamondFloatingElement(aboutDiamondPopover, activeDiamondTrigger);
+    } else if (!aboutDiamondPrompt.hidden) {
+      positionDiamondFloatingElement(aboutDiamondPrompt, activeDiamondTrigger);
+    }
   }
 
-  setTrackPosition(false);
-  updateIndicators();
-  startAutoplay();
+  window.addEventListener('resize', repositionDiamondExplanation);
+  window.addEventListener('scroll', repositionDiamondExplanation, { passive: true });
 }
 
 // About top nav: match Home behavior (show on load, hide on scroll down, show on scroll up)
