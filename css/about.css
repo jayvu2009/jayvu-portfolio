@@ -159,6 +159,21 @@
   .diamond-popover {
     transition: none;
   }
+
+  .about-tools .tool-marquee {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .about-tools .tool-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .about-tools .tool-loop-set[aria-hidden="true"] {
+    display: none;
+  }
 }
 
 .about-page .about-hero,
@@ -496,21 +511,15 @@
   flex-shrink: 0;
 }
 
-.tool-group + .tool-group {
-  margin-top: 1.2rem;
-}
-
-.tool-group h3 {
-  margin: 0 0 0.6rem;
-  color: #3b2d29;
-  font-size: 1rem;
-}
-
 .tool-marquee {
   overflow: hidden;
   width: 100%;
   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.about-tools .tool-marquee {
+  margin-top: 0.9rem;
 }
 
 .tool-track {
@@ -523,18 +532,28 @@
 
 .tool-loop-set {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.8rem;
   padding-right: 0.8rem;
   flex-shrink: 0;
 }
 
-.marquee-design .tool-track {
-  animation: toolsMarquee 24s linear infinite reverse;
+.marquee-tools .tool-track {
+  animation: toolsMarquee 28s linear infinite;
 }
 
-.marquee-dev .tool-track {
-  animation: toolsMarquee 18s linear infinite;
+.tool-category {
+  flex: 0 0 auto;
+  padding: 0.48rem 0.72rem;
+  border: 1px solid rgba(252, 114, 56, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 148, 94, 0.16);
+  color: #e95f28;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .tool-item {
