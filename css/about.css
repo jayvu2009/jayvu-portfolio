@@ -11,7 +11,6 @@
 
 /* About: Load-In Animation (runs once on initial page load) */
 .about-page.about-load-anim .sidebar,
-.about-page.about-load-anim .content-panel > .active-badge,
 .about-page.about-load-anim .about-hero,
 .about-page.about-load-anim .about-title,
 .about-page.about-load-anim .about-hero .hero-star,
@@ -22,7 +21,7 @@
 .about-page.about-load-anim .about-polaroid-dots,
 .about-page.about-load-anim .about-hobbies,
 .about-page.about-load-anim .about-tools,
-.about-page.about-load-anim .about-journey,
+.about-page.about-load-anim .about-playground,
 .about-page.about-load-anim .about-cta {
   will-change: transform, opacity;
 }
@@ -31,11 +30,6 @@
   transition: transform var(--about-load-duration) var(--about-load-ease);
   transition-delay: 70ms;
   will-change: transform;
-}
-
-.about-page.about-load-anim .content-panel > .active-badge {
-  transition: transform 620ms var(--about-load-ease), opacity 620ms var(--about-load-ease);
-  transition-delay: 200ms;
 }
 
 .about-page.about-load-anim .about-hero {
@@ -82,23 +76,18 @@
 
 .about-page.about-load-anim .about-hobbies,
 .about-page.about-load-anim .about-tools,
-.about-page.about-load-anim .about-journey,
+.about-page.about-load-anim .about-playground,
 .about-page.about-load-anim .about-cta {
   transition: opacity 720ms var(--about-load-ease), transform 720ms var(--about-load-ease);
 }
 
 .about-page.about-load-anim .about-hobbies { transition-delay: 980ms; }
 .about-page.about-load-anim .about-tools { transition-delay: 1080ms; }
-.about-page.about-load-anim .about-journey { transition-delay: 1180ms; }
+.about-page.about-load-anim .about-playground { transition-delay: 1180ms; }
 .about-page.about-load-anim .about-cta { transition-delay: 1260ms; }
 
 .about-page.about-load-anim:not(.is-loaded) .sidebar {
   transform: translateX(-88px);
-}
-
-.about-page.about-load-anim:not(.is-loaded) .content-panel > .active-badge {
-  opacity: 0;
-  transform: translateX(-24px);
 }
 
 .about-page.about-load-anim:not(.is-loaded) .about-hero {
@@ -125,7 +114,7 @@
 
 .about-page.about-load-anim:not(.is-loaded) .about-hobbies,
 .about-page.about-load-anim:not(.is-loaded) .about-tools,
-.about-page.about-load-anim:not(.is-loaded) .about-journey,
+.about-page.about-load-anim:not(.is-loaded) .about-playground,
 .about-page.about-load-anim:not(.is-loaded) .about-cta {
   opacity: 0;
   transform: translateY(24px);
@@ -133,7 +122,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .about-page.about-load-anim .sidebar,
-  .about-page.about-load-anim .content-panel > .active-badge,
   .about-page.about-load-anim .about-hero,
   .about-page.about-load-anim .about-title,
   .about-page.about-load-anim .about-hero .hero-star,
@@ -144,7 +132,7 @@
   .about-page.about-load-anim .about-polaroid-dots,
   .about-page.about-load-anim .about-hobbies,
   .about-page.about-load-anim .about-tools,
-  .about-page.about-load-anim .about-journey,
+  .about-page.about-load-anim .about-playground,
   .about-page.about-load-anim .about-cta {
     transition: none !important;
     opacity: 1 !important;
@@ -174,12 +162,18 @@
   .about-tools .tool-loop-set[aria-hidden="true"] {
     display: none;
   }
+
+  .playground-thumbnail,
+  .playground-preview img,
+  .playground-overlay {
+    transition: none;
+  }
 }
 
 .about-page .about-hero,
 .about-page .about-hobbies,
 .about-page .about-tools,
-.about-page .about-journey,
+.about-page .about-playground,
 .about-page .about-cta {
   position: relative;
   padding: 1.8rem 2rem;
@@ -451,25 +445,17 @@
 
 .about-hobbies > h2,
 .about-tools > h2,
-.about-journey > h2 {
+.about-playground > h2 {
   margin: 0 0 0.6rem;
   color: #fc7238;
   letter-spacing: 0.08em;
   font-size: 1.05rem;
 }
 
-.about-hobbies p,
-.about-journey p {
+.about-hobbies p {
   margin: 0.35rem 0 0;
   color: #5f4e47;
   line-height: 1.7;
-}
-
-.about-journey h3 {
-  margin: 1.1rem 0 0.25rem;
-  color: #3b2d29;
-  font-size: 1rem;
-  letter-spacing: 0.03em;
 }
 
 .hobby-grid {
@@ -641,47 +627,273 @@
   }
 }
 
-.about-journey {
+.about-playground {
   overflow: hidden;
-  background: linear-gradient(120deg, #fff6f0, #ffeede, #fff5f3);
-  background-size: 180% 180%;
-  animation: journeyBgShift 16s ease-in-out infinite;
   margin-bottom: 0;
-  border-bottom-left-radius: 1.6rem;
-  border-bottom-right-radius: 1.6rem;
 }
 
-.about-journey::before,
-.about-journey::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(40px);
-  opacity: 0.18;
-  pointer-events: none;
+.playground-intro {
+  margin: 0 0 1.2rem;
+  color: #5f4e47;
+  line-height: 1.6;
 }
 
-.about-journey::before {
-  width: 200px;
-  height: 200px;
-  top: -60px;
-  left: -40px;
-  background: #ff945e;
-  animation: floatBlobOne 9s ease-in-out infinite;
+.playground-layout {
+  display: grid;
+  grid-template-columns: minmax(10.5rem, 0.25fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
 }
 
-.about-journey::after {
-  width: 220px;
-  height: 220px;
-  right: -70px;
-  bottom: -70px;
-  background: #ffd1e2;
-  animation: floatBlobTwo 11s ease-in-out infinite;
+.playground-thumbnails {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 0.65rem;
 }
 
-.about-journey > * {
+.playground-thumbnail {
+  appearance: none;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(252, 114, 56, 0.16);
+  border-radius: 0.9rem;
+  background: #fffaf6;
+  color: #493a35;
+  font: inherit;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.playground-thumbnail.active {
+  border-color: #fc7238;
+  background: #fff1e8;
+  box-shadow: 0 8px 18px rgba(252, 114, 56, 0.14);
+}
+
+.playground-thumbnail:focus-visible,
+.playground-preview:focus-visible,
+.playground-overlay-close:focus-visible,
+.playground-action:focus-visible {
+  outline: 2px solid #fc7238;
+  outline-offset: 3px;
+}
+
+.playground-thumbnail-media {
   position: relative;
-  z-index: 1;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 0.6rem;
+  background: #f7ebe4;
+}
+
+.playground-thumbnail-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.playground-thumbnail strong {
+  display: block;
+  margin-bottom: 0.12rem;
+  color: #fc7238;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.playground-preview-shell {
+  position: relative;
+  min-width: 0;
+  min-height: clamp(25rem, 46vw, 32rem);
+  overflow: hidden;
+  border: 1px solid rgba(252, 114, 56, 0.2);
+  border-radius: 1.2rem;
+  background: #f8eee8;
+  box-shadow: 0 12px 24px rgba(59, 42, 35, 0.1);
+}
+
+.playground-preview {
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.playground-preview img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.playground-preview [hidden] {
+  display: none;
+}
+
+.playground-preview-shell.is-switching .playground-preview img {
+  opacity: 0.35;
+  transform: translateY(0.35rem);
+}
+
+.playground-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.35rem, 3.5vw, 2.5rem);
+  overflow: auto;
+  background: linear-gradient(145deg, rgba(255, 250, 246, 0.97), rgba(255, 231, 218, 0.96));
+  color: #433632;
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.playground-overlay[hidden] {
+  display: none;
+}
+
+.playground-overlay.is-open {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.playground-overlay-close {
+  appearance: none;
+  position: absolute;
+  top: 0.8rem;
+  right: 0.9rem;
+  z-index: 2;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid rgba(252, 114, 56, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.82);
+  color: #5f4e47;
+  font: inherit;
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.playground-project-number,
+.playground-project-type {
+  margin: 0;
+  color: #fc7238;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.playground-project-number {
+  margin-bottom: 0.45rem;
+  font-family: 'Holtwood One SC', serif;
+  font-size: 0.82rem;
+}
+
+.playground-project-type {
+  font-size: 0.72rem;
+}
+
+.playground-overlay h3 {
+  margin: 0.55rem 0 0.8rem;
+  color: #e95f28;
+  font-family: 'Holtwood One SC', serif;
+  font-size: clamp(1.35rem, 2.8vw, 2rem);
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}
+
+.playground-project-description {
+  max-width: 46rem;
+  margin: 0;
+  line-height: 1.65;
+}
+
+.playground-project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1.1rem;
+}
+
+.playground-project-actions[hidden] {
+  display: none;
+}
+
+.playground-secondary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.playground-action {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid rgba(252, 114, 56, 0.32);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: #e95f28;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.playground-action-primary {
+  border-color: #fc7238;
+  background: #fc7238;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(252, 114, 56, 0.2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .playground-thumbnail:hover {
+    border-color: rgba(252, 114, 56, 0.48);
+    transform: translateX(0.15rem);
+  }
+
+  .playground-preview:hover img {
+    transform: scale(1.015);
+  }
+
+  .playground-action:hover,
+  .playground-overlay-close:hover {
+    background: #fff0e7;
+  }
+
+  .playground-action-primary:hover {
+    background: #e95f28;
+    color: #fff;
+  }
 }
 
 .about-cta {
@@ -938,21 +1150,11 @@
   50% { background-position: 100% 50%; }
 }
 
-@keyframes floatBlobOne {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(10px, 18px); }
-}
-
-@keyframes floatBlobTwo {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-16px, -12px); }
-}
-
 @media (max-width: 860px) {
   .about-page .about-hero,
   .about-page .about-hobbies,
   .about-page .about-tools,
-  .about-page .about-journey,
+  .about-page .about-playground,
   .about-page .about-cta {
     padding: 1.35rem;
   }
@@ -1000,6 +1202,20 @@
 
   .hobby-item-full {
     grid-column: auto;
+  }
+
+  .playground-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .playground-thumbnails {
+    grid-template-columns: repeat(4, minmax(9rem, 1fr));
+    overflow-x: auto;
+    padding: 0.1rem 0.1rem 0.4rem;
+  }
+
+  .playground-thumbnail {
+    grid-template-columns: 3.8rem minmax(0, 1fr);
   }
 
 }
@@ -1087,6 +1303,26 @@
   .about-polaroid {
     max-width: calc(100% - 1.25rem);
   }
+
+  .playground-preview-shell {
+    min-height: 30rem;
+  }
+
+  .playground-overlay {
+    justify-content: flex-start;
+    padding: 3.5rem 1.1rem 1.2rem;
+  }
+
+  .playground-project-actions,
+  .playground-secondary-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .playground-action {
+    width: 100%;
+  }
+
 }
 
 @media (max-width: 1024px) {

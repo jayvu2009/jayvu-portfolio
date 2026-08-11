@@ -219,6 +219,215 @@ if (aboutPolaroidStage && aboutPolaroidActive && aboutPolaroidImage) {
   renderAboutPolaroid(0, false);
 }
 
+const aboutPlaygroundProjects = [
+  {
+    asset: 'assets/about/playground/1.png',
+    media: 'image',
+    alt: 'Geonmaet Bakery website project preview',
+    number: '01 / 04',
+    type: 'WEBSITE CODING',
+    title: 'GEONMAET BAKERY',
+    description: 'A bakery website I built for a school project. I focused on creating a warm, simple layout with clear navigation and an easy way to browse the menu.'
+  },
+  {
+    asset: 'assets/about/playground/2.png',
+    media: 'image',
+    alt: 'The Sounds of Alphabet experimental typography project preview',
+    number: '02 / 04',
+    type: 'TYPOGRAPHY / EXPERIMENTAL GRAPHIC DESIGN',
+    title: 'THE SOUNDS OF ALPHABET',
+    description: 'An experimental alphabet I designed by transforming musical notes and symbols into letterforms. The project explores how typography and music can come together to create a new visual language.'
+  },
+  {
+    asset: 'assets/about/playground/3.png',
+    media: 'image',
+    alt: 'Maple Journey social media and content creation project preview',
+    number: '03 / 04',
+    type: 'SOCIAL MEDIA / CONTENT CREATION',
+    title: 'MAPLE JOURNEY',
+    description: 'A social media project created for class, sharing the everyday experiences of international students living and studying in Canada. I worked on creating short-form content and building a consistent presence across multiple social platforms.',
+    links: [
+      { label: 'VIEW WEBSITE', url: 'https://mapple-journey-bfdx.vercel.app/', primary: true },
+      { label: 'INSTAGRAM', url: 'https://www.instagram.com/maplejourney_bcit/' },
+      { label: 'YOUTUBE', url: 'https://www.youtube.com/@MapleJourney-bcit' },
+      { label: 'TIKTOK', url: 'https://www.tiktok.com/@maplejourney_bcit' }
+    ]
+  },
+  {
+    asset: 'assets/about/playground/4.png',
+    media: 'image',
+    alt: 'Zestli video storytelling project preview',
+    number: '04 / 04',
+    type: 'VIDEO STORYTELLING / ACTING',
+    title: 'ZESTLI — VIDEO STORYTELLING',
+    description: 'A storytelling video created for class to promote Zestli, a food app built around sharing meals and meaningful messages. I took part in the project as an actor, helping bring the story and its message to life on screen.',
+    links: [
+      {
+        label: 'WATCH FULL VIDEO ↗',
+        url: 'https://drive.google.com/file/d/19CZRnjFJAGCFRC0hz-r_1phFQNMYd2Ee/view?usp=sharing',
+        primary: true
+      }
+    ]
+  }
+];
+
+const aboutPlayground = document.querySelector('.about-playground');
+const aboutPlaygroundThumbnails = Array.from(document.querySelectorAll('.playground-thumbnail'));
+const aboutPlaygroundThumbnailList = document.querySelector('.playground-thumbnails');
+const aboutPlaygroundPreviewShell = document.getElementById('playground-preview');
+const aboutPlaygroundPreviewButton = document.getElementById('playground-preview-button');
+const aboutPlaygroundPreviewImage = document.getElementById('playground-preview-image');
+const aboutPlaygroundOverlay = document.getElementById('playground-overlay');
+const aboutPlaygroundOverlayClose = aboutPlaygroundOverlay?.querySelector('.playground-overlay-close');
+const aboutPlaygroundNumber = document.getElementById('playground-project-number');
+const aboutPlaygroundType = document.getElementById('playground-project-type');
+const aboutPlaygroundTitle = document.getElementById('playground-project-title');
+const aboutPlaygroundDescription = document.getElementById('playground-project-description');
+const aboutPlaygroundActions = document.getElementById('playground-project-actions');
+
+if (
+  aboutPlayground &&
+  aboutPlaygroundThumbnails.length === aboutPlaygroundProjects.length &&
+  aboutPlaygroundPreviewShell &&
+  aboutPlaygroundPreviewButton &&
+  aboutPlaygroundPreviewImage &&
+  aboutPlaygroundOverlay &&
+  aboutPlaygroundOverlayClose &&
+  aboutPlaygroundNumber &&
+  aboutPlaygroundType &&
+  aboutPlaygroundTitle &&
+  aboutPlaygroundDescription &&
+  aboutPlaygroundActions
+) {
+  let aboutPlaygroundIndex = 0;
+  let playgroundOverlayTimer = null;
+
+  function closePlaygroundOverlay(restoreFocus = false, immediately = false) {
+    if (aboutPlaygroundOverlay.hidden) return;
+    window.clearTimeout(playgroundOverlayTimer);
+    aboutPlaygroundOverlay.classList.remove('is-open');
+    aboutPlaygroundOverlay.setAttribute('aria-hidden', 'true');
+    aboutPlaygroundPreviewButton.setAttribute('aria-expanded', 'false');
+
+    if (immediately) {
+      aboutPlaygroundOverlay.hidden = true;
+    } else {
+      playgroundOverlayTimer = window.setTimeout(() => {
+        if (!aboutPlaygroundOverlay.classList.contains('is-open')) aboutPlaygroundOverlay.hidden = true;
+      }, 250);
+    }
+
+    if (restoreFocus) aboutPlaygroundPreviewButton.focus({ preventScroll: true });
+  }
+
+  function createPlaygroundLink(link) {
+    const anchor = document.createElement('a');
+    anchor.className = `playground-action${link.primary ? ' playground-action-primary' : ''}`;
+    anchor.href = link.url;
+    anchor.target = '_blank';
+    anchor.rel = 'noopener noreferrer';
+    anchor.textContent = link.label;
+    return anchor;
+  }
+
+  function renderPlaygroundActions(project) {
+    aboutPlaygroundActions.replaceChildren();
+
+    if (project.links) {
+      const primaryLink = project.links.find((link) => link.primary);
+      const secondaryLinks = project.links.filter((link) => !link.primary);
+      if (primaryLink) aboutPlaygroundActions.append(createPlaygroundLink(primaryLink));
+
+      if (secondaryLinks.length) {
+        const secondaryGroup = document.createElement('div');
+        secondaryGroup.className = 'playground-secondary-actions';
+        secondaryGroup.append(...secondaryLinks.map(createPlaygroundLink));
+        aboutPlaygroundActions.append(secondaryGroup);
+      }
+
+      aboutPlaygroundActions.hidden = false;
+      return;
+    }
+
+    aboutPlaygroundActions.hidden = true;
+  }
+
+  function renderPlaygroundProject(index, animate = true) {
+    const project = aboutPlaygroundProjects[index];
+    aboutPlaygroundIndex = index;
+    closePlaygroundOverlay(false, true);
+
+    aboutPlaygroundThumbnails.forEach((thumbnail, thumbnailIndex) => {
+      const isActive = thumbnailIndex === index;
+      thumbnail.classList.toggle('active', isActive);
+      thumbnail.setAttribute('aria-selected', String(isActive));
+      thumbnail.tabIndex = isActive ? 0 : -1;
+    });
+
+    aboutPlaygroundPreviewShell.setAttribute('aria-labelledby', `playground-tab-${index + 1}`);
+    aboutPlaygroundPreviewButton.setAttribute('aria-label', `Open details for ${project.title}`);
+    aboutPlaygroundPreviewImage.alt = project.alt;
+    aboutPlaygroundNumber.textContent = project.number;
+    aboutPlaygroundType.textContent = project.type;
+    aboutPlaygroundTitle.textContent = project.title;
+    aboutPlaygroundDescription.textContent = project.description;
+    renderPlaygroundActions(project);
+    aboutPlaygroundPreviewImage.src = project.asset;
+
+    if (animate) {
+      aboutPlaygroundPreviewShell.classList.add('is-switching');
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => aboutPlaygroundPreviewShell.classList.remove('is-switching'));
+      });
+    }
+  }
+
+  function openPlaygroundOverlay() {
+    window.clearTimeout(playgroundOverlayTimer);
+    aboutPlaygroundOverlay.hidden = false;
+    aboutPlaygroundOverlay.setAttribute('aria-hidden', 'false');
+    aboutPlaygroundPreviewButton.setAttribute('aria-expanded', 'true');
+    window.requestAnimationFrame(() => aboutPlaygroundOverlay.classList.add('is-open'));
+    aboutPlaygroundOverlayClose.focus({ preventScroll: true });
+  }
+
+  function updatePlaygroundThumbnailOrientation() {
+    aboutPlaygroundThumbnailList?.setAttribute('aria-orientation', window.innerWidth <= 860 ? 'horizontal' : 'vertical');
+  }
+
+  aboutPlaygroundThumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => renderPlaygroundProject(index));
+    thumbnail.addEventListener('keydown', (event) => {
+      const horizontal = window.innerWidth <= 860;
+      const previousKey = horizontal ? 'ArrowLeft' : 'ArrowUp';
+      const nextKey = horizontal ? 'ArrowRight' : 'ArrowDown';
+      let nextIndex = null;
+
+      if (event.key === previousKey) nextIndex = (index - 1 + aboutPlaygroundProjects.length) % aboutPlaygroundProjects.length;
+      if (event.key === nextKey) nextIndex = (index + 1) % aboutPlaygroundProjects.length;
+      if (event.key === 'Home') nextIndex = 0;
+      if (event.key === 'End') nextIndex = aboutPlaygroundProjects.length - 1;
+      if (nextIndex === null) return;
+
+      event.preventDefault();
+      renderPlaygroundProject(nextIndex);
+      aboutPlaygroundThumbnails[nextIndex].focus();
+    });
+  });
+
+  aboutPlaygroundPreviewButton.addEventListener('click', openPlaygroundOverlay);
+  aboutPlaygroundOverlayClose.addEventListener('click', () => closePlaygroundOverlay(true));
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (!aboutPlaygroundOverlay.hidden) closePlaygroundOverlay(true);
+  });
+
+  window.addEventListener('resize', updatePlaygroundThumbnailOrientation);
+  updatePlaygroundThumbnailOrientation();
+  renderPlaygroundProject(0, false);
+}
+
 // Shared two-step explanation for every About-page diamond.
 const aboutDiamondTriggers = Array.from(document.querySelectorAll('.diamond-trigger'));
 const aboutDiamondPrompt = document.getElementById('diamond-prompt');

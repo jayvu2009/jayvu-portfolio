@@ -66,8 +66,6 @@
           <a class="topbar-mobile-link" href="index.html#works">WORK</a>
         </div>
       </nav>
-      <p class="active-badge">ABOUT</p>
-
       <section class="page-section about-hero">
         <button class="hero-star diamond-trigger" type="button" aria-label="Why the diamond?" aria-haspopup="dialog" aria-expanded="false" aria-controls="diamond-explanation-popover"><ion-icon name="diamond" aria-hidden="true"></ion-icon></button>
         <h1 class="about-title">WHO’S JAY?</h1>
@@ -173,23 +171,46 @@
         </div>
       </section>
 
-      <section class="page-section about-journey">
+      <section class="page-section about-playground">
         <button class="hero-star diamond-trigger" type="button" aria-label="Why the diamond?" aria-haspopup="dialog" aria-expanded="false" aria-controls="diamond-explanation-popover"><ion-icon name="diamond" aria-hidden="true"></ion-icon></button>
-        <h2>MY JOURNEY</h2>
-        <h3>I once thought I would build a life around people</h3>
-        <p>In high school, I was Vice President of two clubs: F-Event and IDo. One organized every major event in the school. The other organized charity concerts and fundraising campaigns, traveling to remote areas to support underprivileged communities. I loved it. Planning. Coordinating. Listening. Watching people come together because of something we created.</p>
-        <p>For a long time, I thought this would be my path.</p>
-        <h3>But passions sometimes evolves</h3>
-        <p>What I loved wasn’t just organizing events, it was designing experiences. The way lighting changed a stage atmosphere, the way visuals shaped emotions, the way a small detail could make someone feel seen. I initially considered studying marketing. But when I moved to Canada in December 2024, the intake wasn’t until the following September. I couldn’t afford to wait. So I enrolled in Graphic Design instead and thinking it would simply “fill the gap.”</p>
-        <p>It didn’t fill a gap. It opened a new door for me.</p>
-        <h3>The first website I coded changed everything</h3>
-        <p>It started as a simple assignment which is rebuilding a template that already existed. But I got hooked fast.</p>
-        <p>I loved the feeling of figuring out how each element worked, and even more, the moment when a bug finally made sense after hours of being stuck. That tiny “it works!” moment was addictive.</p>
-        <h3>That’s when I knew.</h3>
-        <p>I didn’t just want to organize experiences, I wanted to build them. Not for a single night but for everyday screens. Not just emotionally but functionally.</p>
-        <h3>I design with empathy and precision.</h3>
-        <p>I care about the details: spacing, flow, interaction, hierarchy. The invisible decisions that quietly shape how someone feels.</p>
-        <p>I’m now working toward my first role as a UX/UI Designer or Front-end Developer, where I can keep learning, building, and creating experiences that truly connect.</p>
+        <h2>PLAYGROUND</h2>
+        <p class="playground-intro">Small projects, experiments, and things I made along the way.</p>
+
+        <div class="playground-layout">
+          <div class="playground-thumbnails" role="tablist" aria-label="Playground projects" aria-orientation="vertical">
+            <button class="playground-thumbnail active" id="playground-tab-1" type="button" role="tab" aria-selected="true" aria-controls="playground-preview" data-index="0">
+              <span class="playground-thumbnail-media"><img src="assets/about/playground/1.png" alt="" width="3024" height="1720" /></span>
+              <span><strong>01</strong> Geonmaet Bakery</span>
+            </button>
+            <button class="playground-thumbnail" id="playground-tab-2" type="button" role="tab" aria-selected="false" aria-controls="playground-preview" data-index="1" tabindex="-1">
+              <span class="playground-thumbnail-media"><img src="assets/about/playground/2.png" alt="" width="792" height="1008" /></span>
+              <span><strong>02</strong> The Sounds of Alphabet</span>
+            </button>
+            <button class="playground-thumbnail" id="playground-tab-3" type="button" role="tab" aria-selected="false" aria-controls="playground-preview" data-index="2" tabindex="-1">
+              <span class="playground-thumbnail-media"><img src="assets/about/playground/3.png" alt="" width="3024" height="1722" /></span>
+              <span><strong>03</strong> Maple Journey</span>
+            </button>
+            <button class="playground-thumbnail" id="playground-tab-4" type="button" role="tab" aria-selected="false" aria-controls="playground-preview" data-index="3" tabindex="-1">
+              <span class="playground-thumbnail-media"><img src="assets/about/playground/4.png" alt="" width="2616" height="1446" /></span>
+              <span><strong>04</strong> Zestli — Video Storytelling</span>
+            </button>
+          </div>
+
+          <div class="playground-preview-shell" id="playground-preview" role="tabpanel" aria-labelledby="playground-tab-1">
+            <button class="playground-preview" id="playground-preview-button" type="button" aria-label="Open details for Geonmaet Bakery" aria-expanded="false">
+              <img id="playground-preview-image" src="assets/about/playground/1.png" alt="Geonmaet Bakery website project preview" width="3024" height="1720" />
+            </button>
+
+            <div class="playground-overlay" id="playground-overlay" aria-hidden="true" hidden>
+              <button class="playground-overlay-close" type="button" aria-label="Close project details">×</button>
+              <p class="playground-project-number" id="playground-project-number">01 / 04</p>
+              <p class="playground-project-type" id="playground-project-type">WEBSITE CODING</p>
+              <h3 id="playground-project-title">GEONMAET BAKERY</h3>
+              <p class="playground-project-description" id="playground-project-description">A bakery website I built for a school project. I focused on creating a warm, simple layout with clear navigation and an easy way to browse the menu.</p>
+              <div class="playground-project-actions" id="playground-project-actions" hidden></div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="page-section about-cta" id="contact-cta">
