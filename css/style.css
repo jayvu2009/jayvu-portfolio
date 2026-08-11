@@ -55,6 +55,13 @@ video {
   outline-offset: 4px;
 }
 
+/* Shared body copy */
+.about-page main p:not(.active-badge),
+body[class*="project"][class*="-page"] main p {
+  font-size: 1.12rem;
+  line-height: 1.68;
+}
+
 /* Layout Shell */
 .page-shell {
   display: grid;
@@ -96,9 +103,22 @@ video {
     min-height: calc(100vh - 2.4rem);
   }
 
+  .page-shell > .sidebar {
+    position: relative;
+    top: auto;
+    align-self: stretch;
+    align-items: flex-start;
+  }
+
   .profile-card {
     height: auto;
     min-height: calc(100vh - 2.4rem);
+  }
+
+  .page-shell > .sidebar > .profile-card {
+    position: sticky;
+    top: 1.2rem;
+    align-self: flex-start;
   }
 }
 
@@ -636,8 +656,8 @@ video {
 .subtitle {
   margin: 0.42rem 0 0;
   color: #6d5952;
-  font-size: 1.03rem;
-  line-height: 1.55;
+  font-size: 1.08rem;
+  line-height: 1.6;
   max-width: 540px;
 }
 
@@ -1062,6 +1082,13 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
   border-radius: 1.2rem;
 }
 
+@media (min-width: 1121px) {
+  .work-carousel-wrap {
+    top: clamp(2rem, 3.25vh, 2.5rem);
+    min-height: 620px;
+  }
+}
+
 .work-carousel-stage {
   position: relative;
   height: auto;
@@ -1192,6 +1219,8 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
 .project-card p {
   color: #5c4c44;
   margin: 0 0 .65rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
 }
 
 .tag-row {
@@ -1199,6 +1228,28 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
   flex-wrap: wrap;
   gap: .35rem;
   margin-bottom: .75rem;
+}
+
+@media (min-width: 1121px) {
+  .project-card {
+    padding: 1.15rem 1rem 1.2rem;
+  }
+
+  .project-card .project-image-wrap {
+    margin-bottom: 1.15rem;
+  }
+
+  .project-card h3 {
+    margin: 0.6rem 0 0.45rem;
+  }
+
+  .project-card p {
+    margin-bottom: 0.9rem;
+  }
+
+  .project-card .tag-row {
+    margin-bottom: 1rem;
+  }
 }
 
 .tool-tag {
