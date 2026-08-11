@@ -515,38 +515,20 @@ function initHomeScrollReveal() {
   const revealSelector = [
     '#works .work-filter-row',
     '#works .work-carousel-wrap',
-    '#works .hero-star',
-    '#contact .contact-heading',
-    '#contact .contact-star',
-    '#contact .contact-field',
-    '#contact .contact-message',
-    '#contact .contact-send',
-    'footer.site-footer .footer-nav',
-    'footer.site-footer .footer-logo',
-    'footer.site-footer .footer-connect',
-    'footer.site-footer .footer-social',
-    'footer.site-footer .footer-copy'
+    '#works .hero-star'
   ].join(', ');
 
   const revealElements = Array.from(document.querySelectorAll(revealSelector));
   if (!revealElements.length) return;
 
   // Reveal direction + subtle stagger setup
-  let fieldDelay = 0;
   revealElements.forEach((element) => {
     element.classList.add('scroll-reveal');
 
-    if (element.matches('#works .work-filter-row, #contact .contact-heading, #contact .contact-message, #contact .contact-send')) {
+    if (element.matches('#works .work-filter-row')) {
       element.classList.add('sr-up');
-    } else if (element.matches('#works .work-carousel-wrap, footer.site-footer .footer-social')) {
+    } else if (element.matches('#works .work-carousel-wrap')) {
       element.classList.add('sr-right');
-    } else if (element.matches('#works .hero-star, #contact .contact-star')) {
-      element.classList.add('sr-up');
-    } else if (element.matches('#contact .contact-field')) {
-      const isOddField = fieldDelay % 2 === 0;
-      element.classList.add(isOddField ? 'sr-left' : 'sr-right');
-      element.style.setProperty('--sr-delay', `${fieldDelay * 40}ms`);
-      fieldDelay += 1;
     } else {
       element.classList.add('sr-up');
     }
@@ -587,50 +569,4 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', delayScrollRevealInit, { once: true });
 } else {
   delayScrollRevealInit();
-}
-
-
-// Contact: Mailto Form + Validation
-const contactForm = document.getElementById('contact-form');
-const contactMessage = document.getElementById('contact-message');
-
-if (contactForm) {
-  contactForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const nameInput = document.getElementById('contact-name');
-    const companyInput = document.getElementById('contact-company');
-    const emailInput = document.getElementById('contact-email');
-    const phoneInput = document.getElementById('contact-phone');
-    const descriptionInput = document.getElementById('contact-description');
-
-    if (!nameInput || !companyInput || !emailInput || !phoneInput || !descriptionInput) return;
-
-    const requiredFields = [nameInput, emailInput, phoneInput, descriptionInput];
-    const firstMissing = requiredFields.find((field) => !field.value.trim());
-    if (firstMissing) {
-      if (contactMessage) contactMessage.textContent = 'Please complete all required fields.';
-      firstMissing.focus();
-      return;
-    }
-
-    if (!emailInput.checkValidity()) {
-      if (contactMessage) contactMessage.textContent = 'Please enter a valid email address.';
-      emailInput.focus();
-      return;
-    }
-
-    if (contactMessage) contactMessage.textContent = '';
-
-    const bodyText = [
-      `Name: ${nameInput.value.trim()}`,
-      `Company: ${companyInput.value.trim()}`,
-      `Email address: ${emailInput.value.trim()}`,
-      `Phone number: ${phoneInput.value.trim()}`,
-      `Description of work: ${descriptionInput.value.trim()}`
-    ].join('\n');
-
-    const mailtoUrl = `mailto:jayvu209@gmail.com?subject=${encodeURIComponent('Project Inquiry')}&body=${encodeURIComponent(bodyText)}`;
-    window.location.href = mailtoUrl;
-  });
 }

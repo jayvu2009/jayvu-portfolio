@@ -127,6 +127,13 @@
     const target = event.target;
     if (!(target instanceof Element)) return;
 
+    const backToTopLink = target.closest('.footer-back-to-top');
+    if (backToTopLink) {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
     const link = target.closest('a[href]');
     if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
 

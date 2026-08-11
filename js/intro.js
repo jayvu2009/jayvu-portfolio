@@ -98,7 +98,7 @@
       return;
     }
 
-    if (!['home', 'works', 'contact'].includes(sectionId)) return;
+    if (!['home', 'works'].includes(sectionId)) return;
     const section = document.getElementById(sectionId);
     if (!section) return;
 
