@@ -29,69 +29,109 @@ if (aboutLoadRoot && aboutLoadRoot.classList.contains('about-load-anim')) {
 const aboutPolaroidSlides = [
   {
     image: 'assets/about/pic1.jpg',
-    alt: 'Jay Vu taking a mirror selfie',
-    width: 3024,
-    height: 4032,
+    alt: 'Jay Vu with dyed hair',
+    width: 2316,
+    height: 3088,
     orientation: 'portrait',
     rotation: '-3deg',
-    title: "Hi, I'm Jay!",
+    title: "HI, I'M JAY!",
     description: [
       "I'm a designer based in Canada who enjoys turning ideas into thoughtful visual experiences.",
       'I care about details, storytelling, and creating things that feel both useful and personal.'
     ],
-    caption: 'just a random mirror selfie :)'
+    caption: 'I really love dyeing my hair :)'
   },
   {
     image: 'assets/about/pic2.jpg',
-    alt: 'Jay Vu exploring the city',
+    alt: 'Jay Vu talking on the phone',
     width: 3024,
     height: 4032,
     orientation: 'portrait',
     rotation: '2.5deg',
-    title: 'Curious by nature',
+    title: 'ALWAYS CONNECTED',
     description: [
-      'I find inspiration in small details, new places, and the unexpected ideas that show up along the way.'
+      'I love talking, sharing random stories, and staying connected with the people around me. A good conversation can easily become one of the best parts of my day.'
     ],
-    caption: 'out looking for ideas'
+    caption: 'probably on a call again :)'
+  },
+  {
+    image: 'assets/about/pic6.jpg',
+    alt: 'Jay Vu participating in a community charity activity',
+    width: 892,
+    height: 1586,
+    orientation: 'portrait',
+    frame: 'tall',
+    rotation: '-2deg',
+    title: 'GIVING BACK MATTERS',
+    description: [
+      'Giving back has always been important to me. In high school, I spent two years as Vice President of a charity club, organizing activities and working with others to support communities in need.'
+    ],
+    caption: 'giving back, together ♡'
+  },
+  {
+    image: 'assets/about/pic7.jpg',
+    alt: 'An activity Jay Vu helped organize for children in a mountain community in Vietnam',
+    width: 4000,
+    height: 6000,
+    orientation: 'portrait',
+    rotation: '2deg',
+    title: 'CREATING MOMENTS TOGETHER',
+    description: [
+      'I love bringing people together through events. This was one of the activities I helped organize for children in a mountain community in Vietnam. Seeing everyone enjoy something we created together is still one of my favourite parts of running events.'
+    ],
+    caption: 'little moments, big smiles ♡'
   },
   {
     image: 'assets/about/pic3.JPEG',
-    alt: 'Jay Vu sharing time with friends',
+    alt: 'A personal moment photographed with an old digital camera',
     width: 4320,
     height: 3240,
     orientation: 'landscape',
-    rotation: '-2deg',
-    title: 'People keep me inspired',
+    rotation: '-2.5deg',
+    title: 'I LIKE THE IMPERFECT ONES',
     description: [
-      'Good conversations and shared moments remind me that the best creative work always has a human side.'
+      'I love taking photos with old digital cameras. The soft colours, grain, and little imperfections make everyday moments feel more personal and worth remembering.'
     ],
-    caption: 'better together'
+    caption: 'captured on my little digicam :)'
   },
   {
     image: 'assets/about/pic4.JPG',
-    alt: 'Jay Vu spending time outdoors',
+    alt: 'One of Jay Vu’s favourite tarot decks',
     width: 2048,
     height: 1638,
     orientation: 'landscape',
-    rotation: '2deg',
-    title: 'A little room to wander',
+    rotation: '1.5deg',
+    title: "I'M ALSO A TAROT READER",
     description: [
-      'Stepping away from the screen helps me reset, notice more, and return to a project with fresh eyes.'
+      'Tarot has been one of my interests for years. I love the artwork, symbolism, and stories behind different decks, and this is one of my favourites to read with.'
     ],
-    caption: 'taking the scenic route'
+    caption: 'one of my favourite decks ♡'
   },
   {
     image: 'assets/about/pic5.jpg',
-    alt: 'Jay Vu in a scenic outdoor setting',
+    alt: 'Gunwook and Matthew, two of Jay Vu’s favourite idols',
     width: 1328,
     height: 900,
     orientation: 'landscape',
     rotation: '-1.5deg',
-    title: 'Always making something',
+    title: 'THEY KEEP ME INSPIRED',
     description: [
-      'Whether it is design, motion, or a new experiment, I am happiest when an idea starts becoming real.'
+      'Gunwook and Matthew are two of my favourite idols and a constant source of inspiration for me. Their creativity, energy, and friendship remind me to keep enjoying what I create and stay true to myself.'
     ],
-    caption: 'one idea at a time'
+    caption: 'a little source of inspiration ♡'
+  },
+  {
+    image: 'assets/about/pic8.jpg',
+    alt: 'A fridge memory wall filled with family photos and Polaroids',
+    width: 4284,
+    height: 4988,
+    orientation: 'portrait',
+    rotation: '2.5deg',
+    title: 'MY PEOPLE, MY HOME',
+    description: [
+      'My sister and my family are my people, the ones behind so many of my favourite memories. I also love taking Polaroids because there’s something special about turning little moments together into something I can actually keep.'
+    ],
+    caption: 'my people, my little memories ♡'
   }
 ];
 
@@ -113,6 +153,7 @@ if (aboutPolaroidStage && aboutPolaroidActive && aboutPolaroidImage) {
   function setAboutPolaroidFrame(frame, image, slide) {
     frame.classList.toggle('about-polaroid--portrait', slide.orientation === 'portrait');
     frame.classList.toggle('about-polaroid--landscape', slide.orientation === 'landscape');
+    frame.classList.toggle('about-polaroid--tall', slide.frame === 'tall');
     image.src = slide.image;
     image.width = slide.width;
     image.height = slide.height;

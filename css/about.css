@@ -227,6 +227,7 @@
   display: block;
   width: 100%;
   height: auto;
+  object-fit: contain;
   border-radius: 0.22rem;
 }
 
@@ -236,6 +237,10 @@
 
 .about-polaroid--landscape {
   width: min(88%, 31rem);
+}
+
+.about-polaroid--tall {
+  width: min(54%, 16rem);
 }
 
 .about-polaroid--back {
@@ -951,6 +956,10 @@
     width: min(84%, 30rem);
   }
 
+  .about-polaroid--tall {
+    width: min(50%, 15rem);
+  }
+
   .about-polaroid-story {
     max-width: 36rem;
     margin-inline: auto;
@@ -1050,6 +1059,10 @@
 
   .about-polaroid--landscape {
     width: min(92%, 24rem);
+  }
+
+  .about-polaroid--tall {
+    width: min(56%, 12.5rem);
   }
 
   .about-polaroid {
