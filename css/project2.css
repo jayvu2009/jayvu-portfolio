@@ -212,8 +212,8 @@ body.project2-page.project2-reveal-ready .reveal-right.is-visible {
   overflow: hidden;
   border: 1px solid rgba(252, 114, 56, 0.2);
   box-shadow: 0 16px 30px rgba(252, 114, 56, 0.14);
-  padding: 0.55rem;
-  min-height: 390px;
+  padding: 0.8rem;
+  min-height: 0;
 }
 
 .project2-hero-media img {

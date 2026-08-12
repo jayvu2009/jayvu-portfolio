@@ -62,6 +62,15 @@
       images: ['assets/project6/image1.png'],
       link: 'project6.html'
     },
+    {
+      id: 'project7',
+      category: 'motion',
+      title: 'Bringing My Brand to Life',
+      description: 'A personal motion project that transforms my portfolio logo and mascots into a playful animated intro, bringing more personality and storytelling into my visual identity.',
+      tools: ['After Effects', 'Illustrator', 'Premiere Pro'],
+      images: ['assets/project7/cover.jpeg'],
+      link: 'project7.html'
+    },
   ];
 
   const IMAGE_DIMENSIONS = {
@@ -74,7 +83,8 @@
     'assets/project4/image1.png': { width: 1727, height: 1132 },
     'assets/project4/image6.png': { width: 1729, height: 1279 },
     'assets/project5/image1.png': { width: 2624, height: 1542 },
-    'assets/project6/image1.png': { width: 1162, height: 654 }
+    'assets/project6/image1.png': { width: 1162, height: 654 },
+    'assets/project7/cover.jpeg': { width: 1280, height: 731 }
   };
 
   function categoryLabel(category) {

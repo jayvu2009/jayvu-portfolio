@@ -3,7 +3,7 @@
   font-family: 'Alegreya Sans', sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at 14% 10%, rgba(255, 209, 226, 0.42), rgba(255, 209, 226, 0) 36%),
+    radial-gradient(circle at 12% 8%, rgba(255, 209, 226, 0.45), rgba(255, 209, 226, 0) 35%),
     linear-gradient(160deg, #f6f1ed 0%, #f9f2eb 48%, #f2e5dc 100%);
 }
 
@@ -213,19 +213,17 @@ body.project3-page.project3-reveal-ready .reveal-right.is-visible {
   border: 1px solid rgba(252, 114, 56, 0.2);
   min-height: 0;
   box-shadow: 0 16px 30px rgba(252, 114, 56, 0.14);
-  padding: 0.28rem;
-  min-height: 500px;
+  padding: 0.8rem;
 }
 
 .project3-hero-media img {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  max-height: none;
-  object-fit: cover;
-  object-position: center;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
   display: block;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .project3-status-pill {
@@ -247,7 +245,7 @@ body.project3-page.project3-reveal-ready .reveal-right.is-visible {
 }
 
 .project3-intro {
-  margin: 1rem 0 0;
+  margin: 0.8rem 0 0;
   color: #594940;
   line-height: 1.62;
   font-size: 1.05rem;
