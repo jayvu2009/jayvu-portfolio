@@ -468,6 +468,63 @@ body.project7-page.project7-reveal-ready .reveal-right.is-visible {
   margin-top: 1rem;
 }
 
+.project7-more-grid.more-works-grid--carousel {
+  display: block;
+  margin-top: 1rem;
+}
+
+.project7-more-grid .more-works-carousel-wrap {
+  position: relative;
+  min-height: 560px;
+  padding: 0 3.4rem;
+  overflow: hidden;
+  border-radius: 1.2rem;
+}
+
+.project7-more-grid .more-works-carousel-stage {
+  position: relative;
+  min-height: 100%;
+}
+
+.project7-more-grid.more-works-grid--carousel .more-works-card {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(100%, 460px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scale(0.84);
+  filter: blur(0.6px);
+  transition: transform 0.42s ease, opacity 0.42s ease, filter 0.42s ease;
+}
+
+.project7-more-grid.more-works-grid--carousel .more-works-card.is-center {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 5;
+  transform: translateX(-50%) scale(1);
+  filter: none;
+}
+
+.project7-more-grid.more-works-grid--carousel .more-works-card.is-left {
+  opacity: 0.58;
+  z-index: 4;
+  transform: translateX(-128%) scale(0.87);
+}
+
+.project7-more-grid.more-works-grid--carousel .more-works-card.is-right {
+  opacity: 0.58;
+  z-index: 4;
+  transform: translateX(28%) scale(0.87);
+}
+
+.project7-more-grid.more-works-grid--carousel .more-works-card.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transform: translateX(-50%) scale(0.8);
+}
+
 .project7-more-card {
   width: 100%;
   max-width: 480px;
@@ -614,6 +671,19 @@ body.project7-page.project7-reveal-ready .reveal-right.is-visible {
 
   .project7-filter-wrap {
     margin-right: 0;
+  }
+
+  .project7-more-grid .more-works-carousel-wrap {
+    min-height: 520px;
+    padding: 0 2.35rem;
+  }
+
+  .project7-more-grid.more-works-grid--carousel .more-works-card.is-left {
+    transform: translateX(-114%) scale(0.86);
+  }
+
+  .project7-more-grid.more-works-grid--carousel .more-works-card.is-right {
+    transform: translateX(14%) scale(0.86);
   }
 
   .project7-hero-media {
