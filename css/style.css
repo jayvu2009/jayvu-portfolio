@@ -1211,6 +1211,12 @@ body.scroll-reveal-ready .scroll-reveal.is-visible {
 
 .project-image-wrap .slide-img.active { opacity: 1; }
 
+.project-card[data-project="project8"] .project-image-wrap .slide-img,
+.more-works-card[data-project-id="project8"] img {
+  object-fit: contain;
+  background: #fff6f4;
+}
+
 .project-card h3 {
   margin: .45rem 0 .3rem;
   color: #fc7238;

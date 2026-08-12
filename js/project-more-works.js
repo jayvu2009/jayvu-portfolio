@@ -18,6 +18,15 @@
       link: 'project1.html'
     },
     {
+      id: 'project8',
+      category: 'uiux',
+      title: '2gether',
+      description: 'A relationship companion app designed to help couples preserve memories, remember meaningful milestones, and stay connected through everyday moments.',
+      tools: ['Figma'],
+      images: ['assets/project8/04 HOME.png'],
+      link: 'project8.html'
+    },
+    {
       id: 'project2',
       category: 'design',
       title: 'Packaging Vintage Jungle',
@@ -73,6 +82,8 @@
     },
   ];
 
+  const PROJECT_PRIORITY = ['project7', 'project1', 'project8', 'project2', 'project3', 'project4', 'project5', 'project6'];
+
   const IMAGE_DIMENSIONS = {
     'assets/home/project card/project-card-1(1).png': { width: 535, height: 350 },
     'assets/home/project card/project-card-1(2).png': { width: 535, height: 350 },
@@ -84,7 +95,8 @@
     'assets/project4/image6.png': { width: 1729, height: 1279 },
     'assets/project5/image1.png': { width: 2624, height: 1542 },
     'assets/project6/image1.png': { width: 1162, height: 654 },
-    'assets/project7/cover.jpeg': { width: 1280, height: 731 }
+    'assets/project7/cover.jpeg': { width: 1280, height: 731 },
+    'assets/project8/04 HOME.png': { width: 440, height: 956 }
   };
 
   function categoryLabel(category) {
@@ -203,7 +215,9 @@
       if (project.category !== selectedCategory) return false;
       if (project.category === selectedCategory && project.id === currentProjectId) return false;
       return true;
-    });
+    }).sort((projectA, projectB) => (
+      PROJECT_PRIORITY.indexOf(projectA.id) - PROJECT_PRIORITY.indexOf(projectB.id)
+    ));
   }
 
   function setMenuOpen(toggleEl, menuEl, isOpen) {

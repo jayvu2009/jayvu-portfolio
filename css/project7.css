@@ -240,7 +240,8 @@ body.project7-page.project7-reveal-ready .reveal-right.is-visible {
 .project7-copy-block,
 .project7-story-copy,
 .project7-section-intro {
-  max-width: 920px;
+  width: 100%;
+  max-width: none;
 }
 
 .project7-section h2 {

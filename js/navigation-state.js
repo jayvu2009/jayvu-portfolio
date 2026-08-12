@@ -4,7 +4,7 @@
   const SIGNED_IN_KEY = 'portfolioSignedIn';
   const INTERNAL_NAVIGATION_KEY = 'portfolioInternalNavigation';
   const INDEX_FILE_PATTERN = /(?:^|\/)index\.html$/i;
-  const PORTFOLIO_PAGE_PATTERN = /(?:^|\/)(?:about|project[1-7])\.html$/i;
+  const PORTFOLIO_PAGE_PATTERN = /(?:^|\/)(?:about|project[1-8])\.html$/i;
 
   const navigationScript = document.currentScript;
   if (navigationScript?.src) {

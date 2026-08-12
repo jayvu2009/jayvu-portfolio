@@ -90,8 +90,11 @@ document.querySelectorAll('.js-scroll-link, .section-btn[data-section]').forEach
 
 const workRoot = document.getElementById('works');
 const filterButtons = Array.from(document.querySelectorAll('.work-filter-row .filter-btn'));
+const workProjectPriority = ['project7', 'project1', 'project8', 'project2', 'project3', 'project4', 'project5', 'project6'];
 const allWorkCards = Array.from(document.querySelectorAll('#work-carousel-stage .project-card'))
-  .sort((cardA, cardB) => Number(cardB.dataset.project === 'project7') - Number(cardA.dataset.project === 'project7'));
+  .sort((cardA, cardB) => (
+    workProjectPriority.indexOf(cardA.dataset.project) - workProjectPriority.indexOf(cardB.dataset.project)
+  ));
 const toolTags = Array.from(document.querySelectorAll('.tool-tag'));
 const carouselPrev = document.querySelector('.carousel-arrow.prev');
 const carouselNext = document.querySelector('.carousel-arrow.next');
