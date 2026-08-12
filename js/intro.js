@@ -3,7 +3,6 @@
 
   const overlay = document.getElementById('intro-overlay');
   const video = document.getElementById('intro-video');
-  const playButton = document.getElementById('intro-play');
   const dateElement = document.getElementById('intro-date');
   const timeElement = document.getElementById('intro-time');
   const lockScreen = overlay?.querySelector('.intro-lock-screen');
@@ -147,18 +146,11 @@
 
   function handleKeydown(event) {
     if (isSigningIn || !overlay.isConnected) return;
-    if (event.target === playButton) return;
     if (event.key === 'Enter' || event.key === ' ' || event.code === 'Space') {
       event.preventDefault();
       signIn();
     }
   }
-
-  const showPlayFallback = () => {
-    if (playButton && !isSigningIn && !prefersReducedMotion) {
-      playButton.hidden = false;
-    }
-  };
 
   const pulseLockScreen = () => {
     if (!lockScreen || prefersReducedMotion) return;
@@ -187,11 +179,9 @@
     const playAttempt = video.play();
 
     if (playAttempt && typeof playAttempt.then === 'function') {
-      playAttempt
-        .then(() => {
-          if (playButton) playButton.hidden = true;
-        })
-        .catch(showPlayFallback);
+      playAttempt.catch(() => {
+        // Browsers may block autoplay; the lock screen remains usable for sign-in.
+      });
     }
   };
 
@@ -211,12 +201,6 @@
   clockTimer = window.setInterval(updateClock, 30000);
 
   overlay.addEventListener('click', signIn);
-  if (playButton) {
-    playButton.addEventListener('click', (event) => {
-      event.stopPropagation();
-      tryToPlay();
-    });
-  }
   document.addEventListener('keydown', handleKeydown);
   if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     document.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -224,7 +208,6 @@
 
   if (video) {
     video.addEventListener('ended', scheduleReplay);
-    video.addEventListener('error', showPlayFallback);
     if (lockScreen) {
       lockScreen.addEventListener('animationend', () => {
         lockScreen.classList.remove('intro-loop-pulse');
